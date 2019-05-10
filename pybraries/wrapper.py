@@ -1,5 +1,8 @@
 import requests
 import fire
+import os
+
+api_key = os.environ['LIBRARIES_API_KEY']
 
 def __call_api(api_key, manager, package):
     """
@@ -33,11 +36,14 @@ def package_info(api_key, manager, package):
     Returns:
         r.json (json): response from libraries.io
     """
+    manager = manager.lower()
     result = __call_api(api_key, manager, package)
     print(result['name'])
-    return 
 
 
+package_info(api_key, "pypi", "plotly")
+
+# From the command line you can call any function by name with arguments
 if __name__ == "__main__":
     fire.Fire()
     
