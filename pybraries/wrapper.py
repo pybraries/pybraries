@@ -2,7 +2,7 @@ import requests
 import fire
 import os
 
-# api_key = os.environ['LIBRARIES_API_KEY']
+api_key = os.environ['LIBRARIES_API_KEY']
 
 
 def __call_api(api_key, manager, package):
