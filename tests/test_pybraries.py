@@ -3,7 +3,7 @@ import pytest
 import os
 from pybraries import package_info, __call_api
 
-api_key = os.environ['I_KEY']
+api_key = os.environ['LIBRARIES_API_KEY']
 # api_key for libraries.io
 
 mgr = "pypi"
