@@ -4,7 +4,7 @@ from pybraries import package_info, __call_api
 
 # api_key = cmdopt
 
-# os.environ['LIBRARIES_API_KEY']
+cmdopt = os.environ['LIBRARIES_API_KEY']
 
 mgr = "pypi"
 # package manager name
