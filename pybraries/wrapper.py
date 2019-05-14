@@ -42,7 +42,7 @@ def package_info(api_key, manager, package):
     print(result['name'])
 
 
-# package_info(api_key, "pypi", "plotly")
+package_info(api_key, "pypi", "plotly")
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
