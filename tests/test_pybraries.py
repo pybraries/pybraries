@@ -1,5 +1,6 @@
 """Tests for `pybraries` package."""
 import pytest
+import os
 from pybraries import package_info, __call_api
 
 # api_key = cmdopt
