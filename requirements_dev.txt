@@ -1,5 +1,5 @@
 pip==19.1.1
-wheel==0.33.3
+wheel==0.33.4
 twine==1.13.0
 pytest==4.4.2
 pytest-cov==2.7.1

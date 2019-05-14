@@ -4,6 +4,7 @@ import os
 
 api_key = os.environ['LIBRARIES_API_KEY']
 
+
 def __call_api(api_key, manager, package):
     """
     Call the API for package manager info.
@@ -46,4 +47,3 @@ package_info(api_key, "pypi", "plotly")
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
     fire.Fire()
-    
