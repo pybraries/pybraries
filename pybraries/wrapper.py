@@ -1,47 +1,71 @@
 import requests
+from requests.exceptions import HTTPError
 import fire
 import os
 
-api_key = os.environ['LIBRARIES_API_KEY']
+# api_key = os.environ['LIBRARIES_API_KEY']
+class API:
+    def __init__(self):
+        self.api_key = os.environ['LIBRARIES_API_KEY']
 
-def __call_api(api_key, manager, package):
-    """
-    Call the API for package manager info.
-    Args:
-        api_key (str): user api key
-        manager (str): package manager
-        package (str): package name
-    Returns:
-        r.json (json): response from libraries.io
-    """
-    if not isinstance(api_key, str):
-        raise TypeError("Please provide your api key as a string.")
+        # check for valid API key
 
-    r = requests.get(
-        f'https://libraries.io/api/{manager}/{package}',
-        params=dict(api_key=api_key),
-        timeout=3,
-    )
-    response = r.json()
+    def __call_api(self, thing, *args, **kwargs):
+        """
+        Call the API.
+        Args:
+            manager (str): package manager
+            package (str): package name
+        Returns:
+            r.json (json): response from libraries.io
+        """
 
-    return response
+        if thing == "project":
+            if kwargs:
+                if kwargs['manager']:
+                    manager = kwargs['manager'] 
+                if kwargs['package']:
+                    package = kwargs['package']
+            if args:
+                args = list(args)
+                # need to search list?
+                if args[0]:
+                    manager = args[0]
+                if args[1]:
+                    package = args[1]
+
+            try:
+                r = requests.get(
+                    f'https://libraries.io/api/{manager}/{package}',
+                    params=dict(api_key=self.api_key),
+                    timeout=5,
+                )
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  # Python 3.6
+            except Exception as err:
+                print(f'Other error occurred: {err}')  # Python 3.6
+
+        return response
 
 
-def package_info(api_key, manager, package):
-    """
-    Print result of API for package manager info.
-    Args:
-        manager (str): package manager
-        package (str): package name
-    Returns:
-        r.json (json): response from libraries.io
-    """
-    manager = manager.lower()
-    result = __call_api(api_key, manager, package)
-    print(result['name'])
+    def project(self, *args, **kwargs):
+        """
+        Return information about a package and its versions.
+        Args:
+            manager (str): package manager
+            package (str): package name
+        Returns:
+            r.json (json): response from libraries.io
+        """
 
+        my_call = self.__call_api("project", *args, **kwargs)
 
-package_info(api_key, "pypi", "plotly")
+        return my_call
+
+api = API()
+pkg = api.project(manager="pypi", package="plotly")
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
