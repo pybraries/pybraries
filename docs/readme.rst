@@ -2,6 +2,13 @@
 Pybraries
 =============
 
+.. image:: https://img.shields.io/github/license/pybraries/pybraries.svg  :alt: license   :target: https://github.com/pybraries/pybraries/blob/master/LICENSE
+
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg :alt: coveralls_coverage :target: https://coveralls.io/github/pybraries/pybraries
+
+
+
+
 Pybraries is a wrapper for the libraries.io API.
 
 We hope you enjoy it. If you see something that could be improved, please let us know.
@@ -52,6 +59,8 @@ Contributing
 ____________
 
 Contributions are appreciated.
-All contributors are expected to follow our Code of Conduct.
+All contributors are expected to follow our [Code of Conduct]().
 
 .. _libraries.io: https://libraries.io
+
+

@@ -3,9 +3,6 @@
 Welcome to Pybraries's documentation!
 =====================================
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=travis
-   :target: https://coveralls.io/github/pybraries/pybraries?branch=travis
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
