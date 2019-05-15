@@ -2,8 +2,14 @@
 Pybraries
 =============
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master :alt: coveralls  :target: https://coveralls.io/github/pybraries/pybraries?branch=master
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master 
+    :alt: coveralls  
+    :target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
+.. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest 
+    :target: https://pybraries.readthedocs.io/en/latest/?badge=latest 
+    :alt: Documentation Status
+      
 Pybraries is a wrapper for the libraries.io API.
 
 We hope you enjoy it. If you see something that could be improved, please let us know.
