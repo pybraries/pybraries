@@ -3,8 +3,13 @@ from requests.exceptions import HTTPError
 import fire
 import os
 
-# api_key = os.environ['LIBRARIES_API_KEY']
 class API:
+    """The class for wrapping the libraries.io API
+
+    """
+
+
+
     def __init__(self):
         self.api_key = os.environ['LIBRARIES_API_KEY']
 
@@ -17,8 +22,10 @@ class API:
             manager (str): package manager
             package (str): package name
         Returns:
-            r.json (json): response from libraries.io
+            r.json (dict): json response from libraries.io
         """
+        response = {}
+        # dictionary from api response to return
 
         if thing == "project":
             if kwargs:
