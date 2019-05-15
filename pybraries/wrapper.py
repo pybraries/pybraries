@@ -19,6 +19,8 @@ class API:
         Returns:
             r.json (json): response from libraries.io
         """
+        response = {}
+        # dictionary from api response to return
 
         if thing == "project":
             if kwargs:

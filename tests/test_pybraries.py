@@ -13,14 +13,11 @@ pkg = "plotly"
 # package name
 
 api = API()
+
 # Integration tests
-
-
-def test_project(capsys):
-    """Correct package name prints"""
+def test_project():
+    """Correct package returned"""
     pack = api.project(mgr, pkg)
-    # captured = capsys.readouterr()
-    # assert "plotly" in captured.out
     assert pack['name'] == 'plotly'
 
 # Unit tests
