@@ -8,7 +8,7 @@ Contributions are welcome and greatly appreciated!
 
 You can contribute in many ways:
 
-Please ensure you follow our [Code of Conduct](https://github.com/pybraries/pybraries/blob/master/code_of_conduct.md).
+Please ensure you follow our Code of Conduct: https://github.com/pybraries/pybraries/blob/master/code_of_conduct.md.
 
 Types of Contributions
 ----------------------
@@ -119,7 +119,7 @@ Deploying
 ---------
 
 A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in HISTORY.rst).
+Make sure all your changes are committed (including an entry in history.rst).
 Then run::
 
     bumpversion2 patch      # possible: major / minor / patch
