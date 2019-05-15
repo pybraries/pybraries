@@ -12,18 +12,19 @@ Quick Start
 Install
 _______
 
-Install from PyPI.
+Install from PyPI.::
 
     pip install pybraries
 
 Use
 ___
 
-Get your API key from libraries.io
+Get your API key from `libraries.io`_.
 
-Set it as an environment variable from the command line with export API_KEY="your_api_key_goes_here"
+Set it as an environment variable from the command line with:: 
+export API_KEY="your_api_key_goes_here"
 
-Import the package and use it with.
+Import the package and use it with::
 
     import pybraries
     import os
@@ -32,7 +33,7 @@ Import the package and use it with.
 
     package_info(api_key, manager, package)
 
-The package JSON should be returned.
+The package name should be returned.
 
 Note that you can only call the API at a rate of once per second.
 
@@ -52,3 +53,5 @@ ____________
 
 Contributions are appreciated.
 All contributors are expected to follow our Code of Conduct.
+
+.. _libraries.io: https://libraries.io

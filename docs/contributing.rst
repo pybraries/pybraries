@@ -13,6 +13,12 @@ Please ensure you follow our Code of Conduct.
 Types of Contributions
 ----------------------
 
+Report Security Vunlerabilities
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please email jeffmshale at gmail dot com.
+
+
 Report Bugs
 ~~~~~~~~~~~
 
@@ -20,6 +26,7 @@ Report bugs at https://github.com/pybraries/pybraries/issues.
 
 If you are reporting a bug, please include:
 
+* The pybraries version.
 * Your operating system name and version, if applicable.
 * Any details about your local setup that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
@@ -27,8 +34,8 @@ If you are reporting a bug, please include:
 Fix Bugs
 ~~~~~~~~
 
-Look through the GitHub issues for bugs. Anything tagged with "bug" and "help
-wanted" is open to whoever wants to implement it.
+Feel free to look through the GitHub issues for bugs. Anything tagged with "bug" and "help
+wanted" is open to whoever wants to fix it.
 
 Implement Features
 ~~~~~~~~~~~~~~~~~~
@@ -39,8 +46,19 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
+The main README.md
+
 pybraries could always use more documentation, whether as part of the
-official pybraries docs, in docstrings, or even on the web in blog posts.
+official pybraries docs, in docstrings, or on the web in blog posts.
+
+When in the docs folder, build the docs with the command:
+    make html
+
+The built HTML docs will be found in the docs->_build folder.
+
+Check for broken links by running the following command:
+    make linkcheck
+
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
@@ -62,21 +80,20 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 1. Fork the `pybraries` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_github_username_here/pybraries.git
+    git clone git@github.com:your_github_username_here/pybraries.git
 
 3. Install your local copy into a virtual environment. 
 
 4. Create a branch for local development::
 
-    $ git checkout -b name-of-your-bugfix-or-feature
+    git checkout -b name-of-your-bugfix-or-feature-branch
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass :
+5. When you're done making changes, check that your changes pass::
 
-    $ pytest 
+    pytest 
 
-   To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
@@ -106,9 +123,9 @@ A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
-$ bumpversion2 patch # possible: major / minor / patch
-$ git push
-$ git push --tags
+bumpversion2 patch      # possible: major / minor / patch
+git push
+git push --tags
 
 Use twine to upload to PyPI.
 Update the changelog on GitHub.
