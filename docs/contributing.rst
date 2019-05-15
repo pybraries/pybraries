@@ -94,12 +94,11 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 
     pytest 
 
-
 6. Commit your changes and push your branch to GitHub::
 
-    $ git add .
-    $ git commit -m "Your detailed description of your changes."
-    $ git push origin name-of-your-bugfix-or-feature
+    git add .
+    git commit -m "Your detailed description of your changes."
+    git push origin name-of-your-bugfix-or-feature
 
 7. Submit a pull request through the GitHub website.
 
@@ -123,9 +122,9 @@ A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
-bumpversion2 patch      # possible: major / minor / patch
-git push
-git push --tags
+    bumpversion2 patch      # possible: major / minor / patch
+    git push
+    git push --tags
 
 Use twine to upload to PyPI.
 Update the changelog on GitHub.
