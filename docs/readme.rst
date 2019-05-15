@@ -25,7 +25,7 @@ Get your API key from `libraries.io`_.
 
 Set it as an environment variable from the command line with ::
 
-export API_KEY="your_api_key_goes_here"
+    export API_KEY="your_api_key_goes_here"
 
 Import the package and use it with
 
