@@ -20,4 +20,12 @@ def test_project():
     pack = api.project(mgr, pkg)
     assert pack['name'] == 'plotly'
 
+
+def test_platforms():
+    """Correct platform returned"""
+    all_platforms = api.platforms(mgr, pkg)
+    assert all_platforms[0]['name'] == 'Go'
+
+
+
 # Unit tests
