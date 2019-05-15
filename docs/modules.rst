@@ -1,7 +1,7 @@
 pybraries
 =============
 
-.. automodule:: pybraries
+.. automodule:: pybraries.wrapper
     :members:
 
 .. toctree::
