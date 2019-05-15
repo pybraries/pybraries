@@ -28,23 +28,17 @@ From sources
 
 The sources for pybraries can be downloaded from the `Github repo`_.
 
-You can either clone the public repository:
+You can either clone the public repository::
 
-.. code-block:: console
+    git clone git://github.com/pybraries/pybraries
 
-    $ git clone git://github.com/pybraries/pybraries
+Or download the `tarball`_::
 
-Or download the `tarball`_:
+    curl  -OL https://github.com/pybraries/pybraries/tarball/master
 
-.. code-block:: console
+Once you have a copy of the source, you can install it with::
 
-    $ curl  -OL https://github.com/pybraries/pybraries/tarball/master
-
-Once you have a copy of the source, you can install it with:
-
-.. code-block:: console
-
-    $ python setup.py install
+    python setup.py install
 
 
 .. _Github repo: https://github.com/pybraries
