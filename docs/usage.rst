@@ -9,4 +9,4 @@ To use the pybraries API wrapper in a project to return a package name.
 
     from pybraries import transform_notebook
 
-        package_info(api_key, manager, package)
+    package_info(api_key, manager, package)

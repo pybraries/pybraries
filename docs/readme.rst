@@ -2,12 +2,10 @@
 Pybraries
 =============
 
-.. image:: https://img.shields.io/github/license/pybraries/pybraries.svg  :alt: license   :target: https://github.com/pybraries/pybraries/blob/master/LICENSE
+.. image:: https://img.shields.io/github/license/pybraries/pybraries.svg   :alt: GitHub license   :target: https://github.com/pybraries/pybraries/blob/master/LICENSE
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg :alt: coveralls_coverage :target: https://coveralls.io/github/pybraries/pybraries
-
-
-
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
+:target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
 Pybraries is a wrapper for the libraries.io API.
 
@@ -29,9 +27,12 @@ ___
 Get your API key from `libraries.io`_.
 
 Set it as an environment variable from the command line with:: 
+
 export API_KEY="your_api_key_goes_here"
 
-Import the package and use it with::
+Import the package and use it with
+
+.. code:: python
 
     import pybraries
     import os
@@ -48,7 +49,7 @@ Note that you can only call the API at a rate of once per second.
 License
 _______
 
-* Free software: BSD v3
+* BSD-3-clause: https://github.com/pybraries/pybraries/blob/master/LICENSE
 
 Docs
 ____
@@ -58,8 +59,7 @@ ____
 Contributing
 ____________
 
-Contributions are appreciated.
-All contributors are expected to follow our [Code of Conduct]().
+Contributions are appreciated. See Contributing.
 
 .. _libraries.io: https://libraries.io
 
