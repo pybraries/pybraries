@@ -1,7 +1,7 @@
 """Tests for `pybraries` package."""
 import pytest
 import os
-from pybraries import API
+from pybraries import Api
 
 api_key = os.environ['LIBRARIES_API_KEY']
 # api_key for libraries.io
@@ -12,7 +12,7 @@ mgr = "pypi"
 pkg = "plotly"
 # package name
 
-api = API()
+api = Api()
 
 # Integration tests
 def test_project():
@@ -21,7 +21,3 @@ def test_project():
     assert pack['name'] == 'plotly'
 
 # Unit tests
-# def test_api_arg_type():
-    """Raise an exception if non-string argument passed"""
- #   with pytest.raises(TypeError):
-   #     __call_api(0.99, mgr, pkg)

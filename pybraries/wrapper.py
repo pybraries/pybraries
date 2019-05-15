@@ -3,12 +3,9 @@ from requests.exceptions import HTTPError
 import fire
 import os
 
-class API:
+class Api:
     """The class for wrapping the libraries.io API
-
     """
-
-
 
     def __init__(self):
         self.api_key = os.environ['LIBRARIES_API_KEY']
@@ -67,13 +64,14 @@ class API:
             r.json (json): response from libraries.io
         """
 
-        my_call = self.__call_api("project", *args, **kwargs)
+        return self.__call_api("project", *args, **kwargs)
 
-        return my_call
 
-api = API()
+
+
+api = Api()
 pkg = api.project(manager="pypi", package="plotly")
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
-    fire.Fire()
+    fire.Fire(Api)
