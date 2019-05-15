@@ -2,9 +2,10 @@
 Pybraries
 =============
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg :alt: coveralls_coverage :target: https://coveralls.io/github/pybraries/pybraries
-
 .. image:: https://img.shields.io/github/license/pybraries/pybraries.svg   :alt: GitHub license   :target: https://github.com/pybraries/pybraries/blob/master/LICENSE
+
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
+:target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
 Pybraries is a wrapper for the libraries.io API.
 
