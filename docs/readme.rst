@@ -2,10 +2,7 @@
 Pybraries
 =============
 
-.. image:: https://img.shields.io/github/license/pybraries/pybraries.svg   :alt: GitHub license   :target: https://github.com/pybraries/pybraries/blob/master/LICENSE
-
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
-:target: https://coveralls.io/github/pybraries/pybraries?branch=master
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master :alt: coveralls  :target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
 Pybraries is a wrapper for the libraries.io API.
 
@@ -26,7 +23,7 @@ ___
 
 Get your API key from `libraries.io`_.
 
-Set it as an environment variable from the command line with:: 
+Set it as an environment variable from the command line with ::
 
 export API_KEY="your_api_key_goes_here"
 
