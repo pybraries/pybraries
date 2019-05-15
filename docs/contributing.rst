@@ -8,7 +8,7 @@ Contributions are welcome and greatly appreciated!
 
 You can contribute in many ways:
 
-Please ensure you follow our Code of Conduct.
+Please ensure you follow our [Code of Conduct](https://github.com/pybraries/pybraries/blob/master/code_of_conduct.md).
 
 Types of Contributions
 ----------------------
