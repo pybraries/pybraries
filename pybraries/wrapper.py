@@ -21,8 +21,18 @@ class API:
         """
 
         if thing == "project":
-            manager = kwargs['manager'] 
-            package = kwargs['package']
+            if kwargs:
+                if kwargs['manager']:
+                    manager = kwargs['manager'] 
+                if kwargs['package']:
+                    package = kwargs['package']
+            if args:
+                args = list(args)
+                # need to search list?
+                if args[0]:
+                    manager = args[0]
+                if args[1]:
+                    package = args[1]
 
             try:
                 r = requests.get(
@@ -31,12 +41,11 @@ class API:
                     timeout=5,
                 )
                 r.raise_for_status()
+                response = r.json()
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')  # Python 3.6
             except Exception as err:
                 print(f'Other error occurred: {err}')  # Python 3.6
-
-            response = r.json()
 
         return response
 
