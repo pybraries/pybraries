@@ -60,11 +60,9 @@ def test_user_packages_contributions():
     user_package_contribs = api.user_packages_contributions("github", "discdiver")
     assert user_package_contribs[0]['stars'] >= 0
 
-
-@pytest.mark.skip()
 def test_user_repository_contributions():
     user_repo_contribs = api.user_repository_contributions("github", "discdiver")
-    assert user_repo_contribs[0]['stars'] == "pytest"
+    assert user_repo_contribs[0]['size'] >= 0
 
 
 @pytest.mark.skip()

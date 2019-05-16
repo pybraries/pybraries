@@ -88,6 +88,18 @@ class Api:
 
             url_end_list.append("project-contributions")
 
+        if thing == "user_repositories_contributions":
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
+            url_end_list.append("repository-contributions")
+
+
 
         url_combined = '/'.join(url_end_list)
         print(url_combined)
@@ -176,6 +188,17 @@ class Api:
             response (list): list of dicts response from libraries.io
         """
         return self.__call_api("user_packages_contributions", *args, **kwargs)
+    
+    def user_repository_contributions(self, *args, **kwargs):
+        """
+        Return information about repositories a user has contributed to.
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_repositories_contributions", *args, **kwargs)
 
 
 api = Api()
