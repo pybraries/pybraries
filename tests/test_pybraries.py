@@ -37,6 +37,10 @@ def test_platforms():
 
     sleep(1)
 
-
+def test_user_packages():
+    user_package_contribs = api.user_packages("github", "discdiver")
+    assert user_package_contribs[0]['name'] == "pytest"
+    # TODO improve test
+    # this is a brittle test
 
 # Unit tests

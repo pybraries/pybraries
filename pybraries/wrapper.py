@@ -9,8 +9,9 @@ class Api:
 
     def __init__(self):
         self.api_key = os.environ['LIBRARIES_API_KEY']
-
+        # TODO
         # check for valid API key
+
 
     def __call_api(self, thing, *args, **kwargs):
         """
@@ -37,13 +38,25 @@ class Api:
                 args = list(args)
                 # need to search list?
                 # this is kind of hacky
-                if args[0]:
-                    url_end_list.append(args[0])
+                args[0] = url_end_list.append(args[0])
                 if args[1]:
                     url_end_list.append(args[1])
 
         if thing == 'platforms':
             url_end_list.append('platforms')
+
+        if thing == "user_packages":
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+            url_end_list.append("project-contributions")
+
+
+        # if thing == "user_repositories":
             
 
         url_combined = '/'.join(url_end_list)
@@ -81,14 +94,29 @@ class Api:
         """
         Return information about a package and its versions.
         Args:
-            manager (str): package manager
-            package (str): package name
+
         Returns:
             r.json (json): response from libraries.io
         """
 
         output = self.__call_api("platforms", *args, **kwargs)
         return output
+
+    def user_packages(self, *args, **kwargs):
+        """
+        Return information about packages a user has contributed to.
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            r.json (json): response from libraries.io
+        """
+        output = self.__call_api("user_packages", *args, **kwargs)
+        return output
+
+api = Api()
+x = api.user_packages("github", "discdiver")
+print(x)
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
