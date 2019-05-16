@@ -28,6 +28,9 @@ class Api:
         url_end_list = ["https://libraries.io/api"]
         # list to append to base to build url
 
+        if thing == 'platforms':
+            url_end_list.append('platforms')
+
         if thing == "project":
             if kwargs:
                 if kwargs['manager']:
@@ -42,9 +45,6 @@ class Api:
                 if args[1]:
                     url_end_list.append(args[1])
 
-        if thing == 'platforms':
-            url_end_list.append('platforms')
-
         if thing == "user":
             if kwargs:
                 url_end_list.append(provider)
@@ -55,7 +55,16 @@ class Api:
                 args[1] = url_end_list.append(args[1])
             
 
+        if thing == "user_repositories":
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
 
+            url_end_list.append("repositories")
 
 
         url_combined = '/'.join(url_end_list)
@@ -78,6 +87,18 @@ class Api:
         return response
 
 
+    def platforms(self, *args, **kwargs):
+        """
+        Return information about a package and its versions.
+        Args:
+
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("platforms", *args, **kwargs)
+
+
     def project(self, *args, **kwargs):
         """
         Return information about a package and its versions.
@@ -85,41 +106,41 @@ class Api:
             manager (str): package manager
             package (str): package name
         Returns:
-            r.json (json): response from libraries.io
+            response (dict): response from libraries.io
         """
 
         return self.__call_api("project", *args, **kwargs)
 
 
-    def platforms(self, *args, **kwargs):
-        """
-        Return information about a package and its versions.
-        Args:
-
-        Returns:
-            r.json (json): response from libraries.io
-        """
-
-        return self.__call_api("platforms", *args, **kwargs)
-
-
     def user(self, *args, **kwargs):
         """
-        Return information about packages a user has contributed to.
+        Return information about a user.
         Args:
             provider (str): host (e.g. github)
             user (str): username
         Returns:
-            r.json (json): response from libraries.io
+            response (dict): response from libraries.io
         """
         return self.__call_api("user", *args, **kwargs)
 
+    def user_repositories(self, *args, **kwargs):
+        """
+        Return information about a user's repos.
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            respons (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_repositories", *args, **kwargs)
+
+
 
 api = Api()
-x = api.user('github', 'discdiver')
+# x = api.user('github', 'discdiver')
 
-print(type(x))
-print(x)
+# print(type(x))
+# print(x)
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":

@@ -48,10 +48,10 @@ def test_user():
     users = api.user(provider, username)
     assert users['login'] == "discdiver"
 
-@pytest.mark.skip()
 def test_user_repositories():
-    user_repos = api.user_packages(provider, user)
-    pass
+    user_repos = api.user_repositories(provider, username)
+    assert user_repos[0]['size'] > 0
+
 
 @pytest.mark.skip()
 def test_user_packages():
