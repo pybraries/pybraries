@@ -1,46 +1,97 @@
 """Tests for `pybraries` package."""
 import pytest
 import os
-from pybraries import Api
 from time import sleep
+from pybraries import Api
 
-api_key = os.environ['LIBRARIES_API_KEY']
-# api_key for libraries.io
+# fixture to avoid rate limiting
+@pytest.fixture(autouse=True, scope='function')
+def wait_a_sec():
+    yield
+    sleep(1)
 
-mgr = "pypi"
-# package manager name
+api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
+api = Api()             # instantiate object
+mgr = 'pypi'            # package manager name
+pkg = 'plotly'          # package name
+provider = 'github'     # host name
+username = 'discdiver'      # username
 
-pkg = "plotly"
-# package name
-
-api = Api()
 
 # Integration tests
+
+# Platforms functionality
+def test_platforms():
+    """Go in returned platforms"""
+    all_platforms = api.platforms()
+    assert all_platforms[0]['name'] == 'Go'
+
+# Project functionality
+
 def test_project_args():
     """Correct package returned with positional args"""
     pack = api.project(mgr, pkg)
-    assert pack['name'] == 'plotly'
-
-    sleep(1)
+    assert pack['name'] == 'plotly' 
 
 def test_project_kwargs():
     """Correct package returned with kwargs"""
     packs = api.project(manager="pypi", package="plotly")
     assert packs['name'] == 'plotly'
 
-    sleep(1)
+# add more project functionality
 
-def test_platforms():
-    """Go in returned platforms"""
-    all_platforms = api.platforms()
-    assert all_platforms[0]['name'] == 'Go'
+# Repository functionality
 
-    sleep(1)
 
+# User functionality
+def test_user():
+    users = api.user(provider, username)
+    assert users['login'] == "discdiver"
+
+@pytest.mark.skip()
+def test_user_repositories():
+    user_repos = api.user_packages(provider, user)
+    pass
+
+@pytest.mark.skip()
 def test_user_packages():
     user_package_contribs = api.user_packages("github", "discdiver")
     assert user_package_contribs[0]['name'] == "pytest"
-    # TODO improve test
-    # this is a brittle test
+  
 
+@pytest.mark.skip()
+def test_user_packages_contributions():
+    user_package_contribs = api.user_packages("github", "discdiver")
+    assert user_package_contribs[0]['name'] == "pytest"
+
+
+@pytest.mark.skip()
+def test_user_repository_contributions():
+    user_package_contribs = api.user_packages("github", "discdiver")
+    assert user_package_contribs[0]['name'] == "pytest"
+
+
+@pytest.mark.skip()
+def test_user_dependencies():
+    pass
+
+@pytest.mark.skip()
+def test_user_subscriptions():
+    pass
+
+@pytest.mark.skip()
+def test_subscribe():
+    pass
+
+@pytest.mark.skip()
+def test_subscribed():
+    pass
+
+@pytest.mark.skip()
+def test_update_subscription():
+    pass
+
+@pytest.mark.skip()
+def test_unsubscribe():
+    pass
 # Unit tests

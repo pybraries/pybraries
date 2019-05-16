@@ -45,7 +45,7 @@ class Api:
         if thing == 'platforms':
             url_end_list.append('platforms')
 
-        if thing == "user_packages":
+        if thing == "user":
             if kwargs:
                 url_end_list.append(provider)
                 url_end_list.append(user)
@@ -53,14 +53,15 @@ class Api:
                 args = list(args)
                 args[0] = url_end_list.append(args[0])
                 args[1] = url_end_list.append(args[1])
-            url_end_list.append("project-contributions")
-
-
-        # if thing == "user_repositories":
             
 
+
+
+
         url_combined = '/'.join(url_end_list)
+
         print(url_combined)
+        
         try:
             r = requests.get(
                 url_combined,
@@ -87,8 +88,8 @@ class Api:
             r.json (json): response from libraries.io
         """
 
-        output = self.__call_api("project", *args, **kwargs)
-        return output
+        return self.__call_api("project", *args, **kwargs)
+
 
     def platforms(self, *args, **kwargs):
         """
@@ -99,10 +100,10 @@ class Api:
             r.json (json): response from libraries.io
         """
 
-        output = self.__call_api("platforms", *args, **kwargs)
-        return output
+        return self.__call_api("platforms", *args, **kwargs)
 
-    def user_packages(self, *args, **kwargs):
+
+    def user(self, *args, **kwargs):
         """
         Return information about packages a user has contributed to.
         Args:
@@ -111,11 +112,13 @@ class Api:
         Returns:
             r.json (json): response from libraries.io
         """
-        output = self.__call_api("user_packages", *args, **kwargs)
-        return output
+        return self.__call_api("user", *args, **kwargs)
+
 
 api = Api()
-x = api.user_packages("github", "discdiver")
+x = api.user('github', 'discdiver')
+
+print(type(x))
 print(x)
 
 # From the command line you can call any function by name with arguments
