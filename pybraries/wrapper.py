@@ -36,10 +36,11 @@ class Api:
             if args:
                 args = list(args)
                 # need to search list?
+                # this is kind of hacky
                 if args[0]:
-                    manager = args[0]
+                    url_end_list.append(args[0])
                 if args[1]:
-                    package = args[1]
+                    url_end_list.append(args[1])
 
         if thing == 'platforms':
             url_end_list.append('platforms')
@@ -88,12 +89,6 @@ class Api:
 
         output = self.__call_api("platforms", *args, **kwargs)
         return output
-
-api = Api()
-pkg = api.project(manager="pypi", package="plotly")
-
-my_api = Api()
-plats = my_api.platforms()
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
