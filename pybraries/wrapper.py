@@ -16,6 +16,7 @@ class Api:
     def __call_api(self, thing, *args, **kwargs):
         """
         Call the API.
+
         Args:
             manager (str): package manager
             package (str): package name
@@ -45,7 +46,7 @@ class Api:
                 if args[1]:
                     url_end_list.append(args[1])
 
-        if thing == "user":
+        if "user" in thing:
             if kwargs:
                 url_end_list.append(provider)
                 url_end_list.append(user)
@@ -54,50 +55,17 @@ class Api:
                 args[0] = url_end_list.append(args[0])
                 args[1] = url_end_list.append(args[1])
             
+            if thing == "user_repositories":
+                url_end_list.append("repositories")
 
-        if thing == "user_repositories":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
+            if thing == "user_packages": 
+                url_end_list.append("projects")
 
-            url_end_list.append("repositories")
+            if thing == "user_packages_contributions":
+                url_end_list.append("project-contributions")
 
-        if thing == "user_packages":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("projects")
-
-        if thing == "user_packages_contributions":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("project-contributions")
-
-        if thing == "user_repositories_contributions":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("repository-contributions")
+            if thing == "user_repositories_contributions":
+                url_end_list.append("repository-contributions")
 
 
 
@@ -123,6 +91,7 @@ class Api:
     def platforms(self, *args, **kwargs):
         """
         Return information about a package and its versions.
+
         Args:
 
         Returns:
@@ -135,6 +104,7 @@ class Api:
     def project(self, *args, **kwargs):
         """
         Return information about a package and its versions.
+
         Args:
             manager (str): package manager
             package (str): package name
@@ -148,6 +118,7 @@ class Api:
     def user(self, *args, **kwargs):
         """
         Return information about a user.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -159,6 +130,7 @@ class Api:
     def user_repositories(self, *args, **kwargs):
         """
         Return information about a user's repos.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -170,6 +142,7 @@ class Api:
     def user_packages(self, *args, **kwargs):
         """
         Return information about packages using a user's repos.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -181,6 +154,7 @@ class Api:
     def user_packages_contributions(self, *args, **kwargs):
         """
         Return information about packages a user has contributed to.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -192,6 +166,7 @@ class Api:
     def user_repository_contributions(self, *args, **kwargs):
         """
         Return information about repositories a user has contributed to.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
