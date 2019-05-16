@@ -11,12 +11,12 @@ def wait_a_sec():
     sleep(1)
 
 api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
-api = Api()             # instantiate object
-mgr = 'pypi'            # package manager name
-pkg = 'plotly'          # package name
-provider = 'github'     # host name
-username = 'discdiver'      # username
-
+api = Api()                                # instantiate object
+mgr = 'pypi'                               # package manager name
+pkg = 'plotly'                             # package name
+provider = 'github'                        # host name
+username = 'discdiver'                     # github username
+username2 = 'jakevdp'                      # github username
 
 # Integration tests
 
@@ -52,12 +52,9 @@ def test_user_repositories():
     user_repos = api.user_repositories(provider, username)
     assert user_repos[0]['size'] > 0
 
-
-@pytest.mark.skip()
 def test_user_packages():
-    user_package_contribs = api.user_packages("github", "discdiver")
-    assert user_package_contribs[0]['name'] == "pytest"
-  
+    user_pkgs = api.user_packages(provider, username2)
+    assert user_pkgs[0]['rank'] >= 0
 
 @pytest.mark.skip()
 def test_user_packages_contributions():

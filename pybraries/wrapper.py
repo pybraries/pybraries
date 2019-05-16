@@ -66,9 +66,20 @@ class Api:
 
             url_end_list.append("repositories")
 
+        if thing == "user_packages":
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
+            url_end_list.append("projects")
+
+
 
         url_combined = '/'.join(url_end_list)
-
         print(url_combined)
         
         try:
@@ -134,6 +145,16 @@ class Api:
         """
         return self.__call_api("user_repositories", *args, **kwargs)
 
+    def user_packages(self, *args, **kwargs):
+        """
+        Return information about a user's repos.
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            respons (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_packages", *args, **kwargs)
 
 
 api = Api()
