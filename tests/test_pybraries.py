@@ -22,8 +22,8 @@ def test_project():
 
 
 def test_platforms():
-    """Correct platform returned"""
-    all_platforms = api.platforms(mgr, pkg)
+    """Go in returned platforms"""
+    all_platforms = api.platforms()
     assert all_platforms[0]['name'] == 'Go'
 
 
