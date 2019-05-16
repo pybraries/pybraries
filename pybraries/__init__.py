@@ -1,3 +1,3 @@
 from .wrapper import ( 
-    API
+    Api
 )
