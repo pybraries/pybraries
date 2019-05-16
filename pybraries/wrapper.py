@@ -77,6 +77,16 @@ class Api:
 
             url_end_list.append("projects")
 
+        if thing == "user_packages_contributions":
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
+            url_end_list.append("project-contributions")
 
 
         url_combined = '/'.join(url_end_list)
@@ -147,21 +157,32 @@ class Api:
 
     def user_packages(self, *args, **kwargs):
         """
-        Return information about a user's repos.
+        Return information about packages using a user's repos.
         Args:
             provider (str): host (e.g. github)
             user (str): username
         Returns:
-            respons (list): list of dicts response from libraries.io
+            response (list): list of dicts response from libraries.io
         """
         return self.__call_api("user_packages", *args, **kwargs)
 
+    def user_packages_contributions(self, *args, **kwargs):
+        """
+        Return information about packages a user has contributed to.
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_packages_contributions", *args, **kwargs)
+
 
 api = Api()
-# x = api.user('github', 'discdiver')
+x = api.user_packages_contributions('github', 'discdiver')
 
-# print(type(x))
-# print(x)
+print(type(x))
+print(x)
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
