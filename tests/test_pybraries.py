@@ -59,9 +59,10 @@ def test_project_contributors():
     pack = api.project_contributors(mgr, pkg2)
     assert float(pack[0]['github_id']) > 0
 
-@pytest.mark.skip()
 def test_project_sourcerank():
-    pass
+    pack = api.project_sourcerank(mgr, pkg2)
+    assert pack['basic_info_present'] >= 0
+
 
 @pytest.mark.skip()
 def test_project_usage():

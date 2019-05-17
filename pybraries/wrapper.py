@@ -64,6 +64,9 @@ class Api:
             if thing == 'pproject_contributors':
                 url_end_list.append("contributors")
 
+            if thing == 'pproject_sourcerank':
+                url_end_list.append("sourcerank")
+
 
             # if "thing == project_search":
             # The search endpoint accepts a sort parameter, 
@@ -230,6 +233,23 @@ class Api:
         return self.__call_api("pproject_contributors", *args, **kwargs)
 
 
+    def project_sourcerank(self, *args, **kwargs):
+        """
+        Get breakdown of SourceRank score for a given project.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+        Returns:
+            response (dict): sourcerank info response from libraries.io
+        """
+
+        return self.__call_api("pproject_sourcerank", *args, **kwargs)
+
+
+
+
+
 
 
 
@@ -364,7 +384,7 @@ class Api:
 
 
 api = Api()
-x = api.project_contributors('pypi', "yellowbrick")
+x = api.project_sourcerank('pypi', "yellowbrick")
 
 print(type(x))
 print(x)
