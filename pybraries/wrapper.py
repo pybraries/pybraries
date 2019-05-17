@@ -2,6 +2,7 @@ import requests
 from requests.exceptions import HTTPError
 import fire
 import os
+import pdb
 
 class Api:
     """The class for wrapping the libraries.io API
@@ -27,12 +28,16 @@ class Api:
         # dictionary from api response to return
 
         url_end_list = ["https://libraries.io/api"]
-        # list to append to base to build url
+        # list to build url
+
+        url_combined = ""
+        # final string url
+
 
         if thing == 'platforms':
             url_end_list.append('platforms')
 
-        if "project" in thing:
+        if "pproject" in thing:
             if kwargs:
                 if kwargs['manager']:
                     url_end_list.append(kwargs['manager'])
@@ -45,6 +50,11 @@ class Api:
                 args[0] = url_end_list.append(args[0])
                 if args[1]:
                     url_end_list.append(args[1])
+
+            if thing == 'pproject_dependencies':
+                url_end_list.append("latest/")
+                url_end_list.append("dependencies")
+
 
             # if "thing == project_search":
             # The search endpoint accepts a sort parameter, 
@@ -62,16 +72,20 @@ class Api:
 
         if 'repository' in thing:
             if kwargs:
-                url_end_list.append(platform)
+                url_end_list.append(provider)
                 url_end_list.append(owner)
                 url_end_list.append(repo)
             if args:
                 args = list(args)
                 args[0] = url_end_list.append(args[0])
                 args[1] = url_end_list.append(args[1])
+                args[2] = url_end_list.append(args[2])
 
             if thing == 'repository_dependencies':
                 url_end_list.append("dependencies")
+
+            if thing == 'repository_projects':
+                url_end_list.append("projects")
 
 
         if "user" in thing:
@@ -123,7 +137,7 @@ class Api:
 
     def platforms(self, *args, **kwargs):
         """
-        Return information about a package and its versions.
+        Return a list of supported package managers.
 
         Args:
 
@@ -145,7 +159,26 @@ class Api:
             response (dict): response from libraries.io
         """
 
-        return self.__call_api("project", *args, **kwargs)
+        return self.__call_api("pproject", *args, **kwargs)
+
+
+    def project_dependencies(self, *args, **kwargs):
+        """
+        Get a list of dependencies for a version of a project.
+        
+        Returns latest version info.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+            version (str): package version
+        Returns:
+            response (dict): response from libraries.io
+        """
+
+        return self.__call_api("pproject_dependencies", *args, **kwargs)
+
+
 
 
 
@@ -166,7 +199,21 @@ class Api:
 
     def repository_dependencies(self, *args, **kwargs):
         """
-        Return information about a repository's dependencies'.
+        Return information about a repository's dependencies.
+
+        Args:
+            provider (str): host provider name (e.g. GitHub)
+            owner (str): owner
+            repo (str): repo
+        Returns:
+            response (dict): dict response from libraries.io
+        """
+
+        return self.__call_api("repository_dependencies", *args, **kwargs)
+
+    def repository_projects(self, *args, **kwargs):
+        """
+        Get a list of packages referencing the given repository.
 
         Args:
             provider (str): host provider name (e.g. GitHub)
@@ -176,10 +223,8 @@ class Api:
             response (list): list of dicts response from libraries.io
         """
 
-        return self.__call_api("repository_dependencies", *args, **kwargs)
-
-
-
+        return self.__call_api("repository_projects", *args, **kwargs)
+        
 
 
     def user(self, *args, **kwargs):
@@ -269,11 +314,11 @@ class Api:
 
 
 api = Api()
-x = api.repository("github", "notebooktoall", "notebooktoall")
+x = api.repository_projects("github", "pandas-dev", "pandas")
 
 print(type(x))
 print(x)
-# print(x['github_id'])
+
 
 
 # From the command line you can call any function by name with arguments

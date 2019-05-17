@@ -19,6 +19,8 @@ username = 'discdiver'                     # github username
 username2 = 'jakevdp'                      # github username
 owner = 'notebooktoall'                    # github repo owner
 repo = 'notebooktoall'                     # repository name
+owner2 = 'pandas-dev'                         # github repo owner
+repo2 = 'pandas'                          # repository name
 
 # Integration tests
 
@@ -40,11 +42,10 @@ def test_project_kwargs():
     packs = api.project(manager="pypi", package="plotly")
     assert packs['name'] == 'plotly'
 
-# add more project functionality
-
-@pytest.mark.skip()
 def test_project_dependencies():
-    pass
+    pack = api.project_dependencies(mgr, pkg, 'latest')
+    assert pack['name'] == 'plotly' 
+
 
 @pytest.mark.skip()
 def test_project_dependents():
@@ -74,21 +75,19 @@ def test_project_search():
 # Repository functionality
 
 def test_repository():
-    repos = api.user(provider, owner, repo)
+    repos = api.repository(provider, owner, repo)
     assert repos['github_id'] in repos.values() 
 
 def test_repository_dependencies():
-    repos = api.user(provider, owner, repo)
-    assert "github_id" in repos.keys()
+    repo_deps = api.repository_dependencies(provider, owner2, repo2)
+    assert "full_name" in repo_deps.keys()
 
-
-@pytest.mark.skip()
 def test_repository_projects():
-    pass
-
-
+    repo_projs = api.repository_projects(provider, owner2, repo2)
+    assert "name" in repo_projs[0].keys()
 
 # User functionality
+
 def test_user():
     users = api.user(provider, username)
     assert users['login'] == "discdiver"
