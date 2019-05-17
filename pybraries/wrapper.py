@@ -1,8 +1,10 @@
 import requests
 from requests.exceptions import HTTPError
+from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter
 import fire
 import os
-import pdb
+
 
 class Api:
     """The class for wrapping the libraries.io API
@@ -143,23 +145,31 @@ class Api:
 
         url_combined = '/'.join(url_end_list)
         print(url_combined)
-        
-        try:
-            r = requests.get(
-                url_combined,
-                params=dict(api_key=self.api_key),
-                timeout=5,
-            )
-            r.raise_for_status()
-            response = r.json()
-        except HTTPError as http_err:
-            print(f'HTTP error occurred: {http_err}')  
-        except Exception as err:
-            print(f'Other error occurred: {err}')  
 
-        return response
+        with requests.Session() as s:
+            retries = Retry(
+                total=10,
+                backoff_factor=0.2,
+                status_forcelist=[500, 502, 503, 504])
 
+            s.mount('https://', HTTPAdapter(max_retries=retries))
 
+            try:
+                r = s.get(
+                    url_combined,
+                    params=dict(api_key=self.api_key),
+                    timeout=5,
+                )
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
+
+            return response
+
+    # public methods 
     def platforms(self, *args, **kwargs):
         """
         Return a list of supported package managers.
@@ -421,14 +431,11 @@ class Api:
         return self.__call_api("user_subscriptions", *args, **kwargs)
 
 
-api = Api()
-x = api.project_search(package='pandas', sort='created_at', platforms="pypi")
-
-print(type(x))
-print(x[0])
-
-
-
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
     fire.Fire(Api)
+
+    # api = Api()
+    # x = api.project_search(package='pandas', sort='created_at', platforms="pypi")
+    # print(type(x))
+    # print(x[0])
