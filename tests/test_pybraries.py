@@ -63,10 +63,9 @@ def test_project_sourcerank():
     pack = api.project_sourcerank(mgr, pkg2)
     assert pack['basic_info_present'] >= 0
 
-
-@pytest.mark.skip()
 def test_project_usage():
-    pass
+    pack = api.project_usage(mgr, pkg2)
+    assert pack['*'] >= 0
 
 @pytest.mark.skip()
 def test_project_search():

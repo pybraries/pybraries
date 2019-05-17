@@ -66,6 +66,9 @@ class Api:
 
             if thing == 'pproject_sourcerank':
                 url_end_list.append("sourcerank")
+            
+            if thing == 'pproject_usage':
+                url_end_list.append("usage")
 
 
             # if "thing == project_search":
@@ -247,6 +250,18 @@ class Api:
         return self.__call_api("pproject_sourcerank", *args, **kwargs)
 
 
+    def project_usage(self, *args, **kwargs):
+        """
+        Get breakdown of version usage for a given project.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+        Returns:
+            response (dict): verion usage info response from libraries.io
+        """
+
+        return self.__call_api("pproject_usage", *args, **kwargs)
 
 
 
@@ -384,7 +399,7 @@ class Api:
 
 
 api = Api()
-x = api.project_sourcerank('pypi', "yellowbrick")
+x = api.project_usage('pypi', "yellowbrick")
 
 print(type(x))
 print(x)
