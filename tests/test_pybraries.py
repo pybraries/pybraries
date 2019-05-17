@@ -47,12 +47,14 @@ def test_project_dependencies():
     assert pack['name'] == 'plotly' 
 
 def test_project_dependents():
-    pack = api.project_dependents(mgr, pkg)
+    packer = api.project_dependents(mgr, pkg)
+    assert packer['name'] == 'plotly' 
+
+def test_project_dependent_repositories():
+    pack = api.project_dependent_repositories(mgr, pkg)
     assert pack['name'] == 'plotly' 
 
-@pytest.mark.skip()
-def test_project_repositories():
-    pass
+    
 
 @pytest.mark.skip()
 def test_project_contributors():

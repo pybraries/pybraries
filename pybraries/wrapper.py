@@ -58,6 +58,8 @@ class Api:
             if thing == 'ppproject_dependents':
                 url_end_list.append("dependendents")
             
+            if thing == 'ppproject_dependent_repositories':
+                url_end_list.append("dependendent_repositories")
 
 
             # if "thing == project_search":
@@ -196,6 +198,22 @@ class Api:
         """
 
         return self.__call_api("pproject_dependendents", *args, **kwargs)
+
+
+    def project_dependent_repositories(self, *args, **kwargs):
+        """
+        Get repositories that depend on a given project.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("pproject_dependendent_repositories", *args, **kwargs)
+
 
 
 
