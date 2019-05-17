@@ -2,6 +2,9 @@
 Pybraries
 =============
 
+.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master
+    :target: https://travis-ci.org/pybraries/pybraries
+
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master 
     :alt: coveralls  
     :target: https://coveralls.io/github/pybraries/pybraries?branch=master

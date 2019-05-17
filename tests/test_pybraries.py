@@ -14,9 +14,14 @@ api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
 api = Api()                                # instantiate object
 mgr = 'pypi'                               # package manager name
 pkg = 'plotly'                             # package name
+pkg2 = 'yellowbrick'                           # package name
 provider = 'github'                        # host name
 username = 'discdiver'                     # github username
 username2 = 'jakevdp'                      # github username
+owner = 'notebooktoall'                    # github repo owner
+repo = 'notebooktoall'                     # repository name
+owner2 = 'pandas-dev'                         # github repo owner
+repo2 = 'pandas'                          # repository name
 
 # Integration tests
 
@@ -38,54 +43,54 @@ def test_project_kwargs():
     packs = api.project(manager="pypi", package="plotly")
     assert packs['name'] == 'plotly'
 
-# add more project functionality
-
-@pytest.mark.skip()
 def test_project_dependencies():
-    pass
+    pack = api.project_dependencies(mgr, pkg)
+    assert pack['name'] == 'plotly' 
 
-@pytest.mark.skip()
 def test_project_dependents():
-    pass
+    packer = api.project_dependents(mgr, pkg)
+    assert packer['name'] == 'plotly' 
 
-@pytest.mark.skip()
-def test_project_repositories():
-    pass
+def test_project_dependent_repositories():
+    pack = api.project_dependent_repositories(mgr, pkg)
+    assert pack['name'] == 'plotly' 
 
-@pytest.mark.skip()
 def test_project_contributors():
-    pass
+    pack = api.project_contributors(mgr, pkg2)
+    assert float(pack[0]['github_id']) > 0
 
-@pytest.mark.skip()
 def test_project_sourcerank():
-    pass
+    pack = api.project_sourcerank(mgr, pkg2)
+    assert pack['basic_info_present'] >= 0
 
-@pytest.mark.skip()
 def test_project_usage():
-    pass
+    pack = api.project_usage(mgr, pkg2)
+    assert pack['*'] >= 0
 
-@pytest.mark.skip()
 def test_project_search():
-    pass
+    projects = api.project_search()
+    assert 'name' in projects[0].keys()
 
+def test_project_search():
+    projects = api.project_search(sort='stars', keywords='visualization')
+    assert 'name' in projects[0].keys()
 
 # Repository functionality
 
-@pytest.mark.skip()
 def test_repository():
-    pass
+    repos = api.repository(provider, owner, repo)
+    assert repos['github_id'] in repos.values() 
 
-@pytest.mark.skip()
 def test_repository_dependencies():
-    pass
+    repo_deps = api.repository_dependencies(provider, owner2, repo2)
+    assert "full_name" in repo_deps.keys()
 
-@pytest.mark.skip()
 def test_repository_projects():
-    pass
-
-
+    repo_projs = api.repository_projects(provider, owner2, repo2)
+    assert "name" in repo_projs[0].keys()
 
 # User functionality
+
 def test_user():
     users = api.user(provider, username)
     assert users['login'] == "discdiver"
