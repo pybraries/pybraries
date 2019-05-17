@@ -32,7 +32,33 @@ class Api:
 
         url_combined = ""
         # final string url
+        
+        # special case
+        if thing == "special_project_search":
+            url_end_list.append('search?')
 
+            # package seems to be ignored by the libraries.io API
+            if "package" in kwargs:
+                url_end_list.append('q='+ kwargs['package'])
+
+            url_combined = '/'.join(url_end_list)
+
+            try:
+                r = requests.get(
+                    url_combined,
+                    params=dict(
+                        kwargs,
+                        api_key=self.api_key),
+                    timeout=5,
+                )
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
+
+            return response
 
         if thing == 'platforms':
             url_end_list.append('platforms')
@@ -70,21 +96,6 @@ class Api:
             if thing == 'pproject_usage':
                 url_end_list.append("usage")
 
-
-            # if "thing == project_search":
-            # The search endpoint accepts a sort parameter, 
-            # one of 
-            # rank, stars, dependents_count, 
-            # dependent_repos_count, latest_release_published_at, 
-            # contributions_count, created_at
-
-            # The search endpoint accepts number of other parameters to filter results:
-
-            # languages
-            # licenses
-            # keywords
-            # platforms
-
         if 'repository' in thing:
             if kwargs:
                 url_end_list.append(provider)
@@ -101,7 +112,6 @@ class Api:
 
             if thing == 'repository_projects':
                 url_end_list.append("projects")
-
 
         if "user" in thing:
             if kwargs:
@@ -263,6 +273,19 @@ class Api:
 
         return self.__call_api("pproject_usage", *args, **kwargs)
 
+    def project_search(self, *args, **kwargs):
+        """
+        Search for projects.
+
+        Args:
+            package (optional)(str): package name
+            sort= (optional) (str): one of rank, stars, dependents_count, dependent_repos_count, latest_release_published_at, contributions_count, created_at
+            filter= (optional) (list): list of strings. Options: languages, licenses, keywords, platforms
+        Returns:
+            response (list): list of dicts containing project info response from libraries.io
+        """
+
+        return self.__call_api("special_project_search", *args, **kwargs)
 
 
 
@@ -399,10 +422,10 @@ class Api:
 
 
 api = Api()
-x = api.project_usage('pypi', "yellowbrick")
+x = api.project_search(package='pandas', sort='created_at', platforms="pypi")
 
 print(type(x))
-print(x)
+print(x[0])
 
 
 

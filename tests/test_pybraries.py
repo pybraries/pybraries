@@ -67,10 +67,13 @@ def test_project_usage():
     pack = api.project_usage(mgr, pkg2)
     assert pack['*'] >= 0
 
-@pytest.mark.skip()
 def test_project_search():
-    pass
+    projects = api.project_search()
+    assert 'name' in projects[0].keys()
 
+def test_project_search():
+    projects = api.project_search(sort='stars', keywords='visualization')
+    assert 'name' in projects[0].keys()
 
 # Repository functionality
 
