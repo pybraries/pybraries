@@ -43,13 +43,12 @@ def test_project_kwargs():
     assert packs['name'] == 'plotly'
 
 def test_project_dependencies():
-    pack = api.project_dependencies(mgr, pkg, 'latest')
+    pack = api.project_dependencies(mgr, pkg)
     assert pack['name'] == 'plotly' 
 
-
-@pytest.mark.skip()
 def test_project_dependents():
-    pass
+    pack = api.project_dependents(mgr, pkg)
+    assert pack['name'] == 'plotly' 
 
 @pytest.mark.skip()
 def test_project_repositories():

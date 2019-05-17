@@ -55,6 +55,10 @@ class Api:
                 url_end_list.append("latest/")
                 url_end_list.append("dependencies")
 
+            if thing == 'ppproject_dependents':
+                url_end_list.append("dependendents")
+            
+
 
             # if "thing == project_search":
             # The search endpoint accepts a sort parameter, 
@@ -179,6 +183,19 @@ class Api:
         return self.__call_api("pproject_dependencies", *args, **kwargs)
 
 
+    def project_dependents(self, *args, **kwargs):
+        """
+        Get packages that have at least one version that depends on a given project.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+            version (str): package version
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("pproject_dependendents", *args, **kwargs)
 
 
 
