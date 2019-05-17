@@ -17,6 +17,8 @@ pkg = 'plotly'                             # package name
 provider = 'github'                        # host name
 username = 'discdiver'                     # github username
 username2 = 'jakevdp'                      # github username
+owner = 'notebooktoall'                    # github repo owner
+repo = 'notebooktoall'                     # repository name
 
 # Integration tests
 
@@ -71,13 +73,14 @@ def test_project_search():
 
 # Repository functionality
 
-@pytest.mark.skip()
 def test_repository():
-    pass
+    repos = api.user(provider, owner, repo)
+    assert repos['github_id'] in repos.values() 
 
-@pytest.mark.skip()
 def test_repository_dependencies():
-    pass
+    repos = api.user(provider, owner, repo)
+    assert "github_id" in repos.keys()
+
 
 @pytest.mark.skip()
 def test_repository_projects():

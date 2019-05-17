@@ -32,7 +32,7 @@ class Api:
         if thing == 'platforms':
             url_end_list.append('platforms')
 
-        if thing == "project":
+        if "project" in thing:
             if kwargs:
                 if kwargs['manager']:
                     url_end_list.append(kwargs['manager'])
@@ -45,6 +45,34 @@ class Api:
                 args[0] = url_end_list.append(args[0])
                 if args[1]:
                     url_end_list.append(args[1])
+
+            # if "thing == project_search":
+            # The search endpoint accepts a sort parameter, 
+            # one of 
+            # rank, stars, dependents_count, 
+            # dependent_repos_count, latest_release_published_at, 
+            # contributions_count, created_at
+
+            # The search endpoint accepts number of other parameters to filter results:
+
+            # languages
+            # licenses
+            # keywords
+            # platforms
+
+        if 'repository' in thing:
+            if kwargs:
+                url_end_list.append(platform)
+                url_end_list.append(owner)
+                url_end_list.append(repo)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
+            if thing == 'repository_dependencies':
+                url_end_list.append("dependencies")
+
 
         if "user" in thing:
             if kwargs:
@@ -108,7 +136,7 @@ class Api:
 
     def project(self, *args, **kwargs):
         """
-        Return information about a package and its versions.
+        Return information about a package and its versions from a platform (e.g. PyPI).
 
         Args:
             manager (str): package manager
@@ -118,6 +146,40 @@ class Api:
         """
 
         return self.__call_api("project", *args, **kwargs)
+
+
+
+
+    def repository(self, *args, **kwargs):
+        """
+        Return information about a reposiotory and its versions.
+
+        Args:
+            provider (str): host provider name (e.g. GitHub)
+            owner (str): owner
+            repo (str): repo
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("repository", *args, **kwargs)
+
+    def repository_dependencies(self, *args, **kwargs):
+        """
+        Return information about a repository's dependencies'.
+
+        Args:
+            provider (str): host provider name (e.g. GitHub)
+            owner (str): owner
+            repo (str): repo
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("repository_dependencies", *args, **kwargs)
+
+
+
 
 
     def user(self, *args, **kwargs):
@@ -196,22 +258,23 @@ class Api:
 
     def user_subscriptions(self, *args, **kwargs):
         """
-        Return a list of packages that a user is subscribed to receive new release notifications for.
+        Return a list of packages a user is subscribed to for release notifications.
 
         Args:
       
         Returns:
-            response (list): list of dicts response from libraries.io
+            response (dict): dict response from libraries.io
         """
         return self.__call_api("user_subscriptions", *args, **kwargs)
 
 
 api = Api()
-x = api.user_subscriptions()
+x = api.repository("github", "notebooktoall", "notebooktoall")
 
 print(type(x))
 print(x)
-print(x[0]['project']['rank'])
+# print(x['github_id'])
+
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
