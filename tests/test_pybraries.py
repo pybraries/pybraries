@@ -14,6 +14,7 @@ api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
 api = Api()                                # instantiate object
 mgr = 'pypi'                               # package manager name
 pkg = 'plotly'                             # package name
+pkg2 = 'yellowbrick'                           # package name
 provider = 'github'                        # host name
 username = 'discdiver'                     # github username
 username2 = 'jakevdp'                      # github username
@@ -54,11 +55,9 @@ def test_project_dependent_repositories():
     pack = api.project_dependent_repositories(mgr, pkg)
     assert pack['name'] == 'plotly' 
 
-    
-
-@pytest.mark.skip()
 def test_project_contributors():
-    pass
+    pack = api.project_contributors(mgr, pkg2)
+    assert float(pack[0]['github_id']) > 0
 
 @pytest.mark.skip()
 def test_project_sourcerank():

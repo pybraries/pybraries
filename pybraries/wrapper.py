@@ -55,11 +55,14 @@ class Api:
                 url_end_list.append("latest/")
                 url_end_list.append("dependencies")
 
-            if thing == 'ppproject_dependents':
+            if thing == 'pproject_dependents':
                 url_end_list.append("dependendents")
             
-            if thing == 'ppproject_dependent_repositories':
+            if thing == 'pproject_dependent_repositories':
                 url_end_list.append("dependendent_repositories")
+
+            if thing == 'pproject_contributors':
+                url_end_list.append("contributors")
 
 
             # if "thing == project_search":
@@ -207,12 +210,24 @@ class Api:
         Args:
             manager (str): package manager
             package (str): package name
-
         Returns:
             response (list): list of dicts response from libraries.io
         """
 
         return self.__call_api("pproject_dependendent_repositories", *args, **kwargs)
+
+    def project_contributors(self, *args, **kwargs):
+        """
+        Get users that have contributed to a given project.
+
+        Args:
+            manager (str): package manager
+            package (str): package name
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+
+        return self.__call_api("pproject_contributors", *args, **kwargs)
 
 
 
@@ -349,7 +364,7 @@ class Api:
 
 
 api = Api()
-x = api.repository_projects("github", "pandas-dev", "pandas")
+x = api.project_contributors('pypi', "yellowbrick")
 
 print(type(x))
 print(x)
