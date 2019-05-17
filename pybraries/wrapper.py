@@ -66,7 +66,9 @@ class Api:
 
             if thing == "user_repositories_contributions":
                 url_end_list.append("repository-contributions")
-
+            
+            if thing == "user_dependencies":
+                url_end_list.append("dependencies")
 
 
         url_combined = '/'.join(url_end_list)
@@ -166,6 +168,20 @@ class Api:
     def user_repository_contributions(self, *args, **kwargs):
         """
         Return information about repositories a user has contributed to.
+
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_repositories_contributions", *args, **kwargs)
+
+    def user_dependencies(self, *args, **kwargs):
+        """
+        Return Get a list of unique packages that the given user's repositories list as a dependency. 
+        
+        Ordered by frequency of use in those repositories.
 
         Args:
             provider (str): host (e.g. github)

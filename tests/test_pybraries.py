@@ -57,17 +57,16 @@ def test_user_packages():
     assert user_pkgs[0]['rank'] >= 0
 
 def test_user_packages_contributions():
-    user_package_contribs = api.user_packages_contributions("github", "discdiver")
+    user_package_contribs = api.user_packages_contributions(provider, username)
     assert user_package_contribs[0]['stars'] >= 0
 
 def test_user_repository_contributions():
-    user_repo_contribs = api.user_repository_contributions("github", "discdiver")
+    user_repo_contribs = api.user_repository_contributions(provider, username)
     assert user_repo_contribs[0]['size'] >= 0
 
-
-@pytest.mark.skip()
 def test_user_dependencies():
-    pass
+    user_deps = api.user_dependencies(provider, username)
+    assert user_deps[0]['rank'] >= 0
 
 @pytest.mark.skip()
 def test_user_subscriptions():
