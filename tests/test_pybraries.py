@@ -40,8 +40,9 @@ def test_project_kwargs():
 
 # add more project functionality
 
+@pytest.mark.skip()
 def test_project_dependencies():
-
+    pass
 
 @pytest.mark.skip()
 def test_project_dependents():
