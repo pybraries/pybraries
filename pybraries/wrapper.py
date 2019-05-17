@@ -69,6 +69,9 @@ class Api:
             
             if thing == "user_dependencies":
                 url_end_list.append("dependencies")
+            
+            if thing == "user_subscriptions":
+                url_end_list.append("subscriptions")
 
 
         url_combined = '/'.join(url_end_list)
@@ -189,14 +192,26 @@ class Api:
         Returns:
             response (list): list of dicts response from libraries.io
         """
-        return self.__call_api("user_repositories_contributions", *args, **kwargs)
+        return self.__call_api("user_dependencies", *args, **kwargs)
+
+    def user_subscriptions(self, *args, **kwargs):
+        """
+        Return a list of packages that a user is subscribed to receive new release notifications for.
+
+        Args:
+      
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_subscriptions", *args, **kwargs)
 
 
 api = Api()
-x = api.user_packages_contributions('github', 'discdiver')
+x = api.user_subscriptions()
 
 print(type(x))
 print(x)
+print(x[0]['project']['rank'])
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
