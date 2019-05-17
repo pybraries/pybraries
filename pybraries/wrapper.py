@@ -16,6 +16,7 @@ class Api:
     def __call_api(self, thing, *args, **kwargs):
         """
         Call the API.
+
         Args:
             manager (str): package manager
             package (str): package name
@@ -45,7 +46,7 @@ class Api:
                 if args[1]:
                     url_end_list.append(args[1])
 
-        if thing == "user":
+        if "user" in thing:
             if kwargs:
                 url_end_list.append(provider)
                 url_end_list.append(user)
@@ -54,51 +55,23 @@ class Api:
                 args[0] = url_end_list.append(args[0])
                 args[1] = url_end_list.append(args[1])
             
+            if thing == "user_repositories":
+                url_end_list.append("repositories")
 
-        if thing == "user_repositories":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
+            if thing == "user_packages": 
+                url_end_list.append("projects")
 
-            url_end_list.append("repositories")
+            if thing == "user_packages_contributions":
+                url_end_list.append("project-contributions")
 
-        if thing == "user_packages":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("projects")
-
-        if thing == "user_packages_contributions":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("project-contributions")
-
-        if thing == "user_repositories_contributions":
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-            url_end_list.append("repository-contributions")
-
+            if thing == "user_repositories_contributions":
+                url_end_list.append("repository-contributions")
+            
+            if thing == "user_dependencies":
+                url_end_list.append("dependencies")
+            
+            if thing == "user_subscriptions":
+                url_end_list.append("subscriptions")
 
 
         url_combined = '/'.join(url_end_list)
@@ -123,6 +96,7 @@ class Api:
     def platforms(self, *args, **kwargs):
         """
         Return information about a package and its versions.
+
         Args:
 
         Returns:
@@ -135,6 +109,7 @@ class Api:
     def project(self, *args, **kwargs):
         """
         Return information about a package and its versions.
+
         Args:
             manager (str): package manager
             package (str): package name
@@ -148,6 +123,7 @@ class Api:
     def user(self, *args, **kwargs):
         """
         Return information about a user.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -159,6 +135,7 @@ class Api:
     def user_repositories(self, *args, **kwargs):
         """
         Return information about a user's repos.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -170,6 +147,7 @@ class Api:
     def user_packages(self, *args, **kwargs):
         """
         Return information about packages using a user's repos.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -181,6 +159,7 @@ class Api:
     def user_packages_contributions(self, *args, **kwargs):
         """
         Return information about packages a user has contributed to.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -192,6 +171,7 @@ class Api:
     def user_repository_contributions(self, *args, **kwargs):
         """
         Return information about repositories a user has contributed to.
+
         Args:
             provider (str): host (e.g. github)
             user (str): username
@@ -200,12 +180,38 @@ class Api:
         """
         return self.__call_api("user_repositories_contributions", *args, **kwargs)
 
+    def user_dependencies(self, *args, **kwargs):
+        """
+        Return Get a list of unique packages that the given user's repositories list as a dependency. 
+        
+        Ordered by frequency of use in those repositories.
+
+        Args:
+            provider (str): host (e.g. github)
+            user (str): username
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_dependencies", *args, **kwargs)
+
+    def user_subscriptions(self, *args, **kwargs):
+        """
+        Return a list of packages that a user is subscribed to receive new release notifications for.
+
+        Args:
+      
+        Returns:
+            response (list): list of dicts response from libraries.io
+        """
+        return self.__call_api("user_subscriptions", *args, **kwargs)
+
 
 api = Api()
-x = api.user_packages_contributions('github', 'discdiver')
+x = api.user_subscriptions()
 
 print(type(x))
 print(x)
+print(x[0]['project']['rank'])
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":

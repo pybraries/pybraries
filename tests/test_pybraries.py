@@ -40,7 +40,49 @@ def test_project_kwargs():
 
 # add more project functionality
 
+@pytest.mark.skip()
+def test_project_dependencies():
+    pass
+
+@pytest.mark.skip()
+def test_project_dependents():
+    pass
+
+@pytest.mark.skip()
+def test_project_repositories():
+    pass
+
+@pytest.mark.skip()
+def test_project_contributors():
+    pass
+
+@pytest.mark.skip()
+def test_project_sourcerank():
+    pass
+
+@pytest.mark.skip()
+def test_project_usage():
+    pass
+
+@pytest.mark.skip()
+def test_project_search():
+    pass
+
+
 # Repository functionality
+
+@pytest.mark.skip()
+def test_repository():
+    pass
+
+@pytest.mark.skip()
+def test_repository_dependencies():
+    pass
+
+@pytest.mark.skip()
+def test_repository_projects():
+    pass
+
 
 
 # User functionality
@@ -57,21 +99,24 @@ def test_user_packages():
     assert user_pkgs[0]['rank'] >= 0
 
 def test_user_packages_contributions():
-    user_package_contribs = api.user_packages_contributions("github", "discdiver")
+    user_package_contribs = api.user_packages_contributions(provider, username)
     assert user_package_contribs[0]['stars'] >= 0
 
 def test_user_repository_contributions():
-    user_repo_contribs = api.user_repository_contributions("github", "discdiver")
+    user_repo_contribs = api.user_repository_contributions(provider, username)
     assert user_repo_contribs[0]['size'] >= 0
 
-
-@pytest.mark.skip()
 def test_user_dependencies():
-    pass
+    user_deps = api.user_dependencies(provider, username)
+    assert user_deps[0]['rank'] >= 0
 
-@pytest.mark.skip()
+
+# first need to subscribe the user to package updates
+# my api key is subscribed, so will work for travis tests
+# won't pass locally if user's api_key isn't subscribed to any packages
 def test_user_subscriptions():
-    pass
+    user_subs = api.user_subscriptions()
+    assert user_subs[0]['project']['rank'] >= 0
 
 @pytest.mark.skip()
 def test_subscribe():
