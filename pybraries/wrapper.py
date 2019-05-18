@@ -74,24 +74,20 @@ class Api:
         # special case #2
         if thing == "subscribe":
             url_end_list.append("subscriptions")
-            url_combined = '/'.join(url_end_list)
-            print(url_combined)
-            data = []
 
             if kwargs:
-                data=dict(
-                    kwargs 
-                )
-
+                if kwargs['manager']:
+                    url_end_list.append(kwargs['manager'])
+                if kwargs['package']:
+                    url_end_list.append(kwargs['package'])
             if args:
                 args = list(args)
                 args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-                #data.append(args[0])
-                #data.append(args[1])
+                if args[1]:
+                    url_end_list.append(args[1])
 
             url_combined = '/'.join(url_end_list)
+            
             with requests.Session() as s:
                 retries = Retry(
                     total=10,
@@ -105,7 +101,6 @@ class Api:
                         url_combined,
                         params=dict(
                             api_key=self.api_key),
-                        json=data,
                         timeout=10,
                     )
                     print(r)
@@ -171,7 +166,6 @@ class Api:
                 url_end_list.append("projects")
 
         if "user" in thing:
-
             if kwargs:
                 url_end_list.append(provider)
                 url_end_list.append(user)
@@ -195,11 +189,22 @@ class Api:
             if thing == "user_dependencies":
                 url_end_list.append("dependencies")
             
-            if thing == "user_subscriptions":
-                url_end_list.append("subscriptions")
-            
-            if thing == "user_subscribed":
-                url_end_list.append("subscriptions")
+
+        if thing == "list_subscriptions":
+            url_end_list.append("subscriptions")
+        
+        if thing == "subscribed":
+            url_end_list.append("subscriptions")
+            if kwargs:
+                if kwargs['manager']:
+                    url_end_list.append(kwargs['manager'])
+                if kwargs['package']:
+                    url_end_list.append(kwargs['package'])
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                if args[1]:
+                    url_end_list.append(args[1])
 
 
         url_combined = '/'.join(url_end_list)
@@ -490,7 +495,7 @@ class Api:
         Returns:
             response (dict): dict response from libraries.io
         """
-        return self.__call_api("user_subscriptions", *args, **kwargs)
+        return self.__call_api("list_subscriptions", *args, **kwargs)
 
     def subscribe(self, *args, **kwargs):
         """
@@ -518,7 +523,7 @@ class Api:
             # maybe return true if dict not empty, false if 404
             # return error earlier if can't connect, server issue, etc.
         """
-        return self.__call_api("user_subscribed", *args, **kwargs)
+        return self.__call_api("subscribed", *args, **kwargs)
 
 
 
