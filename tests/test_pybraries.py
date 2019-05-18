@@ -2,7 +2,7 @@
 import pytest
 import os
 from time import sleep
-from pybraries import Api
+from pybraries import Libraries_API
 
 # fixture to avoid rate limiting
 @pytest.fixture(autouse=True, scope='function')
@@ -11,7 +11,7 @@ def wait_a_sec():
     sleep(1)
 
 api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
-api = Api()                                # instantiate object
+api = Libraries_API()                      # instantiate object
 mgr = 'pypi'                               # package manager name
 pkg = 'plotly'                             # package name
 pkg2 = 'yellowbrick'                       # package name
@@ -24,7 +24,17 @@ owner2 = 'pandas-dev'                      # github repo owner
 repo2 = 'pandas'                           # repository name
 repo3 = 'scikit-learn'                     # repo name
 
+
+
 # Integration tests
+
+# API key check
+def test_platforms():
+    """if api key is not present, message to get key is returned'"""
+    # attempt to instatioate object
+    # assert libraries.io in stdout
+    pass
+
 
 # Platforms functionality
 def test_platforms():
@@ -163,6 +173,11 @@ def test_subscribe():
 @pytest.mark.skip()
 def test_subscribe_kwargs():
     """for api key sent- use kwargs to check if subscribed"""
+    sub = api.subscribe(manager=mgr, package=repo2)
+    assert sub['project']['rank'] >= 0
+
+def test_subscribe():
+    """for api key sent-returns package info regardless of previous status"""
     sub = api.subscribe(manager=mgr, package=repo2)
     assert sub['project']['rank'] >= 0
 

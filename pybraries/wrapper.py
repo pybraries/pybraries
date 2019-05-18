@@ -4,17 +4,15 @@ from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 import fire
 import os
+from .helpers import sess
 
-
-class Api:
+class Libraries_API:
     """The class for wrapping the libraries.io API
     """
 
     def __init__(self):
         self.api_key = os.environ['LIBRARIES_API_KEY']
-        # TODO
-        # check for valid API key
-
+        pass
 
     def __call_api(self, thing, *args, **kwargs):
         """
@@ -45,29 +43,21 @@ class Api:
 
             url_combined = '/'.join(url_end_list)
 
-            with requests.Session() as s:
-                retries = Retry(
-                    total=10,
-                    backoff_factor=0.2,
-                    status_forcelist=[500, 502, 503, 504])
-
-                s.mount('https://', HTTPAdapter(max_retries=retries))
-
-                try:
-                    r = s.get(
-                        url_combined,
-                        params=dict(
-                            kwargs,
-                            api_key=self.api_key),
-                            # add args support
-                        timeout=5,
-                    )
-                    r.raise_for_status()
-                    response = r.json()
-                except HTTPError as http_err:
-                    print(f'HTTP error occurred: {http_err}')  
-                except Exception as err:
-                    print(f'Other error occurred: {err}')  
+            try:
+                r = sess.get(
+                    url_combined,
+                    params=dict(
+                        kwargs,
+                        api_key=self.api_key),
+                        # add args support
+                    timeout=5,
+                )
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
 
             return response
 
@@ -89,28 +79,21 @@ class Api:
 
             url_combined = '/'.join(url_end_list)
 
-            with requests.Session() as s:
-                retries = Retry(
-                    total=10,
-                    backoff_factor=0.3,
-                    status_forcelist=[500, 502, 503, 504])
-                s.mount('https://', HTTPAdapter(max_retries=retries))
-
-                try:
-                    r = s.post(
-                        url_combined,
-                        params=dict(
-                            include_prerelease=0,
-                            api_key=self.api_key),
-                        timeout=10,
-                    )
-                    print(r)
-                    r.raise_for_status()
-                    response = r.json()
-                except HTTPError as http_err:
-                    print(f'HTTP error occurred: {http_err}')  
-                except Exception as err:
-                    print(f'Other error occurred: {err}')  
+            try:
+                r = sess.post(
+                    url_combined,
+                    params=dict(
+                        include_prerelease=0,
+                        api_key=self.api_key),
+                    timeout=7,
+                )
+                print(r)
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
             return response
 
 
@@ -139,31 +122,21 @@ class Api:
                     url_end_list.append(args[1])
 
             url_combined = '/'.join(url_end_list)
-            parameters['api_key']=self.api_key
-
-            with requests.Session() as s:
-                retries = Retry(
-                    total=10,
-                    backoff_factor=0.3,
-                    status_forcelist=[500, 502, 503, 504])
-
-                s.mount('https://', HTTPAdapter(max_retries=retries))
                 
-                
-                try:
-                    r = s.put(
-                        url_combined,
-                        params=parameters,
-                        data=dat,
-                        timeout=10,
-                    )
-                    print(r.request.url)
-                    r.raise_for_status()
-                    response = r.json()
-                except HTTPError as http_err:
-                    print(f'HTTP error occurred: {http_err}')  
-                except Exception as err:
-                    print(f'Other error occurred: {err}')  
+            try:
+                r = sess.put(
+                    url_combined,
+                    params=parameters,
+                    data=dat,
+                    timeout=10,
+                )
+                print(r.request.url)
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')  
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
             return response
 
         # special case #4
@@ -311,30 +284,23 @@ class Api:
 
 
         url_combined = '/'.join(url_end_list)
-        print(url_combined)
 
-        with requests.Session() as s:
-            retries = Retry(
-                total=10,
-                backoff_factor=0.2,
-                status_forcelist=[500, 502, 503, 504])
+        try:
+            r = sess.get(
+                url_combined,
+                params=dict(api_key=self.api_key),
+                timeout=5,
+            )
+            r.raise_for_status()
+            response = r.json()
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')  
+        except Exception as err:
+            print(f'Other error occurred: {err}')  
 
-            s.mount('https://', HTTPAdapter(max_retries=retries))
+        return response
 
-            try:
-                r = s.get(
-                    url_combined,
-                    params=dict(api_key=self.api_key),
-                    timeout=5,
-                )
-                r.raise_for_status()
-                response = r.json()
-            except HTTPError as http_err:
-                print(f'HTTP error occurred: {http_err}')  
-            except Exception as err:
-                print(f'Other error occurred: {err}')  
 
-            return response
 
 
     def platforms(self, *args, **kwargs):
@@ -662,9 +628,9 @@ class Api:
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
-    fire.Fire(Api)
+    fire.Fire(Libraries_API)
 
-    api = Api()
+    api = Libraries_API()
     
     # x = api.subscribe(manager="pypi", package="numpy")
     # print(x)
