@@ -87,7 +87,7 @@ class Api:
                     url_end_list.append(args[1])
 
             url_combined = '/'.join(url_end_list)
-            
+
             with requests.Session() as s:
                 retries = Retry(
                     total=10,
@@ -533,7 +533,7 @@ if __name__ == "__main__":
 
     api = Api()
     
-    y = api.subscribe("pypi", "yellowbrick")
+    y = api.subscribe(manager="pypi", package="yellowbrick")
     print(y)
     # y = api.check_subscribed('pypi', 'yellowbrick')
     # print(y)
