@@ -35,31 +35,86 @@ class Api:
         url_combined = ""
         # final string url
         
-        # special case
+        # special case #1
         if thing == "special_project_search":
             url_end_list.append('search?')
 
             # package seems to be ignored by the libraries.io API
             if "package" in kwargs:
-                url_end_list.append('q='+ kwargs['package'])
+                url_end_list.append(kwargs['package'])
 
             url_combined = '/'.join(url_end_list)
 
-            try:
-                r = requests.get(
-                    url_combined,
-                    params=dict(
-                        kwargs,
-                        api_key=self.api_key),
-                    timeout=5,
-                )
-                r.raise_for_status()
-                response = r.json()
-            except HTTPError as http_err:
-                print(f'HTTP error occurred: {http_err}')  
-            except Exception as err:
-                print(f'Other error occurred: {err}')  
+            with requests.Session() as s:
+                retries = Retry(
+                    total=10,
+                    backoff_factor=0.2,
+                    status_forcelist=[500, 502, 503, 504])
 
+                s.mount('https://', HTTPAdapter(max_retries=retries))
+
+                try:
+                    r = s.get(
+                        url_combined,
+                        params=dict(
+                            kwargs,
+                            api_key=self.api_key),
+                            # add args support
+                        timeout=5,
+                    )
+                    r.raise_for_status()
+                    response = r.json()
+                except HTTPError as http_err:
+                    print(f'HTTP error occurred: {http_err}')  
+                except Exception as err:
+                    print(f'Other error occurred: {err}')  
+
+            return response
+
+        # special case #2
+        if thing == "subscribe":
+            url_end_list.append("subscriptions")
+            url_combined = '/'.join(url_end_list)
+            print(url_combined)
+            data = []
+
+            if kwargs:
+                data=dict(
+                    kwargs 
+                )
+
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
+                #data.append(args[0])
+                #data.append(args[1])
+
+            url_combined = '/'.join(url_end_list)
+            with requests.Session() as s:
+                retries = Retry(
+                    total=10,
+                    backoff_factor=0.3,
+                    status_forcelist=[500, 502, 503, 504])
+
+                s.mount('https://', HTTPAdapter(max_retries=retries))
+
+                try:
+                    r = s.post(
+                        url_combined,
+                        params=dict(
+                            api_key=self.api_key),
+                        json=data,
+                        timeout=10,
+                    )
+                    print(r)
+                    r.raise_for_status()
+                    response = r.json()
+                except HTTPError as http_err:
+                    print(f'HTTP error occurred: {http_err}')  
+                except Exception as err:
+                    print(f'Other error occurred: {err}')  
             return response
 
         if thing == 'platforms':
@@ -146,18 +201,6 @@ class Api:
             if thing == "user_subscribed":
                 url_end_list.append("subscriptions")
 
-        if thing == "subscribed":
-            url_end_list.append("subscriptions")
-
-            if kwargs:
-                url_end_list.append(provider)
-                url_end_list.append(user)
-            if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-
-
 
         url_combined = '/'.join(url_end_list)
         print(url_combined)
@@ -228,6 +271,9 @@ class Api:
         """
 
         return self.__call_api("pproject_dependencies", *args, **kwargs)
+
+        if thing == 'subscribe':
+            url_end_list.append('subscriptions')
 
 
     def project_dependents(self, *args, **kwargs):
@@ -435,7 +481,7 @@ class Api:
         """
         return self.__call_api("user_dependencies", *args, **kwargs)
 
-    def user_subscriptions(self, *args, **kwargs):
+    def list_subscriptions(self, *args, **kwargs):
         """
         Return a list of packages a user is subscribed to for release notifications.
 
@@ -446,24 +492,43 @@ class Api:
         """
         return self.__call_api("user_subscriptions", *args, **kwargs)
 
-    def user_subscribed(self, *args, **kwargs):
+    def subscribe(self, *args, **kwargs):
+        """
+        Subscribe to receive notifications about new releases of a project.
+
+        Args:
+            manager (str): package manager name (e.g. PyPI)
+            package (str): package name
+            include_prelease (bool): default = True. Include prerelease notifications
+        Returns:
+            response (dict): dict of project info from libraries.io
+        """
+        return self.__call_api("subscribe", *args, **kwargs)
+
+    def check_subscribed(self, *args, **kwargs):
         """
         Check if a users is subscribed to receive notifications about new releases of a project.
 
         Args:
-            provider (str): host provider name (e.g. GitHub)
-            repo (str): repo name
+            manager (str): package manager name (e.g. PyPI)
+            package (str): package name
         Returns:
             response (dict): dict of project info from libraries.io
+            # make so a 404 for not found returns a nice message 
+            # maybe return true if dict not empty, false if 404
+            # return error earlier if can't connect, server issue, etc.
         """
-        return self.__call_api("subscribed", *args, **kwargs)
+        return self.__call_api("user_subscribed", *args, **kwargs)
+
 
 
 # From the command line you can call any function by name with arguments
 if __name__ == "__main__":
     fire.Fire(Api)
 
-    # api = Api()
-    # x = api.project_search(package='pandas', sort='created_at', platforms="pypi")
-    # print(type(x))
-    # print(x[0])
+    api = Api()
+    
+    y = api.subscribe("pypi", "yellowbrick")
+    print(y)
+    # y = api.check_subscribed('pypi', 'yellowbrick')
+    # print(y)

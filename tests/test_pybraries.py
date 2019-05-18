@@ -120,17 +120,19 @@ def test_user_dependencies():
 # first need to subscribe the user to package updates
 # my api key is subscribed, so will work for travis tests
 # won't pass locally if user's api_key isn't subscribed to any packages
-def test_user_subscriptions():
-    user_subs = api.user_subscriptions()
+def test_list_subscriptions():
+    user_subs = api.list_subscriptions()
     assert user_subs[0]['project']['rank'] >= 0
 
+def test_check_subscribed():
+    check_sub = api.check_subscribed(mgr, repo3)
+    assert check_sub['project']['rank'] >= 0
+
+# unsubscribe after? mock?
 @pytest.mark.skip()
 def test_subscribe():
-    pass
-
-def test_user_subscribed():
-    check_sub = api.user_subscribed(mgr, repo3)
-    assert check_sub['project']['rank'] >= 0
+    sub = api.subscribe(mgr, repo2)
+    assert sub['project']['rank'] >= 0
 
 @pytest.mark.skip()
 def test_update_subscription():
