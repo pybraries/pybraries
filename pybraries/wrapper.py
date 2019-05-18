@@ -30,6 +30,9 @@ class Libraries_API:
         url_end_list = ["https://libraries.io/api"]
         # list to build url
 
+        more_args = []
+        # for unpacking args
+
         url_combined = ""
         # final string url
         
@@ -40,6 +43,10 @@ class Libraries_API:
             # package seems to be ignored by the libraries.io API
             if "package" in kwargs:
                 url_end_list.append(kwargs['package'])
+            
+            if args:
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_arg
 
             url_combined = '/'.join(url_end_list)
 
@@ -73,8 +80,8 @@ class Libraries_API:
                     url_end_list.append(kwargs['package'])
 
             if args:
-                more_args = [ arg for arg in args]
-                url_end_list = url_end_list.extend(more_args)
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_arg
        
             url_combined = '/'.join(url_end_list)
 
@@ -115,10 +122,8 @@ class Libraries_API:
                         dat = dict(include_prerelease="False")
                     
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                if args[1]:
-                    url_end_list.append(args[1])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_arg
 
             url_combined = '/'.join(url_end_list)
                 
@@ -149,10 +154,8 @@ class Libraries_API:
                     url_end_list.append(kwargs['package'])
 
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                if args[1]:
-                    url_end_list.append(args[1])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_arg
 
             url_combined = '/'.join(url_end_list)
 
@@ -164,7 +167,6 @@ class Libraries_API:
                 if http_err.code == 204: 
                     print(http_err.code)
                     response = f"Successfully unsubscribed from {kwargs['package']}"
-                   
                     pass
                 else:
                     print(f'HTTP error occurred: {http_err}')  
@@ -187,12 +189,8 @@ class Libraries_API:
                 if kwargs['package']:
                     url_end_list.append(kwargs['package'])
             if args:
-                args = list(args)
-                # need to search list?
-                # this is kind of hacky
-                args[0] = url_end_list.append(args[0])
-                if args[1]:
-                    url_end_list.append(args[1])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_args
 
             if thing == 'pproject_dependencies':
                 url_end_list.append("latest/")
@@ -219,10 +217,8 @@ class Libraries_API:
                 url_end_list.append(owner)
                 url_end_list.append(repo)
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
-                args[2] = url_end_list.append(args[2])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_args
 
             if thing == 'repository_dependencies':
                 url_end_list.append("dependencies")
@@ -235,9 +231,8 @@ class Libraries_API:
                 url_end_list.append(provider)
                 url_end_list.append(user)
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                args[1] = url_end_list.append(args[1])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_args
             
             if thing == "user_repositories":
                 url_end_list.append("repositories")
@@ -266,10 +261,8 @@ class Libraries_API:
                 if kwargs['package']:
                     url_end_list.append(kwargs['package'])
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                if args[1]:
-                    url_end_list.append(args[1])
+                more_args = [arg for arg in args]
+                url_end_list = url_end_list + more_arg
 
         url_combined = '/'.join(url_end_list)
 
@@ -610,13 +603,13 @@ if __name__ == "__main__":
     # manually testing things
     api = Libraries_API()
     
-    # x = api.subscribe(manager="pypi", package="numpy")
-    # print(x)
+    x = api.subscribe(manager="pypi", package="numpy")
+    print(x)
 
     # a = api.unsubscribe(manager="pypi", package="numpy")
     # print(a)
 
-    y = api.check_subscribed('pypi', 'yellowbrick')
+    y = api.check_subscribed('pypi', 'numpy')
     print(y)
 
     #z = api.update_subscription(manager="pypi", package="plotly", include_prerelease="False")
