@@ -115,7 +115,7 @@ def test_user_repositories():
     assert user_repos[0]['size'] > 0
 
 def test_user_packages():
-     """returns a package with rank >= 0"""
+    """returns a package with rank >= 0"""
     user_pkgs = api.user_packages(provider, username2)
     assert user_pkgs[0]['rank'] >= 0
 
@@ -139,12 +139,12 @@ def test_user_dependencies():
 # my api key is subscribed, so will work for travis tests
 # won't pass locally if user's api_key isn't subscribed to any packages
 def test_list_subscriptions():
-    """for api key - returns a list item subscription with a project rank >= 0"""
+    """for api key sent- returns a list item subscription with a project rank >= 0"""
     subs = api.list_subscriptions()
     assert subs[0]['project']['rank'] >= 0
 
 def test_check_subscribed():
-    """for api key - checks if user is subscribed to a project with a rank >= 0"""
+    """for api key sent - check if user is subscribed to a project with a rank >= 0"""
     check_sub = api.check_subscribed(mgr, repo3)
     assert check_sub['project']['rank'] >= 0
 
@@ -153,6 +153,7 @@ def test_check_subscribed():
 # unsubscribe after? mock?
 @pytest.mark.skip()
 def test_subscribe():
+    """for api key sent- use args to check if subscribed"""
     sub = api.subscribe(mgr, repo2)
     assert sub['project']['rank'] >= 0
 
@@ -161,14 +162,20 @@ def test_subscribe():
 # unsubscribe after? mock?
 @pytest.mark.skip()
 def test_subscribe_kwargs():
+    """for api key sent- use kwargs to check if subscribed"""
     sub = api.subscribe(manager=mgr, package=repo2)
     assert sub['project']['rank'] >= 0
 
-def test_update_subscription():
-    sub = api.update_subscription(mgr, repo2, False)
-    assert sub['project']['rank'] >= 0
-
+# make sure include_prerelease is set to true before
 @pytest.mark.skip()
+def test_update_subscription():
+    """for api key sent- change subscription for prerelease to false"""
+    update = api.update_subscription(mgr, repo2, False)
+    assert update['include_prerelease'] == False
+
 def test_unsubscribe():
+    """for api key sent- unsubscribe from package"""
+    del_sub = api.unsubscribe(mgr, repo2)
+
+    # check and make sure not subscribed
     pass
-# Unit tests

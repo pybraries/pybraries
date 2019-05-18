@@ -80,6 +80,7 @@ class Api:
                     url_end_list.append(kwargs['manager'])
                 if kwargs['package']:
                     url_end_list.append(kwargs['package'])
+
             if args:
                 args = list(args)
                 args[0] = url_end_list.append(args[0])
@@ -93,11 +94,105 @@ class Api:
                     total=10,
                     backoff_factor=0.3,
                     status_forcelist=[500, 502, 503, 504])
-
                 s.mount('https://', HTTPAdapter(max_retries=retries))
 
                 try:
                     r = s.post(
+                        url_combined,
+                        params=dict(
+                            include_prerelease=0,
+                            api_key=self.api_key),
+                        timeout=10,
+                    )
+                    print(r)
+                    r.raise_for_status()
+                    response = r.json()
+                except HTTPError as http_err:
+                    print(f'HTTP error occurred: {http_err}')  
+                except Exception as err:
+                    print(f'Other error occurred: {err}')  
+            return response
+
+
+        # special case #3
+        if thing == "update_subscription":
+            url_end_list.append("subscriptions")
+            parameters={}
+            dat = {}
+            
+            if kwargs:
+                if kwargs['manager']:
+                    url_end_list.append(kwargs['manager'])
+                if kwargs['package']:
+                    url_end_list.append(kwargs['package'])
+                if kwargs['include_prerelease']:
+                    # breakpoint()
+                    print(kwargs['include_prerelease'])
+                    if kwargs['include_prerelease'] == "False":
+                        #url_end_list.append('include_prerelease=0')
+                        dat = dict(include_prerelease="False")
+                    
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                if args[1]:
+                    url_end_list.append(args[1])
+
+            url_combined = '/'.join(url_end_list)
+            parameters['api_key']=self.api_key
+
+            with requests.Session() as s:
+                retries = Retry(
+                    total=10,
+                    backoff_factor=0.3,
+                    status_forcelist=[500, 502, 503, 504])
+
+                s.mount('https://', HTTPAdapter(max_retries=retries))
+                
+                
+                try:
+                    r = s.put(
+                        url_combined,
+                        params=parameters,
+                        data=dat,
+                        timeout=10,
+                    )
+                    print(r.request.url)
+                    r.raise_for_status()
+                    response = r.json()
+                except HTTPError as http_err:
+                    print(f'HTTP error occurred: {http_err}')  
+                except Exception as err:
+                    print(f'Other error occurred: {err}')  
+            return response
+
+        # special case #4
+        if thing == "delete_subscription":
+            url_end_list.append("subscriptions")
+
+            if kwargs:
+                if kwargs['manager']:
+                    url_end_list.append(kwargs['manager'])
+                if kwargs['package']:
+                    url_end_list.append(kwargs['package'])
+
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                if args[1]:
+                    url_end_list.append(args[1])
+
+            url_combined = '/'.join(url_end_list)
+
+            with requests.Session() as s:
+                retries = Retry(
+                    total=10,
+                    backoff_factor=0.3,
+                    status_forcelist=[500, 502, 503, 504])
+                s.mount('https://', HTTPAdapter(max_retries=retries))
+
+                try:
+                    r = s.delete(
                         url_combined,
                         params=dict(
                             api_key=self.api_key),
@@ -111,6 +206,8 @@ class Api:
                 except Exception as err:
                     print(f'Other error occurred: {err}')  
             return response
+
+
 
         if thing == 'platforms':
             url_end_list.append('platforms')
@@ -233,7 +330,7 @@ class Api:
 
             return response
 
-    # public methods 
+
     def platforms(self, *args, **kwargs):
         """
         Return a list of supported package managers.
@@ -504,7 +601,7 @@ class Api:
         Args:
             manager (str): package manager name (e.g. PyPI)
             package (str): package name
-            include_prelease (bool): default = True. Include prerelease notifications
+            include_prerelease (bool): default = True. Include prerelease notifications
         Returns:
             response (dict): dict of project info from libraries.io
         """
@@ -525,6 +622,36 @@ class Api:
         """
         return self.__call_api("subscribed", *args, **kwargs)
 
+    def update_subscription(self, *args, **kwargs):
+        """
+        Update the options for a subscription
+
+        Args:
+            manager (str): package manager name (e.g. PyPI)
+            package (str): package name
+            include_prerelease (bool): default = True. Include prerelease notifications
+
+        Returns:
+            response (dict): dict of project info from libraries.io
+            # make so a 404 for not found returns a nice message 
+            # maybe return a message if 304 is reponse (not updated)
+        """
+        return self.__call_api("update_subscription", *args, **kwargs)
+
+    def unsubscribe(self, *args, **kwargs):
+        """
+        Stop receiving release notifications from a project.
+
+        Args:
+            manager (str): package manager name (e.g. PyPI)
+            package (str): package name
+        
+        Returns:
+            response (dict): dict of project info from libraries.io
+            # TODO return confirmation that no longer subscribed
+ 
+        """
+        return self.__call_api("delete_subscription", *args, **kwargs)
 
 
 # From the command line you can call any function by name with arguments
@@ -532,8 +659,17 @@ if __name__ == "__main__":
     fire.Fire(Api)
 
     api = Api()
+
+    a = api.unsubscribe(manager="pypi", package="plotly")
+    print(a)
     
-    y = api.subscribe(manager="pypi", package="yellowbrick")
-    print(y)
+    # x = api.subscribe(manager="pypi", package="numpy")
+    # print(x)
+
+
     # y = api.check_subscribed('pypi', 'yellowbrick')
-    # print(y)
+    #print(y)
+
+    #z = api.update_subscription(manager="pypi", package="plotly", include_prerelease="False")
+    #print(z)
+
