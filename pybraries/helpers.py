@@ -12,16 +12,18 @@ class APIKeyMissingError(Exception):
 if LIBRARIES_API_KEY is None:
     raise APIKeyMissingError(
         "All methods require an API key. "
-        "See https://libraries.io to get your free key."
+        "See https://libraries.io to get your free key. "
+        "Then set the key to the environment variable: LIBRARIES_API_KEY"
     )
 
-# session settings
+# session retry settings
 retries = Retry( 
     total=10, 
     backoff_factor=0.2, 
     status_forcelist=[500, 502, 503, 504]
 )
 
+# session object common properties
 sess = requests.Session()
 sess.params = {}
 sess.params['api_key'] = LIBRARIES_API_KEY

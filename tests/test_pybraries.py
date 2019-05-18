@@ -4,7 +4,8 @@ import os
 from time import sleep
 from pybraries import Libraries_API
 
-# fixture to avoid rate limiting
+
+# fixture to avoid hitting rate limit
 @pytest.fixture(autouse=True, scope='function')
 def wait_a_sec():
     yield
