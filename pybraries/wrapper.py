@@ -48,6 +48,7 @@ class Libraries_API:
                     url_combined,
                     params=dict(
                         kwargs,
+                    
                         api_key=self.api_key),
                         # add args support
                     timeout=5,
@@ -72,20 +73,18 @@ class Libraries_API:
                     url_end_list.append(kwargs['package'])
 
             if args:
-                args = list(args)
-                args[0] = url_end_list.append(args[0])
-                if args[1]:
-                    url_end_list.append(args[1])
-
+                more_args = [ arg for arg in args]
+                url_end_list = url_end_list.extend(more_args)
+       
             url_combined = '/'.join(url_end_list)
 
             try:
                 r = sess.post(
                     url_combined,
                     params=dict(
-                        include_prerelease=0,
-                        api_key=self.api_key),
-                    timeout=7,
+                        include_prerelease=0,  # just for testing, not working
+                        api_key=self.api_key), # refactor out, already in session
+                    timeout=5,
                 )
                 print(r)
                 r.raise_for_status()
