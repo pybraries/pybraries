@@ -14,14 +14,15 @@ api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
 api = Api()                                # instantiate object
 mgr = 'pypi'                               # package manager name
 pkg = 'plotly'                             # package name
-pkg2 = 'yellowbrick'                           # package name
+pkg2 = 'yellowbrick'                       # package name
 provider = 'github'                        # host name
 username = 'discdiver'                     # github username
 username2 = 'jakevdp'                      # github username
 owner = 'notebooktoall'                    # github repo owner
 repo = 'notebooktoall'                     # repository name
-owner2 = 'pandas-dev'                         # github repo owner
-repo2 = 'pandas'                          # repository name
+owner2 = 'pandas-dev'                      # github repo owner
+repo2 = 'pandas'                           # repository name
+repo3 = 'scikit-learn'                     # repo name
 
 # Integration tests
 
@@ -127,9 +128,9 @@ def test_user_subscriptions():
 def test_subscribe():
     pass
 
-@pytest.mark.skip()
-def test_subscribed():
-    pass
+def test_user_subscribed():
+    check_sub = api.user_subscribed(mgr, repo3)
+    assert check_sub['project']['rank'] >= 0
 
 @pytest.mark.skip()
 def test_update_subscription():

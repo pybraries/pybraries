@@ -116,6 +116,7 @@ class Api:
                 url_end_list.append("projects")
 
         if "user" in thing:
+
             if kwargs:
                 url_end_list.append(provider)
                 url_end_list.append(user)
@@ -141,6 +142,21 @@ class Api:
             
             if thing == "user_subscriptions":
                 url_end_list.append("subscriptions")
+            
+            if thing == "user_subscribed":
+                url_end_list.append("subscriptions")
+
+        if thing == "subscribed":
+            url_end_list.append("subscriptions")
+
+            if kwargs:
+                url_end_list.append(provider)
+                url_end_list.append(user)
+            if args:
+                args = list(args)
+                args[0] = url_end_list.append(args[0])
+                args[1] = url_end_list.append(args[1])
+
 
 
         url_combined = '/'.join(url_end_list)
@@ -429,6 +445,18 @@ class Api:
             response (dict): dict response from libraries.io
         """
         return self.__call_api("user_subscriptions", *args, **kwargs)
+
+    def user_subscribed(self, *args, **kwargs):
+        """
+        Check if a users is subscribed to receive notifications about new releases of a project.
+
+        Args:
+            provider (str): host provider name (e.g. GitHub)
+            repo (str): repo name
+        Returns:
+            response (dict): dict of project info from libraries.io
+        """
+        return self.__call_api("subscribed", *args, **kwargs)
 
 
 # From the command line you can call any function by name with arguments
