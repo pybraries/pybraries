@@ -1,5 +1,5 @@
 import requests
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, RetryError
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 import fire
@@ -186,8 +186,8 @@ class Api:
 
             with requests.Session() as s:
                 retries = Retry(
-                    total=10,
-                    backoff_factor=0.3,
+                    total=2,
+                    backoff_factor=0.2,
                     status_forcelist=[500, 502, 503, 504])
                 s.mount('https://', HTTPAdapter(max_retries=retries))
 
@@ -196,16 +196,22 @@ class Api:
                         url_combined,
                         params=dict(
                             api_key=self.api_key),
-                        timeout=10,
+                        timeout=2,
                     )
-                    print(r)
                     r.raise_for_status()
-                    response = r.json()
+                    
                 except HTTPError as http_err:
-                    print(f'HTTP error occurred: {http_err}')  
+                    if http_err.code == 204: 
+                        response = f"Successfully unsubscribed from {kwargs['package']}"
+                        pass
+                    else:
+                        print(f'HTTP error occurred: {http_err}')  
+                except RetryError as err:
+                        response = f"Not subscribed to {kwargs['package']} or unsubscribe was unsuccessful"
                 except Exception as err:
-                    print(f'Other error occurred: {err}')  
-            return response
+                    print(f'Other error occurred: {err}') 
+                    
+            return(response)
 
 
 
@@ -647,7 +653,7 @@ class Api:
             package (str): package name
         
         Returns:
-            response (dict): dict of project info from libraries.io
+            response (str or int): response header status from libraries.io
             # TODO return confirmation that no longer subscribed
  
         """
@@ -659,13 +665,12 @@ if __name__ == "__main__":
     fire.Fire(Api)
 
     api = Api()
-
-    a = api.unsubscribe(manager="pypi", package="plotly")
-    print(a)
     
     # x = api.subscribe(manager="pypi", package="numpy")
     # print(x)
 
+    a = api.unsubscribe(manager="pypi", package="numpy")
+    print(a)
 
     # y = api.check_subscribed('pypi', 'yellowbrick')
     #print(y)

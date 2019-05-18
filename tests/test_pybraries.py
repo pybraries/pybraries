@@ -173,9 +173,16 @@ def test_update_subscription():
     update = api.update_subscription(mgr, repo2, False)
     assert update['include_prerelease'] == False
 
+@pytest.mark.skip()
 def test_unsubscribe():
     """for api key sent- unsubscribe from package"""
     del_sub = api.unsubscribe(mgr, repo2)
-
     # check and make sure not subscribed
+    pass
+
+@pytest.mark.skip()
+def test_unsubscribe():
+    """for api key sent- if not subscribed, return not subscribed message """
+    del_sub = api.unsubscribe(mgr, repo2)
+    # check stdout contains "not subscribed"
     pass
