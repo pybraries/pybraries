@@ -4,13 +4,13 @@ import os
 from time import sleep
 from pybraries import Libraries_API
 
-
 # fixture to avoid hitting rate limit
 @pytest.fixture(autouse=True, scope='function')
 def wait_a_sec():
     yield
     sleep(1)
 
+# variables for testing 
 api_key = os.environ['LIBRARIES_API_KEY']  # api_key for libraries.io
 api = Libraries_API()                      # instantiate object
 mgr = 'pypi'                               # package manager name
@@ -25,14 +25,14 @@ owner2 = 'pandas-dev'                      # github repo owner
 repo2 = 'pandas'                           # repository name
 repo3 = 'scikit-learn'                     # repo name
 
-
-
 # Integration tests
 
 # API key check
-def test_platforms():
-    """if api key is not present, message to get key is returned'"""
-    # attempt to instatioate object
+@pytest.mark.skip()
+def test_api_key_missing_msg():
+    """if api key doesn't exist, message to get key is returned'"""
+    # temporarily set api key env var to None
+    # attempt to instatioate api object
     # assert libraries.io in stdout
     pass
 
@@ -148,7 +148,7 @@ def test_user_dependencies():
 
 # first need to subscribe the user to package updates
 # my api key is subscribed, so will work for travis tests
-# won't pass locally if user's api_key isn't subscribed to any packages
+# won't pass locally for development if user's api_key isn't subscribed to any packages
 def test_list_subscriptions():
     """for api key sent- returns a list item subscription with a project rank >= 0"""
     subs = api.list_subscriptions()

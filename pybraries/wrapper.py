@@ -26,19 +26,6 @@ class Libraries_API:
         Returns:
             response (dict, list, or str): response from libraries.io. Many are dicts or list of dicts.
         """
-
-        # def __build_url(*args, **kwargs):
-        """
-        Private method to build the url for the api call
-
-        Args:
-            self (str): package manager
-            thing (str): function name
-            *args (str): positional arguments
-            **kwargs (str): keyword arguments
-        Returns:
-            r.json (dict): json response from libraries.io
-        """
             
         # response = {}                   # dictionary from api response to return
         url_end_list = ["https://libraries.io/api"]   # start of list to build url
@@ -51,22 +38,17 @@ class Libraries_API:
             # package seems to be ignored by the libraries.io API
             if "package" in kwargs:
                 url_end_list.append(kwargs['package'])
-            
+            # params=dict(kwargs)  # append kwargs to params dict
+
+
             if args:
                 more_args = [arg for arg in args]
-                url_end_list = url_end_list + more_arg
+                url_end_list = url_end_list + more_args
 
             url_combined = '/'.join(url_end_list)
 
             try:
-                r = sess.get(
-                    url_combined,
-                    params=dict(
-                        kwargs,
-                        api_key=self.api_key),
-                        # add args support
-                    timeout=5,
-                )
+                r = sess.get(url_combined)
                 r.raise_for_status()
                 response = r.json()
             except HTTPError as http_err:
@@ -219,13 +201,8 @@ class Libraries_API:
 
         url_combined = '/'.join(url_end_list)
 
-
         try:
-            r = sess.get(
-                url_combined,
-                params=dict(api_key=self.api_key),
-                timeout=5,
-            )
+            r = sess.get(url_combined)
             r.raise_for_status()
             response = r.json()
         except HTTPError as http_err:
