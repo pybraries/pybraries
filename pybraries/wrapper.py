@@ -262,7 +262,7 @@ class Libraries_API:
                     url_end_list.append(kwargs['package'])
             if args:
                 more_args = [arg for arg in args]
-                url_end_list = url_end_list + more_arg
+                url_end_list = url_end_list + more_args
 
         url_combined = '/'.join(url_end_list)
 
