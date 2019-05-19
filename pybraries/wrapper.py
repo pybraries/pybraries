@@ -11,7 +11,6 @@ class Libraries_API:
     """
 
     def __init__(self):
-        self.api_key = os.environ['LIBRARIES_API_KEY']
         pass
 
     def __call_api(self, thing, *args, **kwargs):
@@ -70,48 +69,48 @@ class Libraries_API:
             if kwargs:
                 if kwargs['manager']:
                     url_end_list.append(kwargs['manager'])
+                    
                 if kwargs['package']:
                     url_end_list.append(kwargs['package'])
                 if pre:
                     if pre == "False" or pre == False:
-                        url_end_list.append('include_prerelease=0')
-                        
+                        url_end_list.append('include_prerelease=0')      
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
-       
+
             url_combined = '/'.join(url_end_list)
 
             call_type = ""                 # post, put or delete
-            timeout = 5                    # wait time for request
-            if thing == 'subscribe':
-                call_type = 'post'
-            if thing == "update_subscribe":
-                call_type = 'put'
-            if thing == "delete_subscribe":
-                call_type = 'delete'
+            
+            if thing == 'subscribe': call_type = 'post'
+            if thing == "update_subscribe": call_type = 'put'
+            if thing == "delete_subscribe": call_type = 'delete'
 
-                try:
-                    if call_type == "post":
-                        r = sess.post(url_combined, timeout=timeout)
-                    if call_type == 'put':
-                        r = sess.put(url_combined, timeout=timeout)
-                    if call_type == 'delete':
-                        r = sess.delete(url_combined, timeout=timeout)
-                    r.raise_for_status()
-                    response = r.json()
-                except HTTPError as http_err:
-                    if http_err.code == 204: 
-                        print(http_err.code)
-                        response = f"Successfully unsubscribed from {kwargs['package']}"
-                        pass
-                    else:
-                        print(f'HTTP error occurred: {http_err}')  
-                except RetryError as err:                             # for delete
-                    response = f"Not subscribed to {kwargs['package']} or unsubscribe was unsuccessful"
-                except Exception as err:
-                    print(f'Other error occurred: {err}')  
-                return response
+            try:
+                if call_type == "post":
+                    r = sess.post(url_combined)
+                    print(url_combined)
+                if call_type == 'put':
+                    r = sess.put(url_combined)
+                if call_type == 'delete':
+                    r = sess.delete(url_combined)
+                r.raise_for_status()
+                response = r.json()
+            except HTTPError as http_err:
+                if http_err.code == 204 or http_err.code == 304:      
+                    print(http_err.code)
+                    response = f"Successfully unsubscribed from {kwargs['package']}"
+                    pass
+                else:
+                    print(f'HTTP error occurred: {http_err}')  
+            except RetryError as err:                             # for delete
+                response = f"Not subscribed to {kwargs['package']} or unsubscribe unsuccessful"
+                pass
+            except Exception as err:
+                print(f'Other error occurred: {err}')  
+                response = err
+            return response
 
 
         if thing == 'platforms':
@@ -128,7 +127,7 @@ class Libraries_API:
                 url_end_list = url_end_list + more_args
 
             if thing == 'pproject_dependencies':
-                url_end_list.append("latest/")
+                url_end_list.append("latest/")     # could make option to subscribe to other versions
                 url_end_list.append("dependencies")
 
             if thing == 'pproject_dependents':
@@ -534,14 +533,14 @@ if __name__ == "__main__":
     # manually testing things
     api = Libraries_API()
     
-    x = api.subscribe(manager="pypi", package="numpy")
+    x = api.subscribe(manager="pypi", package="pandas")
     print(x)
 
-    # a = api.unsubscribe(manager="pypi", package="numpy")
-    # print(a)
+    a = api.unsubscribe(manager="pypi", package="pandas")
+    print(a)
 
-    y = api.check_subscribed('pypi', 'numpy')
-    print(y)
+    # y = api.check_subscribed('pypi', 'numpy')
+    # print(y)
 
     #z = api.update_subscription(manager="pypi", package="plotly", include_prerelease="False")
     #print(z)

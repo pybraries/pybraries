@@ -18,7 +18,7 @@ if LIBRARIES_API_KEY is None:
 
 # session retry settings
 retries = Retry( 
-    total=10, 
+    total=3, 
     backoff_factor=0.2, 
     status_forcelist=[500, 502, 503, 504]
 )
@@ -27,5 +27,5 @@ retries = Retry(
 sess = requests.Session()
 sess.params = {}
 sess.params['api_key'] = LIBRARIES_API_KEY
-sess.params['timeout'] = 5
+# sess.params['timeout'] = 5
 sess.mount('https://', HTTPAdapter(max_retries=retries))
