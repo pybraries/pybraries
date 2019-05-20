@@ -25,10 +25,10 @@ class Libraries_API(object):
             response (dict, list, or str): response from libraries.io. Many are dicts or list of dicts.
         """
             
-        # response = {}                   # dictionary from api response to return
         url_end_list = ["https://libraries.io/api"]   # start of list to build url
         more_args = []             # for unpacking args
         url_combined = ""          # final string url
+        call_type = ""                 # post, put or delete
         
         def _make_request(url):
             # call api server
@@ -83,8 +83,6 @@ class Libraries_API(object):
                 url_end_list = url_end_list + more_args
 
             url_combined = '/'.join(url_end_list)
-
-            call_type = ""                 # post, put or delete
             
             if thing == 'subscribe': 
                 call_type = 'post'
