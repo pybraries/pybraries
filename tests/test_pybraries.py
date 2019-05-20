@@ -212,3 +212,13 @@ def test_unsubscribe_unsubscribes():
     # check and make sure not subscribed
     pass
 
+
+def test_set_pages_page_return_type():
+    """call to set_pages returns a string"""
+    set_p = api.set_pages(page=1)
+    assert type(set_p) is str
+
+def test_set_pages_big_value():
+    """set_pages returns a value error for too large per_page argument"""
+    with pytest.raises(ValueError):
+        set_pages = api.set_pages(per_page=101)
