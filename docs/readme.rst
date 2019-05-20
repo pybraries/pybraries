@@ -5,19 +5,21 @@ Pybraries
 .. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master
     :target: https://travis-ci.org/pybraries/pybraries
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master 
-    :alt: coveralls  
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
+    :alt: coveralls
     :target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
-.. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest 
-    :target: https://pybraries.readthedocs.io/en/latest/?badge=latest 
+.. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest
+    :target: https://pybraries.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
-      
-Pybraries is a Python wrapper for the libraries.io API. 
 
-Use it to subscribe to and unsubscribe from upates to packages on any package manager.
+Pybraries is a Python wrapper for the libraries.io API.
 
-You can also use pybraries to find information about many aspects related to packages and projects.
+Use it to subscribe to and unsubscribe from upates
+to packages on any package manager.
+
+You can also use pybraries to find information about
+many aspects related to packages and projects.
 
 Quick Start
 -----------
@@ -44,12 +46,12 @@ Import the pybraries package and use it.
 
     from pybraries import Libraries_API
 
-    api = Libraries_API() 
+    api = Libraries_API()
 
     api.subscribe("pypi", "pandas")
 
-Now you're subscribed to updates to the pandas package. 
-Info about the package will be returned. 
+Now you're subscribed to updates to the pandas package.
+Info about the package will be returned.
 
 Note that the Libraries.io API is rate limited to 60 requests per minute.
 

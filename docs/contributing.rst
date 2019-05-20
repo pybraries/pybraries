@@ -16,8 +16,8 @@ Types of Contributions
 Report Security Vulnerabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you think you have found a security vulnerability, 
-please email jeffmshale at gmail dot com. 
+If you think you have found a security vulnerability,
+please email jeffmshale at gmail dot com.
 
 Please don't report it in an issue or any other public forum.
 
@@ -39,7 +39,8 @@ If you are reporting a bug, please include:
 Fix Bugs
 ~~~~~~~~
 
-Feel free to look through the GitHub issues for bugs. Anything tagged with "bug" and "help
+Feel free to look through the GitHub issues for bugs.
+Anything tagged with "bug" and "help
 wanted" is open to whoever wants to fix it.
 
 Implement Features
@@ -87,7 +88,7 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 
     git clone git@github.com:your_github_username_here/pybraries.git
 
-3. Install your local copy into a virtual environment. 
+3. Install your local copy into a virtual environment.
 
 4. Create a branch for local development::
 
@@ -97,7 +98,7 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 
 5. When you're done making changes, check that your changes pass::
 
-    pytest 
+    pytest
 
 6. Commit your changes and push your branch to GitHub::
 
