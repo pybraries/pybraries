@@ -1,9 +1,5 @@
-import requests
-from requests.exceptions import HTTPError, RetryError
-from urllib3.util.retry import Retry
-from requests.adapters import HTTPAdapter
+from requests.exceptions import HTTPError
 import fire
-import os
 from pybraries.helpers import sess
 
 
@@ -22,14 +18,15 @@ class Libraries_API(object):
             *args (str): positional arguments
             **kwargs (str): keyword arguments
         Returns:
-            response (dict, list, or str): response from libraries.io. Many are dicts or list of dicts.
+            response (dict, list, or str): response from libraries.io.
+            Many are dicts or list of dicts.
         """
-            
-        url_end_list = ["https://libraries.io/api"]   # start of list to build url
-        more_args = []             # for unpacking args
-        url_combined = ""          # final string url
-        call_type = ""             # post, put or delete
-        
+
+        url_end_list = ["https://libraries.io/api"]  # start of list to build url
+        more_args = []  # for unpacking args
+        url_combined = ""  # final string url
+        call_type = ""  # post, put or delete
+
         def _make_request(url):
             # call api server
 
@@ -38,61 +35,61 @@ class Libraries_API(object):
                 r.raise_for_status()
                 r_json = r.json()
             except HTTPError as http_err:
-                print(f'HTTP error occurred: {http_err}')  
+                print(f"HTTP error occurred: {http_err}")
             except Exception as err:
-                print(f'Other error occurred: {err}')  
+                print(f"Other error occurred: {err}")
 
             return r_json
-        
+
         if thing == "special_project_search":
-            url_end_list.append('search?')
+            url_end_list.append("search?")
 
             # package seems to be ignored by the libraries.io API
             if "package" in kwargs:
-                url_end_list.append(kwargs['package'])
+                url_end_list.append(kwargs["package"])
             # params=dict(kwargs)  # append kwargs to params dict
 
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
 
-            url_combined = '/'.join(url_end_list)
+            url_combined = "/".join(url_end_list)
 
             response = _make_request(url_combined)
             return response
 
         def __check_prerelease(*args, **kwargs):
-            prerelease = kwargs.pop('include_prerelease', '')
+            prerelease = kwargs.pop("include_prerelease", "")
             return prerelease
 
         if "subscribe" in thing:
-            if thing == 'subscribe': 
-                call_type = 'post'
-            if thing == "update_subscribe": 
-                call_type = 'put'
-            if thing == "delete_subscribe": 
-                call_type = 'delete'
-            
+            if thing == "subscribe":
+                call_type = "post"
+            if thing == "update_subscribe":
+                call_type = "put"
+            if thing == "delete_subscribe":
+                call_type = "delete"
+
             if kwargs:
-                if 'manager' in kwargs:
-                    manager = kwargs['manager']
-                if 'package' in kwargs:
-                    package = kwargs['package']
-                #if pre:
+                if "manager" in kwargs:
+                    manager = kwargs["manager"]
+                if "package" in kwargs:
+                    package = kwargs["package"]
+                # if pre:
                 #    if pre == "False" or pre == False:
-                #       url_end_list.append('include_prerelease=0')      
+                #       url_end_list.append('include_prerelease=0')
             if args:
                 manager = args[0]
                 package = args[1]
-                
+
                 more_args = [arg for arg in args]
-            
-             # first check if subscribed. Must be done before build url.
+
+            # first check if subscribed. Must be done before build url.
             check_pkg_subscribed = self.check_subscribed(manager, package)
 
-            if call_type == 'delete' and check_pkg_subscribed == None:
+            if call_type == "delete" and check_pkg_subscribed is None:
                 msg = f"Unsubscribe unnecessary. You are not subscribed to {package}"
-                return msg 
+                return msg
 
             # reset url_end_list
             url_end_list = ["https://libraries.io/api", "subscriptions"]
@@ -100,17 +97,17 @@ class Libraries_API(object):
             # pre = __check_prerelease(args, kwargs)
 
             url_end_list = url_end_list + more_args
-            url_combined = '/'.join(url_end_list)
+            url_combined = "/".join(url_end_list)
 
             try:
                 if call_type == "post":
                     r = sess.post(url_combined)
                     print(url_combined)
-                if call_type == 'put':
+                if call_type == "put":
                     r = sess.put(url_combined)
-                if call_type == 'delete':
+                if call_type == "delete":
                     r = sess.delete(url_combined)
-                
+
                 if r:
                     if r.status_code == 204:
                         response = f"Successfully unsubscribed from {package}"
@@ -118,76 +115,78 @@ class Libraries_API(object):
                         response = r.json()
                     r.raise_for_status()
                 return response
-            except HTTPError as http_err:   
-                print(f'HTTP error occurred: {http_err}')  
+            except HTTPError as http_err:
+                print(f"HTTP error occurred: {http_err}")
             except Exception as err:
 
-                print(f'Other error occurred: {err}')  
-                
-        if thing == 'platforms':
-            url_end_list.append('platforms')
+                print(f"Other error occurred: {err}")
+
+        if thing == "platforms":
+            url_end_list.append("platforms")
 
         if "pproject" in thing:
             if kwargs:
-                if kwargs['manager']:
-                    url_end_list.append(kwargs['manager'])
-                if kwargs['package']:
-                    url_end_list.append(kwargs['package'])
+                if "manager" in kwargs:
+                    url_end_list.append(kwargs["manager"])
+                if "package" in kwargs:
+                    url_end_list.append(kwargs["package"])
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
 
-            if thing == 'pproject_dependencies':
-                url_end_list.append("latest")     # could make option to subscribe to other versions
+            if thing == "pproject_dependencies":
+                url_end_list.append(
+                    "latest"
+                )  # could make option to subscribe to other versions
                 url_end_list.append("dependencies")
 
-            if thing == 'pproject_dependents':
+            if thing == "pproject_dependents":
                 url_end_list.append("dependendents")
-            
-            if thing == 'pproject_dependent_repositories':
+
+            if thing == "pproject_dependent_repositories":
                 url_end_list.append("dependendent_repositories")
 
-            if thing == 'pproject_contributors':
+            if thing == "pproject_contributors":
                 url_end_list.append("contributors")
 
-            if thing == 'pproject_sourcerank':
+            if thing == "pproject_sourcerank":
                 url_end_list.append("sourcerank")
-            
-            if thing == 'pproject_usage':
+
+            if thing == "pproject_usage":
                 url_end_list.append("usage")
 
-        if 'repository' in thing:
+        if "repository" in thing:
             if kwargs:
-                if 'provider' in kwargs:
-                    url_end_list.append(provider)
-                if 'owner' in kwargs:
-                    url_end_list.append(owner)
-                if 'repo' in kwargs:
-                    url_end_list.append(repo)
+                if "provider" in kwargs:
+                    url_end_list.append(kwargs["provider"])
+                if "owner" in kwargs:
+                    url_end_list.append(kwargs["owner"])
+                if "repo" in kwargs:
+                    url_end_list.append(kwargs["repo"])
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
 
-            if thing == 'repository_dependencies':
+            if thing == "repository_dependencies":
                 url_end_list.append("dependencies")
 
-            if thing == 'repository_projects':
+            if thing == "repository_projects":
                 url_end_list.append("projects")
 
         if "user" in thing:
             if kwargs:
-                if 'provider' in kwargs:
-                    url_end_list.append(provider)
-                if 'user' in kwargs:
-                    url_end_list.append(user)
+                if "provider" in kwargs:
+                    url_end_list.append(kwargs["provider"])
+                if "user" in kwargs:
+                    url_end_list.append(kwargs["user"])
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
-            
+
             if thing == "user_repositories":
                 url_end_list.append("repositories")
 
-            if thing == "user_packages": 
+            if thing == "user_packages":
                 url_end_list.append("projects")
 
             if thing == "user_packages_contributions":
@@ -195,30 +194,29 @@ class Libraries_API(object):
 
             if thing == "user_repositories_contributions":
                 url_end_list.append("repository-contributions")
-            
+
             if thing == "user_dependencies":
                 url_end_list.append("dependencies")
 
-
         if thing == "list_subscriptions":
             url_end_list.append("subscriptions")
-        
+
         if thing == "check_subscription":
             url_end_list.append("subscriptions")
             if kwargs:
-                if 'manager' in kwargs:
-                    url_end_list.append(kwargs['manager'])
-                if 'package' in kwargs:
-                    url_end_list.append(kwargs['package'])
+                if "manager" in kwargs:
+                    url_end_list.append(kwargs["manager"])
+                if "package" in kwargs:
+                    url_end_list.append(kwargs["package"])
             if args:
                 more_args = [arg for arg in args]
                 url_end_list = url_end_list + more_args
 
-        url_combined = '/'.join(url_end_list)
+        url_combined = "/".join(url_end_list)
         response = _make_request(url_combined)
         return response
 
-    # public methods   
+    # public methods
 
     def platforms(self, *args, **kwargs):
         """
@@ -231,7 +229,6 @@ class Libraries_API(object):
         """
 
         return self.__call_api("platforms", *args, **kwargs)
-
 
     def project(self, *args, **kwargs):
         """
@@ -246,11 +243,10 @@ class Libraries_API(object):
 
         return self.__call_api("pproject", *args, **kwargs)
 
-
     def project_dependencies(self, *args, **kwargs):
         """
         Get a list of dependencies for a version of a project.
-        
+
         Returns latest version info.
 
         Args:
@@ -303,7 +299,6 @@ class Libraries_API(object):
 
         return self.__call_api("pproject_contributors", *args, **kwargs)
 
-
     def project_sourcerank(self, *args, **kwargs):
         """
         Get breakdown of SourceRank score for a given project.
@@ -336,14 +331,16 @@ class Libraries_API(object):
 
         Args:
             package (optional)(str): package name
-            sort= (optional) (str): one of rank, stars, dependents_count, dependent_repos_count, latest_release_published_at, contributions_count, created_at
-            filter= (optional) (list): list of strings. Options: languages, licenses, keywords, platforms
+            sort= (optional) (str): one of rank, stars, \
+                dependents_count, dependent_repos_count, \
+                latest_release_published_at, contributions_count, created_at
+            filter= (optional) (list): list of strings. \
+                Options: languages, licenses, keywords, platforms
         Returns:
-            response (list): list of dicts containing project info response from libraries.io
+            response (list): list of dicts of project info from libraries.io
         """
 
         return self.__call_api("special_project_search", *args, **kwargs)
-
 
     def repository(self, *args, **kwargs):
         """
@@ -386,7 +383,6 @@ class Libraries_API(object):
         """
 
         return self.__call_api("repository_projects", *args, **kwargs)
-        
 
     def user(self, *args, **kwargs):
         """
@@ -435,7 +431,7 @@ class Libraries_API(object):
             response (list): list of dicts response from libraries.io
         """
         return self.__call_api("user_packages_contributions", *args, **kwargs)
-    
+
     def user_repository_contributions(self, *args, **kwargs):
         """
         Return information about repositories a user has contributed to.
@@ -450,8 +446,8 @@ class Libraries_API(object):
 
     def user_dependencies(self, *args, **kwargs):
         """
-        Return Get a list of unique packages that the given user's repositories list as a dependency. 
-        
+        Return Get a list of unique packages user's repositories' dependencies.
+
         Ordered by frequency of use in those repositories.
 
         Args:
@@ -467,7 +463,7 @@ class Libraries_API(object):
         Return a list of packages a user is subscribed to for release notifications.
 
         Args:
-      
+
         Returns:
             response (dict): dict response from libraries.io
         """
@@ -486,17 +482,16 @@ class Libraries_API(object):
         """
         return self.__call_api("subscribe", *args, **kwargs)
 
-
     def check_subscribed(self, *args, **kwargs):
         """
-        Check if a users is subscribed to receive notifications about new releases of a project.
+        Check if a user is subscribed to notifications for new project releases.
 
         Args:
             manager (str): package manager name (e.g. PyPI)
             package (str): package name
         Returns:
             response (dict): dict of project info from libraries.io
-            # make so a 404 for not found returns a nice message 
+            # make so a 404 for not found returns a nice message
             # maybe return true if dict not empty, false if 404
             # return error earlier if can't connect, server issue, etc.
         """
@@ -513,7 +508,7 @@ class Libraries_API(object):
 
         Returns:
             response (dict): dict of project info from libraries.io
-            # make so a 404 for not found returns a nice message 
+            # make so a 404 for not found returns a nice message
             # maybe return a message if 304 is reponse (not updated)
         """
         return self.__call_api("update_subscribe", *args, **kwargs)
@@ -525,13 +520,13 @@ class Libraries_API(object):
         Args:
             manager (str): package manager name (e.g. PyPI)
             package (str): package name
-        
+
         Returns:
             response (str or int): response header status from libraries.io
         """
 
         return self.__call_api("delete_subscribe", *args, **kwargs)
-    
+
     def set_pages(self, per_page=30, page=1):
         """
         Change pagination settings.
@@ -539,7 +534,7 @@ class Libraries_API(object):
         Args:
             per_page (int): default=30 number of items per page.  max=100
             page (int): default=1 package name
-        
+
         Returns:
             response (str): message with pagination information
         """
@@ -551,10 +546,13 @@ class Libraries_API(object):
         if per_page > 100 or per_page < 1:
             raise ValueError("perpage must be an integer between 1 and 100, inclusive")
 
-        sess.params['page'] = page          # 1 returns page 1 of results, 2 returns page 2, etc.
-        sess.params['per_page'] = per_page  # 30 is libraries api default, max is 100
+        sess.params[
+            "page"
+        ] = page  # 1 returns page 1 of results, 2 returns page 2, etc.
+        sess.params["per_page"] = per_page  # 30 is libraries api default, max is 100
 
         return f"per_page set to {per_page} and page set to {page}."
+
 
 # From the command line you can call any public function by name with arguments
 if __name__ == "__main__":
@@ -562,9 +560,9 @@ if __name__ == "__main__":
 
     # manually testing things
     api = Libraries_API()
-    
-    #x = api.subscribe(manager="pypi", package="pandas", y="h")
-    #print(x)
+
+    # x = api.subscribe(manager="pypi", package="pandas", y="h")
+    # print(x)
 
     # a = api.unsubscribe(manager="pypi", package="pandas")
     # print(a)
@@ -572,5 +570,6 @@ if __name__ == "__main__":
     # y = api.check_subscribed('pypi', 'numpy')
     # print(y)
 
-    #z = api.update_subscription(manager="pypi", package="plotly", include_prerelease="False")
-    #print(z)
+    # z = api.update_subscription(manager="pypi", package="plotly",
+    # include_prerelease="False")
+    # print(z)
