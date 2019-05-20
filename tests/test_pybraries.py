@@ -32,7 +32,7 @@ repo3 = 'scikit-learn'                     # repo name
 def test_api_key_missing_msg():
     """if api key doesn't exist, message to get key is returned'"""
     # temporarily set api key env var to None
-    # attempt to instatioate api object
+    # attempt to instatiate api object
     # assert libraries.io in stdout
     pass
 
@@ -180,25 +180,35 @@ def test_subscribe_kwargs():
 def test_subscribe():
     """for api key sent-returns package info regardless of previous status"""
     sub = api.subscribe(manager=mgr, package=repo2)
-    assert sub['project']['rank'] >= 0
+    # assert sub['project']['rank'] >= 0
+
+def test_update_subscription():
+    """for api key sent- doesn't error"""
+    update = api.update_subscription(mgr, repo2)
+    pass
 
 # make sure include_prerelease is set to true before
 @pytest.mark.skip()
-def test_update_subscription():
+def test_update_subscription_updates():
     """for api key sent- change subscription for prerelease to false"""
     update = api.update_subscription(mgr, repo2, False)
     assert update['include_prerelease'] == False
 
+def test_unsubscribe_kwargs():
+    """for api key sent- doesn't error for kwargs"""
+    del_sub = api.unsubscribe(manager=mgr, package=repo2)
+
 @pytest.mark.skip()
-def test_unsubscribe():
+def test_unsubscribe_args():
+    """for api key sent- doesn't error for args"""
+    del_sub = api.unsubscribe(mgr, repo2)
+    pass
+
+
+@pytest.mark.skip()
+def test_unsubscribe_unsubscribes():
     """for api key sent- unsubscribe from package"""
     del_sub = api.unsubscribe(mgr, repo2)
     # check and make sure not subscribed
     pass
 
-@pytest.mark.skip()
-def test_unsubscribe():
-    """for api key sent- if not subscribed, return not subscribed message """
-    del_sub = api.unsubscribe(mgr, repo2)
-    # check stdout contains "not subscribed"
-    pass

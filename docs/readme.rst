@@ -13,9 +13,11 @@ Pybraries
     :target: https://pybraries.readthedocs.io/en/latest/?badge=latest 
     :alt: Documentation Status
       
-Pybraries is a wrapper for the libraries.io API.
+Pybraries is a Python wrapper for the libraries.io API. 
 
-We hope you enjoy it. If you see something that could be improved, please let us know.
+Use it to subscribe to and unsubscribe from upates to packages on any package manager.
+
+You can also use pybraries to find information about many aspects related to packages and projects.
 
 Quick Start
 -----------
@@ -32,41 +34,40 @@ ___
 
 Get your API key from `libraries.io`_.
 
-Set it as an environment variable from the command line with ::
+Set your API key as an environment variable from the command line with ::
 
-    export API_KEY="your_api_key_goes_here"
+    export LIBRARIES_API_KEY="your_libraries.io_api_key_goes_here"
 
-Import the package and use it with
+Import the pybraries package and use it.
 
 .. code:: python
 
-    import pybraries
-    import os
+    from pybraries import Libraries_API
 
-    api_key = os.environ['API_KEY']
+    api = Libraries_API() 
 
-    package_info(api_key, manager, package)
+    api.subscribe("pypi", "pandas")
 
-The package name should be returned.
+Now you're subscribed to updates to the pandas package. 
+Info about the package will be returned. 
 
-Note that you can only call the API at a rate of once per second.
+Note that the Libraries.io API is rate limited to 60 requests per minute.
 
+Docs
+____
+
+* Check out the full pybraries `documentation`_.
+
+Contributing
+____________
+
+* Contributions are welcome and appreciated. See `contributing`_.
 
 License
 _______
 
 * BSD-3-clause: https://github.com/pybraries/pybraries/blob/master/LICENSE
 
-Docs
-____
-
-* Documentation: https://pybraries.readthedocs.io.
-
-Contributing
-____________
-
-Contributions are appreciated. See Contributing.
-
+.. _contributing: https://pybraries.readthedocs.io/contributing
+.. _documentation: https://pybraries.readthedocs.io
 .. _libraries.io: https://libraries.io
-
-

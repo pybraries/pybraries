@@ -13,10 +13,15 @@ Please ensure you follow our Code of Conduct: https://github.com/pybraries/pybra
 Types of Contributions
 ----------------------
 
-Report Security Vunlerabilities
+Report Security Vulnerabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Please email jeffmshale at gmail dot com.
+If you think you have found a security vulnerability, 
+please email jeffmshale at gmail dot com. 
+
+Please don't report it in an issue or any other public forum.
+
+Thank you!
 
 
 Report Bugs
