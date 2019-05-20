@@ -32,7 +32,7 @@ repo3 = 'scikit-learn'                     # repo name
 def test_api_key_missing_msg():
     """if api key doesn't exist, message to get key is returned'"""
     # temporarily set api key env var to None
-    # attempt to instatioate api object
+    # attempt to instatiate api object
     # assert libraries.io in stdout
     pass
 

@@ -5,7 +5,3 @@ from .wrapper import (
 from .helpers import ( 
     sess
 )
-
-from .call_api import ( 
-    Mixin
-)
