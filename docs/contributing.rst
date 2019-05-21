@@ -90,10 +90,12 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 
 5. We use `black <https://black.readthedocs.io/en/stable/the_black_code_style.htmla>`_
 and `Flake8 <http://flake8.pycqa.org/en/latest/>`_ for style guide sanity. 
+
 Max line length is set to 88 characters and the following errors are ignored:
-    - F401 - module imported but unused
-    - F841 - local variable name is assigned to but never used
-    - W291 - trailing whitespace
+
+* F401 - module imported but unused
+* F841 - local variable name is assigned to but never used
+* W291 - trailing whitespace
 
 6. When you're done making changes, 
 check that your changes pass the test suite and Flake8::

@@ -7,10 +7,10 @@ Welcome to Pybraries's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   readme
-   modules
-   contributing
-   history
+   README
+   API <modules>
+   CONTRIBUTING
+   HISTORY
 
 Indices and tables
 ==================

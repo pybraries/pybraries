@@ -40,7 +40,7 @@ Set your API key as an environment variable from the command line with ::
 
     export LIBRARIES_API_KEY="your_libraries.io_api_key_goes_here"
 
-Import the pybraries package and use it.
+Import the pybraries package and use it to subscribe to a package.
 
 .. code:: python
 
@@ -51,9 +51,26 @@ Import the pybraries package and use it.
     api.subscribe("pypi", "pandas")
 
 Now you're subscribed to updates to the pandas package.
-Info about the package will be returned.
+
+Here's another example.
+
+Import the pybraries package and use it to subscribe to a package.
+
+.. code:: python
+
+    from pybraries import Libraries_API
+
+    api = Libraries_API()
+
+    api.project_search("pypi", sort='stars', 'keywords'])
+
+Now you're subscribed to updates to the pandas package.
 
 Note that the Libraries.io API is rate limited to 60 requests per minute.
+
+All libraries.io methods are implemented, 
+except updating a subscription to not include prereleases. 
+This option can be toggled on the `libaries.io`_ website.
 
 Docs
 ____
@@ -82,4 +99,4 @@ _______
 .. _documentation: https://pybraries.readthedocs.io
 .. _libraries.io: https://libraries.io
 .. _GitHub: https://github.com/pybraries/pybraries/issues
-.. _StackOverflow: https://stackoverflow.com/questions/ask
+.. _Stack Overflow: https://stackoverflow.com/questions/ask

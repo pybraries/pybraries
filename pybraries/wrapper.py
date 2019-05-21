@@ -232,7 +232,7 @@ class Libraries_API(object):
         Args:
 
         Returns:
-            response (list): list of dicts response from libraries.io
+            list: list of dicts response from libraries.io
         """
 
         return self.__call_api("platforms", *args, **kwargs)
@@ -245,7 +245,7 @@ class Libraries_API(object):
             manager (str): package manager
             package (str): package name
         Returns:
-            response (dict): response from libraries.io
+            dict: Information about the project from libraries.io
         """
 
         return self.__call_api("pproject", *args, **kwargs)
@@ -314,7 +314,7 @@ class Libraries_API(object):
             manager (str): package manager
             package (str): package name
         Returns:
-            response (dict): sourcerank info response from libraries.io
+            dict: sourcerank info response from libraries.io
         """
 
         return self.__call_api("pproject_sourcerank", *args, **kwargs)
@@ -563,7 +563,7 @@ if __name__ == "__main__":
     fire.Fire(Libraries_API)
 
     # manually testing things
-    # api = Libraries_API()
+    api = Libraries_API()
 
     # x = api.subscribe(manager="pypi", package="pandas", y="h")
     # print(x)
@@ -577,3 +577,6 @@ if __name__ == "__main__":
     # z = api.update_subscription(manager="pypi", package="plotly",
     # include_prerelease="False")
     # print(z)
+
+    d = api.project_search(sort="stars", keywords="visualization", languages="python")
+    print(d)
