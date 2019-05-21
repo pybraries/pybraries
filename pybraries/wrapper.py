@@ -45,9 +45,12 @@ class Libraries_API(object):
             url_end_list.append("search?")
 
             # package seems to be ignored by the libraries.io API
-            if "package" in kwargs:
-                url_end_list.append(kwargs["package"])
-            # params=dict(kwargs)  # append kwargs to params dict
+            # - bug in docs or their api
+            # if "package" in kwargs:
+            #    url_end_list.append(kwargs["package"])
+
+            if kwargs:
+                sess.params = {**sess.params, **kwargs}  # append kwargs to params dict
 
             if args:
                 more_args = [arg for arg in args]
@@ -58,6 +61,7 @@ class Libraries_API(object):
             response = _make_request(url_combined)
             return response
 
+        # currently has no effect (perhaps due to libraries.io api glitch)
         def __check_prerelease(*args, **kwargs):
             prerelease = kwargs.pop("include_prerelease", "")
             return prerelease
@@ -336,13 +340,19 @@ class Libraries_API(object):
         """
         Search for projects.
 
+        ** Accepts keyword arguments only right now. \
+            API may change to accept a list of dicts in the future.**
+
         Args:
-            package (optional)(str): package name
-            sort= (optional) (str): one of rank, stars, \
+        
+            sort (optional) (str): one of rank, stars, \
                 dependents_count, dependent_repos_count, \
                 latest_release_published_at, contributions_count, created_at
-            filter= (optional) (list): list of strings. \
-                Options: languages, licenses, keywords, platforms
+            
+            languages(optional) (str):  language type - e.g. python
+            licenses(optional) (str): licencse type 
+            keywords(optional) (str): keywords type - e.g. zisualization
+            platforms(optional) (str): platforms - e.g. pypi
         Returns:
             response (list): list of dicts of project info from libraries.io
         """
@@ -578,5 +588,7 @@ if __name__ == "__main__":
     # include_prerelease="False")
     # print(z)
 
-    d = api.project_search(sort="stars", keywords="visualization", languages="python")
+    x = api.set_pages(1, 3)
+
+    d = api.project_search(sort="created_at", keywords="visualization")
     print(d)

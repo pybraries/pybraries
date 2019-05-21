@@ -21,7 +21,7 @@ Report Security Vulnerabilities
 If you think you have found a security vulnerability,
 please email jeffmshale at gmail dot com.
 
-Please don't report it in an issue or in any other public forum.
+Please don't report it in an GitHub issue or in any other public forum.
 
 Thank you!
 

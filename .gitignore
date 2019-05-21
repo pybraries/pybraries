@@ -106,3 +106,6 @@ venpy/
 
 # vscode
 .vscode/
+
+# mac search
+.DS_Store
