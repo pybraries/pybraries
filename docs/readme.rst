@@ -21,8 +21,8 @@ to open source packages.
 You can also use pybraries to find information about
 many aspects of open source packages and repositories.
 
-This release is a pre-alpha. 
-Pybraries is functional but bugs and breaking changes are likely.
+Pybraries is currently at pre-alpha. 
+It is functional but bugs and breaking changes are likely.
 
 Quick Start
 -----------
@@ -70,7 +70,24 @@ Note that the Libraries.io API is rate limited to 60 requests per minute.
 
 All libraries.io methods are implemented, 
 except updating a subscription to not include prereleases. 
-This option can be toggled on the `libaries.io`_ website.
+This option can be toggled on the `libraries.io`_ website.
+
+Key terms for keywords:
+*host* is a repository host platform. e.g. GitHub
+*owner* is a repository owner. e.g. pandas-dev
+*repo* is a repository. e.g. pandas
+
+
+*manager* is a package manager. e.g. PyPI
+*package* is a package distributed by a package manager. e.g. pandas
+
+Note that many repos and packages share the same name. 
+Many owners and repos also share the same name.
+
+Many methods return a dict with package or repo information.
+
+We plan to break out the subscribe methods into their own API.
+
 
 Docs
 ____
@@ -87,7 +104,7 @@ ____________
 Contributing
 ____________
 
-* Contributions are welcome and appreciated! See `contributing`_.
+* Contributions are welcome and appreciated! See `Contributing`_.
 
 License
 _______
@@ -95,7 +112,7 @@ _______
 * `BSD-3-clause: <https://github.com/pybraries/pybraries/blob/master/LICENSE>`_
 
 
-.. _contributing: https://pybraries.readthedocs.io/contributing
+.. _Contributing: https://pybraries.readthedocs.io/contributing
 .. _documentation: https://pybraries.readthedocs.io
 .. _libraries.io: https://libraries.io
 .. _GitHub: https://github.com/pybraries/pybraries/issues
