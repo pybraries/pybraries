@@ -46,8 +46,6 @@ def test_platforms():
 
 
 # Project functionality
-
-
 def test_project_args():
     """returns a dict with correct package name"""
     pack = api.project(mgr, pkg)
@@ -182,7 +180,7 @@ def test_list_subscriptions():
 def test_check_subscribed():
     """for api key sent - check if user is subscribed to a project with a rank >= 0"""
     check_sub = api.check_subscribed(mgr, repo3)
-    assert check_sub["project"]["rank"] >= 0
+    assert type(check_sub) is bool
 
 
 # feature implemented and checked manually
@@ -211,7 +209,7 @@ def test_update_subscription():
     pass
 
 
-# make sure include_prerelease is set to true before
+# make sure include_prerelease is set to true prior
 @pytest.mark.skip()
 def test_update_subscription_updates():
     """for api key sent- change subscription for prerelease to false"""

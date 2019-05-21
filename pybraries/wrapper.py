@@ -214,7 +214,14 @@ class Libraries_API(object):
 
         url_combined = "/".join(url_end_list)
         response = _make_request(url_combined)
-        return response
+
+        if thing == "check_subscription":
+            if response is not None:
+                return True
+            else:
+                return False
+        else:
+            return response
 
     # public methods
 
@@ -490,10 +497,7 @@ class Libraries_API(object):
             manager (str): package manager name (e.g. PyPI)
             package (str): package name
         Returns:
-            response (dict): dict of project info from libraries.io
-            # make so a 404 for not found returns a nice message
-            # maybe return true if dict not empty, false if 404
-            # return error earlier if can't connect, server issue, etc.
+            (bool): True if subscribed to given package, else False
         """
         return self.__call_api("check_subscription", *args, **kwargs)
 
@@ -559,7 +563,7 @@ if __name__ == "__main__":
     fire.Fire(Libraries_API)
 
     # manually testing things
-    api = Libraries_API()
+    # api = Libraries_API()
 
     # x = api.subscribe(manager="pypi", package="pandas", y="h")
     # print(x)
