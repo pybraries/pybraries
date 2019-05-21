@@ -266,8 +266,8 @@ if __name__ == "__main__":
     # manually testing actions
     api = Search()
 
-    t = api.user()
-    print(t)
+    # t = api.user()
+    # print(t)
 
     # x = set_pages(1, 3)
     # print(x)
