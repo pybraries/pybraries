@@ -19,7 +19,7 @@ Use it to subscribe to and unsubscribe from upates
 to packages on any package manager.
 
 You can also use pybraries to find information about
-many aspects related to packages and projects.
+many aspects related to repos and packages.
 
 Quick Start
 -----------
@@ -60,16 +60,26 @@ ____
 
 * Check out the full pybraries `documentation`_.
 
+Getting Help
+____________
+
+1. Check out the pybraries docs.
+2. Check out the libraries.io docs.
+3. Open an issue on `GitHub`_ or tag a question on `Stack Overflow`_ with "pybraries".
+
 Contributing
 ____________
 
-* Contributions are welcome and appreciated. See `contributing`_.
+* Contributions are welcome and appreciated! See `contributing`_.
 
 License
 _______
 
-* BSD-3-clause: https://github.com/pybraries/pybraries/blob/master/LICENSE
+* `BSD-3-clause: <https://github.com/pybraries/pybraries/blob/master/LICENSE>`_
+
 
 .. _contributing: https://pybraries.readthedocs.io/contributing
 .. _documentation: https://pybraries.readthedocs.io
 .. _libraries.io: https://libraries.io
+.. _GitHub: https://github.com/pybraries/pybraries/issues
+.. _StackOverflow: https://stackoverflow.com/questions/ask

@@ -8,7 +8,9 @@ Contributions are welcome and greatly appreciated!
 
 You can contribute in many ways:
 
-Please ensure you follow our Code of Conduct: https://github.com/pybraries/pybraries/blob/master/code_of_conduct.md.
+We're a welcoming project! 
+Please ensure you follow our 
+`Code of Conduct <https://github.com/pybraries/pybraries/blob/master/code_of_conduct.md>`_.
 
 Types of Contributions
 ----------------------
@@ -19,64 +21,50 @@ Report Security Vulnerabilities
 If you think you have found a security vulnerability,
 please email jeffmshale at gmail dot com.
 
-Please don't report it in an issue or any other public forum.
+Please don't report it in an issue or in any other public forum.
 
 Thank you!
 
 
-Report Bugs
-~~~~~~~~~~~
+Report Bugs and Make Feature Requests 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Report bugs at https://github.com/pybraries/pybraries/issues.
+Open an issue in our `GitHub Repo <https://github.com/pybraries/pybraries/issues>`_.
 
-If you are reporting a bug, please include:
 
-* The pybraries version.
-* Your operating system name and version, if applicable.
-* Any details about your local setup that might be helpful in troubleshooting.
-* Detailed steps to reproduce the bug.
+Write Code
+~~~~~~~~~~
 
-Fix Bugs
-~~~~~~~~
+Feel free to look through the GitHub issues for open issues.
+Anything tagged with "help wanted" is available to fix. 
 
-Feel free to look through the GitHub issues for bugs.
-Anything tagged with "bug" and "help
-wanted" is open to whoever wants to fix it.
+Please ensure new and altered features have tests and are
+documented with DocStrings.
 
-Implement Features
-~~~~~~~~~~~~~~~~~~
-
-Look through the GitHub issues for features. Anything tagged with "enhancement"
-and "help wanted" is open to whoever wants to implement it.
 
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-The main README.md
+We want pybraries users to have a great experience.
+Documentation is a huge part of Developer Experience. 
 
-pybraries could always use more documentation, whether as part of the
-official pybraries docs, in docstrings, or on the web in blog posts.
+Feel free to add to and improve the documentation. 
+You can contribute to official pybraries docs, 
+in docstrings, or by writing blog posts.
+
+Small changes to the docs can be made by editing the code on GitHub 
+in the browser and opening a PR.
+
+If making more substantial changes or additions:
 
 When in the docs folder, build the docs with the command:
     make html
 
-The built HTML docs will be found in the docs->_build folder.
+The built HTML docs will be created in the docs->_build folder.
 
 Check for broken links by running the following command:
     make linkcheck
 
-
-Submit Feedback
-~~~~~~~~~~~~~~~
-
-The best way to send feedback is to file an issue at https://github.com/pybraries/pybraries/issues.
-
-If you are proposing a feature:
-
-* Explain in detail how it would work.
-* Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
 
 Get Started!
 ------------
@@ -96,17 +84,35 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass::
+4. Install requirements_dev.txt with::
 
-    pytest
+    pip install -r requirements_dev.txt
 
-6. Commit your changes and push your branch to GitHub::
+5. We use `black <https://black.readthedocs.io/en/stable/the_black_code_style.htmla>`_
+and `Flake8 <http://flake8.pycqa.org/en/latest/>`_ for style guide sanity. 
+Max line length is set to 88 characters and the following errors are ignored:
+    - F401 - module imported but unused
+    - F841 - local variable name is assigned to but never used
+    - W291 - trailing whitespace
+
+6. When you're done making changes, 
+check that your changes pass the test suite and Flake8::
+
+    pytest flake8
+
+7. Commit your changes and push your branch to GitHub::
 
     git add .
     git commit -m "Your detailed description of your changes."
     git push origin name-of-your-bugfix-or-feature
 
-7. Submit a pull request through the GitHub website.
+8. Submit a pull request through GitHub.
+
+If you are new to contributing to open source,
+ check out 
+`this guide <https://github.com/chalmerlowe/intro_to_sprinting>`_
+ by Chalmer Lowe.
+
 
 Pull Request Guidelines
 -----------------------
@@ -117,20 +123,27 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 3.7 and for PyPI. Check
+3. The pull request should work for Python 3.7. Check
    https://travis-ci.org/pybraries/pybraries/pull_requests
-   and make sure that the tests pass for all supported Python versions.
+   and make sure that the tests pass.
 
 Deploying
 ---------
 
 A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in history.rst).
+
+Make sure all changes are committed (including an entry in history.rst).
+
 Then run::
 
     bumpversion2 patch      # possible: major / minor / patch
     git push
     git push --tags
 
+Build with::
+
+    python setup.py sdist bdist_wheel
+
 Use twine to upload to PyPI.
-Update the changelog on GitHub.
+
+Update the Releases section on GitHub.
