@@ -72,21 +72,19 @@ All libraries.io methods are implemented,
 except updating a subscription to not include prereleases. 
 This option can be toggled on the `libraries.io`_ website.
 
-Key terms for keywords:
+Key terms:
 *host* is a repository host platform. e.g. GitHub
 *owner* is a repository owner. e.g. pandas-dev
 *repo* is a repository. e.g. pandas
-
-
+*user* is a repository user  e.g. a GitHub username such as discdiver
 *manager* is a package manager. e.g. PyPI
 *package* is a package distributed by a package manager. e.g. pandas
 
 Note that many repos and packages share the same name. 
 Many owners and repos also share the same name.
+Further, many owners are also users.
 
 Many methods return a dict with package or repo information.
-
-We plan to break out the subscribe methods into their own API.
 
 
 Docs
