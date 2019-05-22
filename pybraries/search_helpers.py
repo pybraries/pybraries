@@ -5,14 +5,17 @@ from pybraries.make_request import make_request
 
 def search_api(action, *args, **kwargs):
     """
-    build and call for search - refactor into two
+    build and call for search 
 
     Args:
         action (str): function action name
+        filters (list): list of strings 
+        sort (str): to sort by. Options
         *args (str): positional arguments
         **kwargs (str): keyword arguments
     Returns:
-        response (dict, list, or str): response from libraries.io.
+        (list): list of dicts response from libraries.io.
+            according to page and per page 
         Many are dicts or list of dicts.
     """
 
@@ -29,16 +32,11 @@ def search_api(action, *args, **kwargs):
         #    url_end_list.append(kwargs["package"])
 
         if kwargs:
-            sess.params = {**sess.params, **kwargs}  # append kwargs to params dict
-
-        if args:
-            more_args = [arg for arg in args]
-            url_end_list = url_end_list + more_args
-
-        url_combined = "/".join(url_end_list)
-
-        response = make_request(url_combined)
-        return response
+            if "filters" in kwargs:
+                filts = kwargs["filters"]
+                sess.params = {**sess.params, **filts}
+            # if "sort" in kwargs:
+            #    sess.params = {**sess.params, **kwargs["sort"]}
 
     if action == "platforms":
         url_end_list.append("platforms")

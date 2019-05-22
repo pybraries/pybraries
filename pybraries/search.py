@@ -127,9 +127,11 @@ class Search(object):
             API may change to accept a list of dicts in the future.**
 
         Args:
-        
-            sort (optional) (str): one of rank, stars, \
-                dependents_count, dependent_repos_count, \
+            filters (dict): dict of form
+                dict(languages="python", keywords="data", manager="pypi")
+
+            sort (optional) (str): one of rank, stars, 
+                dependents_count, dependent_repos_count, 
                 latest_release_published_at, contributions_count, created_at
             
             languages(optional) (str):  language type - e.g. python
@@ -266,11 +268,11 @@ if __name__ == "__main__":
     # manually testing actions
     api = Search()
 
-    t = api.user("github", "discdiver")
-    print(t)
+    # t = api.user("github", "discdiver")
+    # print(t)
 
     # x = set_pages(1, 3)
     # print(x)
 
-    # d = api.project_search(sort="created_at", keywords="visualization")
-    # print(d)
+    d = api.project_search(filters=dict(keywords="visualization", languages="python"))
+    print(d)
