@@ -10,4 +10,3 @@ pybraries
 
 .. toctree::
    :maxdepth: 4
-g

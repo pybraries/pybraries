@@ -78,20 +78,34 @@ except updating a subscription to not include prereleases.
 This option can be toggled at the `libraries.io`_ website.
 
 Key terms:
-*host* is a repository host platform. e.g. GitHub
-*owner* is a repository owner. e.g. pandas-dev
-*repo* is a repository. e.g. pandas
-*user* is a repository user  e.g. a GitHub username such as discdiver
-*manager* is a package manager. e.g. PyPI
-*package* is a package distributed by a package manager. e.g. pandas
+
+.. glossary::
+
+    *host* 
+        A repository host platform. e.g. GitHub
+
+    *owner* 
+        A repository owner. e.g. pandas-dev
+
+    *repo* 
+        A repository. e.g. pandas
+
+    *user* 
+        A repository user  e.g. a GitHub username such as discdiver
+
+    *manager* 
+        A package manager. e.g. PyPI
+
+    *package* 
+        A package distributed by a package manager. e.g. pandas
+
 
 Note that many repos and packages share the same name. 
-
 Many owners and repos also share the same name.
-
 Further, many owners are also users.
 
-Methods that return one item generally return a dict with information.
+
+Pybraries methods that return one item generally return a dict with information.
 
 Methods that return multiple items return a list of dicts.
 
