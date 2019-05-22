@@ -23,13 +23,12 @@ def sub_api(action, *args, **kwargs):
             package = kwargs["package"]
 
     if args:
+        if args[0]:
+            manager = args[0]
         if args[1]:
-            manager = args[1]
-        if args[2]:
-            package = args[2]
+            package = args[1]
 
     if action == "list_subscribed":
-        url_end_list.append("subscriptions")
         url_combined = "/".join(url_end_list)
         return make_request(url_combined, kind)
 
@@ -38,7 +37,12 @@ def sub_api(action, *args, **kwargs):
         url_end_list.append(manager)
         url_end_list.append(package)
         url_combined = "/".join(url_end_list)
-        return make_request(url_combined, kind)
+        check = make_request(url_combined, kind)
+        if check is not None:
+            r_bool = True
+        else:
+            r_bool = False
+        return r_bool
 
     if action == "subscribe":
         kind = "post"

@@ -1,9 +1,6 @@
 # subscribe_api.py
 import fire
-import pybraries.subscription_helpers as s
-
-
-sub_api = s.sub_api
+from pybraries.subscription_helpers import sub_api
 
 
 class Subscribe(object):
@@ -14,7 +11,7 @@ class Subscribe(object):
 
     # public methods for subscription things
 
-    def list_subscriptions(self, *args, **kwargs):
+    def list_subscribed(self, *args, **kwargs):
         """
         Return a list of packages a user is subscribed to for release notifications.
 
@@ -23,7 +20,7 @@ class Subscribe(object):
         Returns:
             response (dict): dict response from libraries.io
         """
-        return sub_api("list_subscriptions", *args, **kwargs)
+        return sub_api("list_subscribed", *args, **kwargs)
 
     def subscribe(self, *args, **kwargs):
         """
@@ -50,7 +47,7 @@ class Subscribe(object):
         """
         return sub_api("check_subscription", *args, **kwargs)
 
-    def update_subscription(self, *args, **kwargs):
+    def update_subscribe(self, *args, **kwargs):
         """
         Update the options for a subscription.
 
@@ -87,8 +84,11 @@ if __name__ == "__main__":
 
     subs = Subscribe()
 
-    x = subs.subscribe(manager="pypi", package="pandas")
-    print(x)
+    sub = subs.list_subscribed()
+    print(sub)
+
+    # x = subs.subscribe(manager="pypi", package="pandas")
+    # print(x)
 
     # a = subs.unsubscribe(manager="pypi", package="pandas")
     # print(a)

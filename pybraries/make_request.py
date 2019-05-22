@@ -9,7 +9,7 @@ def make_request(url, kind):
     
     """
 
-    r_json = {}  # json object to return
+    # r_json = {}  # json object to return
 
     try:
         if kind == "get":
@@ -22,9 +22,11 @@ def make_request(url, kind):
             r_val = "successfully subscribed"
         if kind == "put":
             r = sess.put(url)
+            r.raise_for_status()
             r_val = "successfully updated"
         if kind == "delete":
             r = sess.delete(url)
+            r.raise_for_status()
             r_val = "successfully unsubscribed"
         return r_val
 
