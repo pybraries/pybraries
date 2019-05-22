@@ -13,13 +13,13 @@ repo3 = "scikit-learn"  # repo name
 # my search key is subscribed, so will work for travis tests
 # won't pass locally for development if user search_key isn't subscribed to any packages
 def test_list_subscribed():
-    """for subscriber- returns a list item subscription with a project rank >= 0"""
+    """for subscriber- returns a list item with a project rank >= 0"""
     sub = subs.list_subscribed()
     assert sub[0]["project"]["rank"] >= 0
 
 
 def test_check_subscribed():
-    """for subscriber - check if user is subscribed to a project with a rank >= 0"""
+    """check if returns a boolean if check_subscribed to a package"""
     check_sub = subs.check_subscribed(mgr, repo3)
     assert type(check_sub) is bool
 
