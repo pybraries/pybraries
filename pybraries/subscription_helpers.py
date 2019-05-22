@@ -44,7 +44,7 @@ def sub_api(action, *args, **kwargs):
         # check_pkg_subscribed = Subscribe.check_subscribed(manager, package)
         # need to add back in
 
-        if call_type == "delete" and check_pkg_subscribed is None:
+        if call_type == "delete":  # and check_pkg_subscribed is None:
             msg = f"Unsubscribe unnecessary. You are not subscribed to {package}"
             return msg
 
