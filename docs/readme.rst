@@ -15,10 +15,10 @@ Pybraries
 
 Pybraries is a Python wrapper for the libraries.io API.
 
-Use it to subscribe to and unsubscribe from updates
+You can use it to subscribe to and unsubscribe from updates
 to open source packages.
 
-You can also use pybraries to find information about
+You can also use it to find information about
 many aspects of open source packages and repositories.
 
 Pybraries is currently at pre-alpha. 
