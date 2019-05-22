@@ -1,11 +1,5 @@
 from setuptools import setup, find_packages
 
-with open("./docs/README.rst", "r") as readme_file:
-    readme = readme_file.read()
-
-with open("./docs/HISTORY.rst") as history_file:
-    history = history_file.read()
-
 setup_requirements = ["pytest-runner"]
 
 test_requirements = ["pytest"]
@@ -17,9 +11,7 @@ setup(
     version="0.0.1",
     author="Jeff Hale",
     author_email="jeffmshale@gmail.com",
-    description="A python wrapper for the libraries.io API",
-    long_description=readme + "\n\n" + history,
-    long_description_content_type="text/markdown",
+    description="A Python wrapper for the libraries.io API",
     url="https://github.com/pybraries/pybraries/",
     packages=find_packages(),
     install_requires=requirements,
