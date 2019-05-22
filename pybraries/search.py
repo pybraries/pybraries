@@ -1,7 +1,7 @@
 # search.py
 import fire
-from search_helpers import search_api
-from set_pages import set_pages
+from .search_helpers import search_api
+from .set_pages import set_pages
 
 
 class Search(object):
@@ -266,8 +266,8 @@ if __name__ == "__main__":
     # manually testing actions
     api = Search()
 
-    # t = api.user()
-    # print(t)
+    t = api.user("github", "discdiver")
+    print(t)
 
     # x = set_pages(1, 3)
     # print(x)

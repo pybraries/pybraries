@@ -1,9 +1,9 @@
 # subscription_helpers.py
 from requests.exceptions import HTTPError
 import fire
-from helpers import sess
-from make_request import make_request
-from subscribe import Subscribe
+from pybraries.helpers import sess
+from pybraries.make_request import make_request
+from pybraries.subscribe import Subscribe
 
 
 def sub_api(action, *args, **kwargs):
@@ -17,14 +17,6 @@ def sub_api(action, *args, **kwargs):
         prerelease = kwargs.pop("include_prerelease", "")
         return prerelease
 
-    if action == "check_subscription":
-        if response is not None:
-            return True
-        else:
-            return False
-    else:
-        return response
-
     if "subscribe" in action:
         if action == "subscribe":
             call_type = "post"
@@ -32,6 +24,8 @@ def sub_api(action, *args, **kwargs):
             call_type = "put"
         if action == "delete_subscribe":
             call_type = "delete"
+        if action == "check_subscription":
+            call_type = "get"
 
         if kwargs:
             if "manager" in kwargs:

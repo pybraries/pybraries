@@ -1,6 +1,6 @@
 # set_pages.py
 from requests.exceptions import HTTPError
-from helpers import sess
+from pybraries.helpers import sess
 
 
 def set_pages(per_page=30, page=1):

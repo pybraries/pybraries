@@ -1,6 +1,6 @@
 # search_helpers.py
-from helpers import sess
-from make_request import make_request
+from pybraries.helpers import sess
+from pybraries.make_request import make_request
 
 
 def search_api(action, *args, **kwargs):
@@ -8,7 +8,7 @@ def search_api(action, *args, **kwargs):
     build and call for search - refactor into two
 
     Args:
-        action (str): function name
+        action (str): function action name
         *args (str): positional arguments
         **kwargs (str): keyword arguments
     Returns:
@@ -99,8 +99,9 @@ def search_api(action, *args, **kwargs):
             if "user" in kwargs:
                 url_end_list.append(kwargs["user"])
         if args:
-            more_args = [arg for arg in args[1:]]
+            more_args = [arg for arg in args]
             url_end_list = url_end_list + more_args
+            print(url_end_list)
 
         if action == "user_repositories":
             url_end_list.append("repositories")
