@@ -33,10 +33,16 @@ def search_api(action, *args, **kwargs):
 
         if kwargs:
             if "filters" in kwargs:
-                filts = kwargs["filters"]
+                filts = dict(kwargs["filters"])
+                if "manager" in filts:
+                    filts["platforms"] = filts.pop("manager")
                 sess.params = {**sess.params, **filts}
-            # if "sort" in kwargs:
-            #    sess.params = {**sess.params, **kwargs["sort"]}
+            if "sort" in kwargs:
+                sess.params["sort"] = kwargs["sort"]
+
+        url_combined = "/".join(url_end_list)
+        response = make_request(url_combined)
+        return response
 
     if action == "platforms":
         url_end_list.append("platforms")

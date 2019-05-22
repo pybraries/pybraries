@@ -18,8 +18,6 @@ repo2 = "pandas"  # repository name
 repo3 = "scikit-learn"  # repo name
 
 # Integration tests
-
-
 # Platforms functionality
 def test_platforms():
     """returns a list of platforms whose name includes 'Go'"""
@@ -82,12 +80,13 @@ def test_project_search():
     assert "name" in projects[0].keys()
 
 
-@pytest.mark.skip()
-def test_project_search_sort():
-    """Project search with kwargs for vizualization keyword filter
-    and sort stars returns top visualization project list item with a name key"""
-    projects = search.project_search(sort="stars", keywords="visualization")
-    assert "name" in projects[0].keys()
+def test_project_search_with_kwargs():
+    """Project search with kwargs for vizualization 
+    and sort stars returns project with visualization as keyword"""
+    projects = search.project_search(
+        sort="stars", filters=dict(keywords="visualization", manager="pypi")
+    )
+    assert "visualization" in projects[0]["keywords"]
 
 
 # Repository functionality

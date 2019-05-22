@@ -127,17 +127,13 @@ class Search(object):
             API may change to accept a list of dicts in the future.**
 
         Args:
-            filters (dict): dict of form
-                dict(languages="python", keywords="data", manager="pypi")
+            filters (dict): optional dict of form
+                dict(languages="python", keywords="data", licenses="my_license", manager="pypi")
 
-            sort (optional) (str): one of rank, stars, 
+            sort (str): (optional) one of rank, stars, 
                 dependents_count, dependent_repos_count, 
                 latest_release_published_at, contributions_count, created_at
             
-            languages(optional) (str):  language type - e.g. python
-            licenses(optional) (str): licencse type 
-            keywords(optional) (str): keywords type - e.g. zisualization
-            platforms(optional) (str): platforms - e.g. pypi
         Returns:
             response (list): list of dicts of project info from libraries.io
         """
@@ -274,5 +270,8 @@ if __name__ == "__main__":
     # x = set_pages(1, 3)
     # print(x)
 
-    d = api.project_search(filters=dict(keywords="visualization", languages="python"))
+    d = api.project_search(
+        sort="latest_release_published_at",
+        filters=dict(keywords="visualization", manager="pypi"),
+    )
     print(d)
