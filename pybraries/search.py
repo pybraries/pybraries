@@ -128,7 +128,8 @@ class Search(object):
 
         Args:
             filters (dict): optional dict of form
-                dict(languages="python", keywords="data", licenses="my_license", manager="pypi")
+                dict(languages="python", keywords="data", \
+                licenses="my_license", manager="pypi")
 
             sort (str): (optional) one of rank, stars, 
                 dependents_count, dependent_repos_count, 

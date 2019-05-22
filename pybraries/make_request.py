@@ -15,17 +15,19 @@ def make_request(url, kind):
         if kind == "get":
             r = sess.get(url)
             r.raise_for_status()
-            r_json = r.json()
+            r_val = r.json()
         if kind == "post":
             r = sess.post(url)
             r.raise_for_status()
-            r_json = r.json()
+            r_val = "successfully subscribed"
         if kind == "put":
-            pass
+            r = sess.put(url)
+            r_val = "successfully updated"
         if kind == "delete":
-            pass
+            r = sess.delete(url)
+            r_val = "successfully unsubscribed"
+        return r_val
 
-        return r_json
     except HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
     except Exception as err:
