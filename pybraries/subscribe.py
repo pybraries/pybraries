@@ -1,6 +1,6 @@
 # subscribe_api.py
 import fire
-from pybraries.subscription_helpers import sub_api
+import pybraries.subscription_helpers
 
 
 class Subscribe(object):

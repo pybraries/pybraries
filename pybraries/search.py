@@ -1,7 +1,7 @@
 # search.py
 import fire
-from .search_helpers import search_api
-from .set_pages import set_pages
+from pybraries.search_helpers import search_api
+from pybraries.set_pages import set_pages
 
 
 class Search(object):

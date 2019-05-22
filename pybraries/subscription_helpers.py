@@ -3,7 +3,6 @@ from requests.exceptions import HTTPError
 import fire
 from pybraries.helpers import sess
 from pybraries.make_request import make_request
-from pybraries.subscribe import Subscribe
 
 
 def sub_api(action, *args, **kwargs):
@@ -42,7 +41,8 @@ def sub_api(action, *args, **kwargs):
             more_args = [arg for arg in args]
 
         # first check if subscribed. Must be done before build url.
-        check_pkg_subscribed = Subscribe.check_subscribed(manager, package)
+        # check_pkg_subscribed = Subscribe.check_subscribed(manager, package)
+        # need to add back in
 
         if call_type == "delete" and check_pkg_subscribed is None:
             msg = f"Unsubscribe unnecessary. You are not subscribed to {package}"

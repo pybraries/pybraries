@@ -83,7 +83,7 @@ def search_api(action, *args, **kwargs):
             if "repo" in kwargs:
                 url_end_list.append(kwargs["repo"])
         if args:
-            more_args = [arg for arg in args[1:]]
+            more_args = [arg for arg in args]
             url_end_list = url_end_list + more_args
 
         if action == "repository_dependencies":
@@ -118,7 +118,7 @@ def search_api(action, *args, **kwargs):
         if action == "user_dependencies":
             url_end_list.append("dependencies")
 
-        url_combined = "/".join(url_end_list)
-        response = make_request(url_combined)
+    url_combined = "/".join(url_end_list)
+    response = make_request(url_combined)
 
     return response

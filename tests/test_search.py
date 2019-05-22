@@ -1,10 +1,10 @@
 """Tests for `pybraries` Search class."""
 import pytest
-from pybraries import Search
+import pybraries
 
 # variables for testing
 # put in fixture
-search = Search()  # instantiate search api object
+search = pybraries.Search()  # instantiate search api object
 mgr = "pypi"  # package manager name
 pkg = "plotly"  # package name
 pkg2 = "yellowbrick"  # package name
