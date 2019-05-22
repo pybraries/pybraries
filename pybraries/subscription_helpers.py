@@ -65,34 +65,20 @@ def sub_api(action, *args, **kwargs):
         url_end_list.append(manager)
         url_end_list.append(package)
         url_combined = "/".join(url_end_list)
-        return make_request(url_combined, kind)
 
-    # first check if subscribed. Must be done before build url.
-    # check_pkg_subscribed = Subscribe.check_subscribed(manager, package)
-    # need to add back in
+        # first check if subscribed. Must be done before build url.
+        check_pkg_subscribed = sub_api(
+            "check_subscribed", manager=manager, package=package
+        )
 
-    # if call_type == "delete":  # and check_pkg_subscribed is None:
-    #     msg = f"Unsubscribe unnecessary. You are not subscribed to {package}"
-    #    return msg
+        if check_pkg_subscribed is False:
+            msg = f"Unsubscribe unnecessary. You are not subscribed to {package}."
+            return msg
+        else:
+            return make_request(url_combined, kind)
 
-    # pre = __check_prerelease(args, kwargs)
-    """
-    try:
-        if r:
-            if r.status_code == 204:
-                response = f"Successfully unsubscribed from {package}"
-            else:
-                response = r.json()
-            r.raise_for_status()
-        return response
-    except HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}")
-    except Exception as err:
-
-        print(f"Other error occurred: {err}")
-    """
-
-    # currently has no effect when used (perhaps due to libraries.io api glitch)
-    def __check_prerelease(*args, **kwargs):
-        prerelease = kwargs.pop("include_prerelease", "")
-        return prerelease
+        # prerelease option ccurrently not changeable for subscribe or update
+        # (perhaps due to libraries.io api glitch)
+        def __check_prerelease(*args, **kwargs):
+            prerelease = kwargs.pop("include_prerelease", "")
+            return prerelease

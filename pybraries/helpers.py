@@ -18,7 +18,7 @@ if LIBRARIES_API_KEY is None:
     )
 
 # session retry settings
-retries = Retry(total=5, backoff_factor=0.2, status_forcelist=[500, 502, 503, 504])
+retries = Retry(total=3, backoff_factor=0.2, status_forcelist=[500, 502, 503, 504])
 
 # session object common properties
 sess = requests.Session()
