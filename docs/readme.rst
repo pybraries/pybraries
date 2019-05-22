@@ -91,7 +91,7 @@ Key terms:
         A repository. e.g. pandas
 
     *user* 
-        A repository user  e.g. a GitHub username such as discdiver
+        A repository user  e.g. a GitHub username. e.g. discdiver
 
     *manager* 
         A package manager. e.g. PyPI

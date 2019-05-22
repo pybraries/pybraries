@@ -22,6 +22,7 @@ def search_api(action, *args, **kwargs):
     url_end_list = ["https://libraries.io/api"]  # start of list to build url
     more_args = []  # for unpacking args
     url_combined = ""  # final string url
+    kind = "get"  # type of request
 
     if action == "special_project_search":
         url_end_list.append("search?")
@@ -41,7 +42,7 @@ def search_api(action, *args, **kwargs):
                 sess.params["sort"] = kwargs["sort"]
 
         url_combined = "/".join(url_end_list)
-        response = make_request(url_combined)
+        response = make_request(url_combined, kind)
         return response
 
     if action == "platforms":
@@ -123,6 +124,6 @@ def search_api(action, *args, **kwargs):
             url_end_list.append("dependencies")
 
     url_combined = "/".join(url_end_list)
-    response = make_request(url_combined)
+    response = make_request(url_combined, kind)
 
     return response
