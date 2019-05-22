@@ -45,7 +45,7 @@ class Subscribe(object):
         Returns:
             (bool): True if subscribed to given package, else False
         """
-        return sub_api("check_subscription", *args, **kwargs)
+        return sub_api("check_subscribed", *args, **kwargs)
 
     def update_subscribe(self, *args, **kwargs):
         """
@@ -84,8 +84,8 @@ if __name__ == "__main__":
 
     subs = Subscribe()
 
-    sub = subs.list_subscribed()
-    print(sub)
+    # sub = subs.list_subscribed()
+    # print(sub)
 
     # x = subs.subscribe(manager="pypi", package="pandas")
     # print(x)
@@ -93,8 +93,8 @@ if __name__ == "__main__":
     # a = subs.unsubscribe(manager="pypi", package="pandas")
     # print(a)
 
-    # y = subs.check_subscribed("pypi", "numpy")
-    # print(y)
+    y = subs.check_subscribed("pypi", "numpy")
+    print(y)
 
     # z = subs.update_subscription(manager="pypi", package="plotly",
     # include_prerelease="False")
