@@ -1,11 +1,16 @@
 # make_request.pyß
 from requests.exceptions import HTTPError
-from pybraries.helpers import sess
+from pybraries.helpers import sess, clear_params
 
 
 def make_request(url, kind):
     """ call api server 
-    
+
+        Args:
+            url (str): base url to call
+            kind (str): get, post, put, or delete
+        Returns:
+            (list): list of dicts response from libraries.io
     
     """
 

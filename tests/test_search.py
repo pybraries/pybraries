@@ -1,6 +1,7 @@
 """Tests for `pybraries` Search class."""
 import pytest
 import pybraries
+from time import sleep
 
 # variables for testing
 # put in fixture
@@ -128,8 +129,8 @@ def test_user_repositories():
 
 def test_user_packages():
     """returns a package with rank >= 0"""
-    user_pkgs = search.user_packages(host, username2)
-    assert user_pkgs[0]["rank"] >= 0
+    user_pkgs2 = search.user_packages(host, "wesm")
+    assert user_pkgs2[0]["rank"] >= 0
 
 
 def test_user_packages_contributions():
@@ -146,5 +147,5 @@ def test_user_repository_contributions():
 
 def test_user_dependencies():
     """returns a project in a list item with a rank >= 0"""
-    user_deps = search.user_dependencies(host, username)
+    user_deps = search.user_dependencies(host, username2)
     assert user_deps[0]["rank"] >= 0

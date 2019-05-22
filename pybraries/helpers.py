@@ -26,3 +26,8 @@ sess.params = {}
 sess.params["api_key"] = LIBRARIES_API_KEY
 # sess.params['timeout'] = 5
 sess.mount("https://", HTTPAdapter(max_retries=retries))
+
+
+def clear_params():
+    sess.params.clear()
+    sess.params["api_key"] = LIBRARIES_API_KEY

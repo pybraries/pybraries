@@ -1,7 +1,7 @@
 # subscription_helpers.py
 from requests.exceptions import HTTPError
 import fire
-from pybraries.helpers import sess
+from pybraries.helpers import sess, clear_params
 from pybraries.make_request import make_request
 
 
@@ -30,7 +30,8 @@ def sub_api(action, *args, **kwargs):
 
     if action == "list_subscribed":
         url_combined = "/".join(url_end_list)
-        return make_request(url_combined, kind)
+        resp = make_request(url_combined, kind)
+        return resp
 
     if action == "check_subscribed":
         # do we need to check for args?

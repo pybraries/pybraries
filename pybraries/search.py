@@ -48,7 +48,7 @@ class Search(object):
             package (str): package name
             version (str): package version
         Returns:
-            response (dict): response from libraries.io
+            (dict): response from libraries.io
         """
 
         return search_api("pproject_dependencies", *args, **kwargs)
@@ -62,7 +62,7 @@ class Search(object):
             package (str): package name
             version (str): package version
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
 
         return search_api("pproject_dependendents", *args, **kwargs)
@@ -75,7 +75,7 @@ class Search(object):
             manager (str): package manager
             package (str): package name
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
 
         return search_api("pproject_dependendent_repositories", *args, **kwargs)
@@ -88,7 +88,7 @@ class Search(object):
             manager (str): package manager
             package (str): package name
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
 
         return search_api("pproject_contributors", *args, **kwargs)
@@ -114,7 +114,7 @@ class Search(object):
             manager (str): package manager
             package (str): package name
         Returns:
-            response (dict): verion usage info response from libraries.io
+            (dict): verion usage info response from libraries.io
         """
 
         return search_api("pproject_usage", *args, **kwargs)
@@ -136,7 +136,7 @@ class Search(object):
                 latest_release_published_at, contributions_count, created_at
             
         Returns:
-            response (list): list of dicts of project info from libraries.io
+            (list): list of dicts of project info from libraries.io
         """
 
         return search_api("special_project_search", *args, **kwargs)
@@ -203,7 +203,7 @@ class Search(object):
             host (str): host (e.g. github)
             user (str): username
         Returns:
-            respons (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
         return search_api("user_repositories", *args, **kwargs)
 
@@ -215,7 +215,8 @@ class Search(object):
             host (str): host (e.g. github)
             user (str): username
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): package with info in list of dicts 
+            response from libraries.io
         """
         return search_api("user_packages", *args, **kwargs)
 
@@ -227,7 +228,7 @@ class Search(object):
             host (str): host (e.g. github)
             user (str): username
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
         return search_api("user_packages_contributions", *args, **kwargs)
 
@@ -239,7 +240,7 @@ class Search(object):
             host (str): host (e.g. github)
             user (str): username
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
         return search_api("user_repositories_contributions", *args, **kwargs)
 
@@ -253,7 +254,7 @@ class Search(object):
             host (str): host (e.g. github)
             user (str): username
         Returns:
-            response (list): list of dicts response from libraries.io
+            (list): list of dicts response from libraries.io
         """
         return search_api("user_dependencies", *args, **kwargs)
 
@@ -263,7 +264,7 @@ if __name__ == "__main__":
     fire.Fire(Search)
 
     # manually testing actions
-    api = Search()
+    # api = Search()
 
     # t = api.user("github", "discdiver")
     # print(t)
@@ -271,8 +272,8 @@ if __name__ == "__main__":
     # x = set_pages(1, 3)
     # print(x)
 
-    d = api.project_search(
-        sort="latest_release_published_at",
-        filters=dict(keywords="visualization", manager="pypi"),
-    )
-    print(d)
+    # d = api.project_search(
+    #    sort="latest_release_published_at",
+    #    filters=dict(keywords="visualization", manager="pypi"),
+    # )
+    # print(d)

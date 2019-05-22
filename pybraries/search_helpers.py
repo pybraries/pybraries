@@ -1,5 +1,5 @@
 # search_helpers.py
-from pybraries.helpers import sess
+from pybraries.helpers import sess, clear_params
 from pybraries.make_request import make_request
 
 
@@ -43,6 +43,8 @@ def search_api(action, *args, **kwargs):
 
         url_combined = "/".join(url_end_list)
         response = make_request(url_combined, kind)
+
+        clear_params()
         return response
 
     if action == "platforms":
@@ -124,6 +126,8 @@ def search_api(action, *args, **kwargs):
             url_end_list.append("dependencies")
 
     url_combined = "/".join(url_end_list)
+    print(url_combined)
+    url_end_list = []
     response = make_request(url_combined, kind)
-
+    print(response)
     return response
