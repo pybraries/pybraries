@@ -33,6 +33,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinx.ext.coverage",
+    "sphinx.ext.autosummary",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -58,3 +59,5 @@ html_static_path = ["_static"]
 
 # to override alphabetical order for autodoc modules
 autodoc_member_order = "bysource"
+
+autosummary_generate = True
