@@ -4,6 +4,7 @@ Pybraries
 
 .. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master&kill_cache=1
     :target: https://travis-ci.org/pybraries/pybraries
+    :alt: Travis Status
 
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
     :alt: coveralls
@@ -12,6 +13,18 @@ Pybraries
 .. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest
     :target: https://pybraries.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
+
+.. image:: https://badgen.net/github/license/pybraries/pybraries
+    :alt: License
+
+.. image:: https://badgen.net/github/release/pybraries/pybraries
+    :alt: Latest Release
+
+.. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
+    :alt: PyPI - Wheel
+
+.. image:: https://img.shields.io/pypi/pyversions/pybraries.svg   
+    :alt: PyPI - Python Version
 
 Pybraries is a Python wrapper for the libraries.io API.
 
@@ -74,9 +87,8 @@ All libraries.io methods are implemented,
 except updating a subscription to not include prereleases. 
 This option can be toggled at the `libraries.io`_ website.
 
-Key terms:
-
-.. glossary::
+Key Terms
+_________
 
     *host* 
         A repository host platform. e.g. GitHub
