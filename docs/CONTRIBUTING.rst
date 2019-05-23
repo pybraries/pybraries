@@ -1,5 +1,3 @@
-.. highlight:: shell
-
 ============
 Contributing
 ============
@@ -57,12 +55,14 @@ in the browser and opening a PR.
 
 If making more substantial changes or additions:
 
-When in the docs folder, build the docs with the command:
+When in the docs folder, build the docs with the command::
+
     make html
 
 The built HTML docs will be created in the docs->_build folder.
 
-Check for broken links by running the following command:
+Check for broken links by running the following command::
+
     make linkcheck
 
 

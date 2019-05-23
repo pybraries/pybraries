@@ -4,13 +4,21 @@ Welcome to Pybraries's documentation!
 =====================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: Contents:
 
-   README
-   API <modules>
-   CONTRIBUTING
-   HISTORY
+    README
+    CONTRIBUTING
+    HISTORY
+    API <modules>
+
+
+.. autosummary::
+    :toctree: stubs
+
+    pybraries.search.Search
+    pybraries.subscribe.Subscribe
+
 
 Indices and tables
 ==================

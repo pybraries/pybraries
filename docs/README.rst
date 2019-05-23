@@ -17,7 +17,7 @@ Pybraries
 .. image:: https://badgen.net/github/license/pybraries/pybraries
     :alt: License
 
-.. image:: https://badgen.net/github/release/pybraries/pybraries
+.. image:: https://badgen.net/github/release/pybraries/pybraries&kill_cache=1
     :alt: Latest Release
 
 .. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
@@ -63,11 +63,11 @@ Import the pybraries package and use it to subscribe to a package.
 
     s.subscribe("pypi", "pandas")
 
-Now you're subscribed to updates to the pandas package.
+Now you're subscribed to updates to the *pandas* package.
 
 Here's another example. 
-Search for projects with "visualization" as a keyword and "python as a language.
-Sort by the number of stars the project has.
+Search for projects with *visualization* as a keyword and *python* as a language.
+Sort by the number of stars.
 
 .. code:: python
 
@@ -86,6 +86,18 @@ Note that the Libraries.io API is rate limited to 60 requests per minute.
 All libraries.io methods are implemented, 
 except updating a subscription to not include prereleases. 
 This option can be toggled at the `libraries.io`_ website.
+
+
+Search() and Subscribe() are the two classes in this package. 
+See all their available methods by clicking on the methods directly below.
+
+.. autosummary::
+    :toctree: stubs
+
+    pybraries.search.Search
+    pybraries.subscribe.Subscribe
+
+
 
 Key Terms
 _________
