@@ -2,8 +2,9 @@
 Pybraries
 =============
 
-.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master
+.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master&kill_cache=1
     :target: https://travis-ci.org/pybraries/pybraries
+    :alt: Travis Status
 
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
     :alt: coveralls
@@ -13,6 +14,18 @@ Pybraries
     :target: https://pybraries.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+.. image:: https://badgen.net/github/license/pybraries/pybraries
+    :alt: License
+
+.. image:: https://badgen.net/github/release/pybraries/pybraries
+    :alt: Latest Release
+
+.. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
+    :alt: PyPI - Wheel
+
+.. image:: https://img.shields.io/pypi/pyversions/pybraries.svg   
+    :alt: PyPI - Python Version
+
 Pybraries is a Python wrapper for the libraries.io API.
 
 You can use it to subscribe to and unsubscribe from updates
@@ -20,9 +33,6 @@ to open source packages.
 
 You can also use it to find information about
 many aspects of open source packages and repositories.
-
-Pybraries is currently at pre-alpha. 
-It is functional but bugs and breaking changes are likely.
 
 Quick Start
 -----------
@@ -39,7 +49,7 @@ ___
 
 Get your API key from `libraries.io`_.
 
-Set your API key as an environment variable from the command line with ::
+Set your API key as to the ``LIBRARIES_API_KEY`` environment variable from the command line with ::
 
     export LIBRARIES_API_KEY="your_libraries.io_api_key_goes_here"
 
@@ -77,9 +87,8 @@ All libraries.io methods are implemented,
 except updating a subscription to not include prereleases. 
 This option can be toggled at the `libraries.io`_ website.
 
-Key terms:
-
-.. glossary::
+Key Terms
+_________
 
     *host* 
         A repository host platform. e.g. GitHub
