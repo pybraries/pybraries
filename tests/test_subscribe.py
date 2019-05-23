@@ -73,4 +73,4 @@ def test_unsubscribe_works():
     """unsubscribes and verifies"""
     del_sub = subs.unsubscribe(mgr, repo2)
     bsub = subs.check_subscribed(mgr, repo2)
-    assert bsub == False
+    assert bsub is False
