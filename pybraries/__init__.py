@@ -1,5 +1,5 @@
-from .search import Search
-from .subscribe import Subscribe
+from pybraries.subscribe import *
+from pybraries.search import *
 from .helpers import sess
 from .subscription_helpers import sub_api
 from .search_helpers import search_api

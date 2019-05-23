@@ -2,7 +2,7 @@
 Pybraries
 =============
 
-.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master
+.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master&kill_cache=1
     :target: https://travis-ci.org/pybraries/pybraries
 
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
@@ -21,9 +21,6 @@ to open source packages.
 You can also use it to find information about
 many aspects of open source packages and repositories.
 
-Pybraries is currently at pre-alpha. 
-It is functional but bugs and breaking changes are likely.
-
 Quick Start
 -----------
 
@@ -39,7 +36,7 @@ ___
 
 Get your API key from `libraries.io`_.
 
-Set your API key as an environment variable from the command line with ::
+Set your API key as to the ``LIBRARIES_API_KEY`` environment variable from the command line with ::
 
     export LIBRARIES_API_KEY="your_libraries.io_api_key_goes_here"
 

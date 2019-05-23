@@ -8,7 +8,7 @@ requirements = ["requests>=2"]
 
 setup(
     name="pybraries",
-    version="0.0.1",
+    version="0.0.2",
     author="Jeff Hale",
     author_email="jeffmshale@gmail.com",
     description="A Python wrapper for the libraries.io API",
@@ -17,7 +17,7 @@ setup(
     install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3.7",
-        "License :: OSI Approved :: BSD 3-Clause License",
+        "License :: OSI Approved :: BSD License",
     ],
     include_package_data=True,
     setup_requires=setup_requirements,
