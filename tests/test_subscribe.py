@@ -56,7 +56,7 @@ def test_unsubscribe_kwargs(pre_sub):
     assert del_sub == "successfully unsubscribed"
 
 
-def test_unsubscribe_kwargs(pre_unsub):
+def test_unsubscribe_intercept(pre_unsub):
     """returns no unsubscribe needed if not subscribed"""
     del_sub = subs.unsubscribe(manager=mgr, package=repo2)
     assert "Unsubscribe unnecessary" in del_sub
