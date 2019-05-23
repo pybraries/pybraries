@@ -2,19 +2,12 @@
 import pytest
 from pybraries import Search
 from pybraries import set_pages
+from pybraries.helpers import APIKeyMissingError, sess
+import pybraries
 
 # variables for testing
 # put in fixture
 search = Search()  # instantiate search api object
-
-# API key check
-@pytest.mark.skip()
-def test_api_key_missing_msg():
-    """if api key doesn't exist, message to get is returned'"""
-    # temporarily set api key env var to None
-    # attempt to instatiate api object
-    # assert libraries.io in stdout
-    pass
 
 
 def test_set_pages_page_return_type():

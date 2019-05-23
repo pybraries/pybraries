@@ -10,11 +10,9 @@ def make_request(url, kind):
             url (str): base url to call
             kind (str): get, post, put, or delete
         Returns:
-            (list): list of dicts response from libraries.io
+            response from libraries.io
     
     """
-
-    # r_json = {}  # json object to return
 
     try:
         if kind == "get":

@@ -9,8 +9,6 @@ class Subscribe(object):
     def __init__(self):
         pass
 
-    # public methods for subscription things
-
     def list_subscribed(self, *args, **kwargs):
         """
         Return a list of packages a user is subscribed to for release notifications.

@@ -126,8 +126,6 @@ def search_api(action, *args, **kwargs):
             url_end_list.append("dependencies")
 
     url_combined = "/".join(url_end_list)
-    print(url_combined)
     url_end_list = []
     response = make_request(url_combined, kind)
-    print(response)
     return response

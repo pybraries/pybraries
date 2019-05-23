@@ -5,12 +5,11 @@ from pybraries.set_pages import set_pages
 
 
 class Search(object):
-    """Class for wrapping the libraries.io API for checking actions"""
+    """Class for wrapping the libraries.io API for 
+    platform, project, repo, and user GET actions"""
 
     def __init__(self):
         pass
-
-    # public informational methods (GET only)
 
     def platforms(self, *args, **kwargs):
         """
@@ -264,10 +263,10 @@ if __name__ == "__main__":
     fire.Fire(Search)
 
     # manually testing actions
-    # api = Search()
+    api = Search()
 
-    # t = api.user("github", "discdiver")
-    # print(t)
+    t = api.user("github", "discdiver")
+    print(t)
 
     # x = set_pages(1, 3)
     # print(x)

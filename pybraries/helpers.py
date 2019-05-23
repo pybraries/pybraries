@@ -3,12 +3,12 @@ import requests
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
-LIBRARIES_API_KEY = os.environ.get("LIBRARIES_API_KEY", None)
-
 
 class APIKeyMissingError(Exception):
     pass
 
+
+LIBRARIES_API_KEY = os.environ.get("LIBRARIES_API_KEY", None)
 
 if LIBRARIES_API_KEY is None:
     raise APIKeyMissingError(
@@ -24,7 +24,6 @@ retries = Retry(total=3, backoff_factor=0.2, status_forcelist=[500, 502, 503, 50
 sess = requests.Session()
 sess.params = {}
 sess.params["api_key"] = LIBRARIES_API_KEY
-# sess.params['timeout'] = 5
 sess.mount("https://", HTTPAdapter(max_retries=retries))
 
 
