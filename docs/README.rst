@@ -17,7 +17,7 @@ Pybraries
 .. image:: https://badgen.net/github/license/pybraries/pybraries
     :alt: License
 
-.. image:: https://badgen.net/github/release/pybraries/pybraries
+.. image:: https://badgen.net/github/release/pybraries/pybraries&kill_cache=1
     :alt: Latest Release
 
 .. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
