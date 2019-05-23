@@ -89,7 +89,7 @@ This option can be toggled at the `libraries.io`_ website.
 
 
 Search() and Subscribe() are the two classes in this package. 
-See all their available methods here:
+See all their available methods by clicking on the methods directly below.
 
 .. autosummary::
     :toctree: stubs
