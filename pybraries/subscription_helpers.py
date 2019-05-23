@@ -38,14 +38,14 @@ def sub_api(action, *args, **kwargs):
         url_end_list.append(manager)
         url_end_list.append(package)
         url_combined = "/".join(url_end_list)
-        print(url_combined)
+
         check = make_request(url_combined, kind)
-        print(check)
+
         if check is not None:
             r_bool = True
         else:
             r_bool = False
-            print(r_bool)
+
         return r_bool
 
     if action == "subscribe":

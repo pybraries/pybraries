@@ -80,16 +80,16 @@ class Subscribe(object):
 if __name__ == "__main__":
     fire.Fire(Subscribe)
 
-    subs = Subscribe()
+    # subs = Subscribe()
 
     # sub = subs.list_subscribed()
     # print(sub)
 
-    x = subs.subscribe(manager="pypi", package="pandas")
-    print(x)
+    # x = subs.subscribe(manager="pypi", package="pandas")
+    # print(x)
 
-    a = subs.unsubscribe(manager="pypi", package="pandas")
-    print(a)
+    # a = subs.unsubscribe(manager="pypi", package="pandas")
+    # print(a)
 
     # y = subs.check_subscribed("pypi", "numpy")
     # print(y)

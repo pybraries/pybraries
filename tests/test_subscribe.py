@@ -43,7 +43,6 @@ def test_update_subscribe():
     pass
 
 
-# make sure include_prerelease is set to true prior
 @pytest.mark.skip()
 def test_update_subscribe_updates():
     """for api key sent- change subscription for prerelease to false"""
@@ -54,16 +53,24 @@ def test_update_subscribe_updates():
 def test_unsubscribe_kwargs(pre_sub):
     """for api key sent- doesn't error for kwargs"""
     del_sub = subs.unsubscribe(manager=mgr, package=repo2)
+    assert del_sub == "successfully unsubscribed"
 
 
+def test_unsubscribe_kwargs(pre_unsub):
+    """returns no unsubscribe needed if not subscribed"""
+    del_sub = subs.unsubscribe(manager=mgr, package=repo2)
+    assert "Unsubscribe unnecessary" in del_sub
+
+
+# slow
 def test_unsubscribe_args(pre_sub):
     """for api key sent- doesn't error if not already subscribed"""
     del_sub = subs.unsubscribe(mgr, repo2)
-    assert type(del_sub) is str
+    assert del_sub == "successfully unsubscribed"
 
 
-@pytest.mark.skip()
-def test_unsubscribe_unsubscribes():
-    """for api key sent- unsubscribe from package"""
+def test_unsubscribe_works():
+    """unsubscribes and verifies"""
     del_sub = subs.unsubscribe(mgr, repo2)
-    assert type(del_sub) is str
+    bsub = subs.check_subscribed(mgr, repo2)
+    assert bsub == False
