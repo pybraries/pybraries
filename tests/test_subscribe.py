@@ -24,24 +24,16 @@ def test_check_subscribed():
     assert type(check_sub) is bool
 
 
-# feature implemented and checked manually
-# need test
-# unsubscribe after? mock?
-@pytest.mark.skip()
-def test_subscribe():
+def test_subscribe(pre_unsub):
     """for subscribe key sent- use args to check if subscribed"""
     sub = subs.subscribe(mgr, repo2)
-    assert sub["project"]["rank"] >= 0
+    assert type(sub) is str
 
 
-# feature implemented and checked manually
-# need test
-# unsubscribe after? mock?
-@pytest.mark.skip()
-def test_subscribe_kwargs():
+def test_subscribe_kwargs(pre_unsub):
     """for api key sent- use kwargs to check if subscribed"""
     sub = subs.subscribe(manager=mgr, package=repo2)
-    assert sub["project"]["rank"] >= 0
+    assert type(sub) is str
 
 
 @pytest.mark.skip()
@@ -51,7 +43,6 @@ def test_update_subscribe():
     pass
 
 
-# make sure include_prerelease is set to true prior
 @pytest.mark.skip()
 def test_update_subscribe_updates():
     """for api key sent- change subscription for prerelease to false"""
@@ -59,21 +50,27 @@ def test_update_subscribe_updates():
     assert update["include_prerelease"] is False
 
 
-def test_unsubscribe_kwargs():
+def test_unsubscribe_kwargs(pre_sub):
     """for api key sent- doesn't error for kwargs"""
     del_sub = subs.unsubscribe(manager=mgr, package=repo2)
+    assert del_sub == "successfully unsubscribed"
 
 
-@pytest.mark.skip()
-def test_unsubscribe_args():
-    """for api key sent- doesn't error for args"""
+def test_unsubscribe_intercept(pre_unsub):
+    """returns no unsubscribe needed if not subscribed"""
+    del_sub = subs.unsubscribe(manager=mgr, package=repo2)
+    assert "Unsubscribe unnecessary" in del_sub
+
+
+# slow
+def test_unsubscribe_args(pre_sub):
+    """for api key sent- doesn't error if not already subscribed"""
     del_sub = subs.unsubscribe(mgr, repo2)
-    pass
+    assert del_sub == "successfully unsubscribed"
 
 
-@pytest.mark.skip()
-def test_unsubscribe_unsubscribes():
-    """for api key sent- unsubscribe from package"""
+def test_unsubscribe_works():
+    """unsubscribes and verifies"""
     del_sub = subs.unsubscribe(mgr, repo2)
-    # check and make sure not subscribed
-    pass
+    bsub = subs.check_subscribed(mgr, repo2)
+    assert bsub is False

@@ -25,4 +25,18 @@ def setup():
 
 
 def teardown():
-    api_key = ""
+    api_key = None
+
+
+# unsubscribe from pandas
+@pytest.fixture
+def pre_sub():
+    a = Subscribe()
+    a.subscribe("pypi", "pandas")
+
+
+# subscribe to pandas
+@pytest.fixture
+def pre_unsub():
+    b = Subscribe()
+    b.unsubscribe("pypi", "pandas")

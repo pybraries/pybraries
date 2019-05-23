@@ -65,13 +65,13 @@ def test_project_contributors():
 
 
 def test_project_sourcerank():
-    """returns a dict with a package with basic_info_present key"""
+    """returns a dict with a package with a basic_info_present key"""
     pack = search.project_sourcerank(mgr, pkg2)
     assert pack["basic_info_present"] >= 0
 
 
 def test_project_usage():
-    """returns a dict with a project usage score list item"""
+    """returns a dict with a project usage list item"""
     pack = search.project_usage(mgr, pkg2)
     assert pack["*"] >= 0
 
