@@ -1,0 +1,6 @@
+fire/__init__ /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/default.pyi
+urllib3/util/retry /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/default.pyi
+pybraries/helpers /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi
+pybraries/make_request /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi
+pybraries/search_helpers /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi
+pybraries/set_pages /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi

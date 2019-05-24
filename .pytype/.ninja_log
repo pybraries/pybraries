@@ -1,0 +1,14 @@
+# ninja log v5
+1	2607	1558728074574561077	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi	df74618da992f469
+2608	5205	1558728077171227331	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi	c3e8e650147173ea
+2607	5209	1558728077173983146	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi	a9f8e9588e42493d
+5209	8506	1558728080426064028	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi	fca292be7aee3dbe
+8506	11328	1558728083271086393	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi	cdbead54f77238b6
+0	2565	1558731550436550857	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi	c0f57bcb5ba1ab82
+2566	5119	1558731552981584811	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi	ca55ee765ac3a287
+2565	5164	1558731553037690317	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi	ffafc987854b6a18
+5164	7752	1558731555628959375	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscription_helpers.pyi	42a6b379bf30a35b
+5164	8405	1558731556240071762	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi	6f5bcbf8b5c41e68
+7752	10382	1558731558249441798	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscribe.pyi	16a13bd5f9d219ad
+8405	11206	1558731559064281564	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi	44f4bb63c711c929
+11206	13678	1558731561562369764	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/__init__.pyi	704e64e65b33fdd6

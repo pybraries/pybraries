@@ -1,0 +1,30 @@
+rule infer
+  command = pytype-single --imports_info $imports --module-name $module -V 3.7 -o $out --no-report-errors --nofail --quick $in
+  description = infer $module
+rule check
+  command = pytype-single --disable unsupported-operands,attribute-error --imports_info $imports --module-name $module -V 3.7 -o $out --analyze-annotated --nofail --quick $in
+  description = check $module
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/helpers.py
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.helpers.imports
+  module = pybraries.helpers
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/make_request.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.make_request.imports
+  module = pybraries.make_request
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscription_helpers.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/subscription_helpers.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.subscription_helpers.imports
+  module = pybraries.subscription_helpers
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscribe.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/subscribe.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscription_helpers.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.subscribe.imports
+  module = pybraries.subscribe
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/search_helpers.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.search_helpers.imports
+  module = pybraries.search_helpers
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/set_pages.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.set_pages.imports
+  module = pybraries.set_pages
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/search.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.search.imports
+  module = pybraries.search
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/__init__.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/__init__.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscribe.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscription_helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.__init__.imports
+  module = pybraries.__init__

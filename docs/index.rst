@@ -10,7 +10,6 @@ Welcome to Pybraries's documentation!
     README
     CONTRIBUTING
     HISTORY
-    API <modules>
 
 
 .. autosummary::

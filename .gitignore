@@ -109,3 +109,6 @@ venpy/
 
 # mac search
 .DS_Store
+
+# pytype for type checking
+.pytype

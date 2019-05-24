@@ -52,6 +52,7 @@ def sub_api(action, *args, **kwargs):
         kind = "post"
         url_end_list.append(manager)
         url_end_list.append(package)
+
         url_combined = "/".join(url_end_list)
         return make_request(url_combined, kind)
 
@@ -59,6 +60,11 @@ def sub_api(action, *args, **kwargs):
         kind = "put"
         # not implemented - seems libraries.io api has bug
         # if implemented in future, adjust modules in readme
+        url_end_list.append(manager)
+        url_end_list.append(package)
+
+        url_combined = "/".join(url_end_list)
+        return make_request(url_combined, kind)
 
     if action == "delete_subscribe":
         kind = "delete"
