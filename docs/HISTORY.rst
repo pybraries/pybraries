@@ -13,3 +13,9 @@ History
 * Alpha release
 * All libraries.io methods implemented except update
 
+0.1.0 (2019-05-24)
+------------------
+
+* Better argument docs
+* Type hinting
+* Type checking
