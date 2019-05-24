@@ -80,13 +80,13 @@ class Subscribe(object):
 if __name__ == "__main__":
     fire.Fire(Subscribe)
 
-    # subs = Subscribe()
+    subs = Subscribe()
 
     # sub = subs.list_subscribed()
     # print(sub)
 
-    # x = subs.subscribe(manager="pypi", package="pandas")
-    # print(x)
+    x = subs.subscribe(manager="pypi", package="pandas")
+    print(x)
 
     # a = subs.unsubscribe(manager="pypi", package="pandas")
     # print(a)
@@ -94,6 +94,7 @@ if __name__ == "__main__":
     # y = subs.check_subscribed("pypi", "numpy")
     # print(y)
 
-    # z = subs.update_subscription(manager="pypi", package="plotly",
-    # include_prerelease="False")
+    # z = subs.update_subscribe(
+    #    manager="pypi", package="plotly", include_prerelease="False"
+    # )
     # print(z)

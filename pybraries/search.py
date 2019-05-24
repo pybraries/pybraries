@@ -52,7 +52,7 @@ class Search(object):
 
         return search_api("pproject_dependencies", *args, **kwargs)
 
-    def project_dependents(self, *args, **kwargs):
+    def project_dependents(manager, package, version, *args, **kwargs):
         """
         Get packages that have at least one version that depends on a given project.
 

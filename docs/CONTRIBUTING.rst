@@ -110,10 +110,7 @@ check that your changes pass the test suite and Flake8::
 
 8. Submit a pull request through GitHub.
 
-If you are new to contributing to open source,
- check out 
-`this guide <https://github.com/chalmerlowe/intro_to_sprinting>`_
- by Chalmer Lowe.
+If you are new to contributing to open source, check out `this guide <https://github.com/chalmerlowe/intro_to_sprinting>`_ by Chalmer Lowe.
 
 
 Pull Request Guidelines
@@ -134,18 +131,18 @@ Deploying
 
 A reminder for the maintainers on how to deploy.
 
-Make sure all changes are committed (including an entry in history.rst).
+#. Make sure all changes are committed (including an entry in history.rst).
 
-Then run::
+#. Then run::
 
     bumpversion2 patch      # possible: major / minor / patch
     git push
     git push --tags
 
-Build with::
+#. Build with::
 
     python setup.py sdist bdist_wheel
 
-Use twine to upload to PyPI.
+#. Use twine to upload to PyPI.
 
-Update the Releases section on GitHub.
+#. Update the Releases section on GitHub.

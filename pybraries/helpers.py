@@ -22,8 +22,9 @@ retries = Retry(total=3, backoff_factor=0.2, status_forcelist=[500, 502, 503, 50
 
 # session object common properties
 sess = requests.Session()
-sess.params = {}
+# sess.params = {"include_prerelease": False}
 sess.params["api_key"] = LIBRARIES_API_KEY
+# sess.params["include_prerelease"] = 0
 sess.mount("https://", HTTPAdapter(max_retries=retries))
 
 
