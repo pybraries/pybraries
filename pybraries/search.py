@@ -16,9 +16,6 @@ class Search(object):
         """
         Return a list of supported package managers.
 
-        Args:
-            None
-
         Returns:
             List of dicts of platforms with platform info from libraries.io.
         """
@@ -38,7 +35,7 @@ class Search(object):
 
         return search_api("pproject", manager, package)
 
-    def project_dependencies(self, manager: str, package: str, version: str) -> Any:
+    def project_dependencies(self, manager: str, package: str) -> Any:
         """
         Get a list of dependencies for a version of a project.
 
@@ -204,7 +201,7 @@ class Search(object):
         """
         return search_api("user_repositories", host, user)
 
-    def user_packages(self, host: (str), user: (str), repo: (str)) -> Any:
+    def user_packages(self, host: (str), user: (str)) -> Any:
         """
         Return information about packages using a user's repos.
 
@@ -260,10 +257,10 @@ if __name__ == "__main__":
     fire.Fire(Search)
 
     # manually testing actions
-    api = Search()
+    # api = Search()
 
-    t = api.user("github", "discdiver")
-    print(t)
+    # t = api.user("github", "discdiver")
+    # print(t)
 
     # x = set_pages(1, 3)
     # print(x)

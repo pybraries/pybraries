@@ -61,4 +61,5 @@ html_static_path = ["_static"]
 autodoc_member_order = "bysource"
 
 autodoc_default_flags = ["members"]
+
 autosummary_generate = True

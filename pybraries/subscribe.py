@@ -1,6 +1,7 @@
 # subscribe_api.py
 import fire
 from pybraries.subscription_helpers import sub_api
+from typing import Dict, List, Optional, Any
 
 
 class Subscribe(object):
@@ -9,71 +10,72 @@ class Subscribe(object):
     def __init__(self):
         pass
 
-    def list_subscribed(self, *args, **kwargs):
+    def list_subscribed(self) -> Any:
         """
         Return a list of packages a user is subscribed to for release notifications.
 
-        Args:
-
         Returns:
-            response (dict): dict response from libraries.io
+            Dict with info for each package subscribed to at libraries.io.
         """
-        return sub_api("list_subscribed", *args, **kwargs)
+        return sub_api("list_subscribed")
 
-    def subscribe(self, *args, **kwargs):
+    def subscribe(self, manager: str, package: str) -> str:
         """
         Subscribe to receive notifications about new releases of a project.
 
-        Args:
-            manager (str): package manager name (e.g. PyPI)
-            package (str): package name
-            include_prerelease (bool): default = True. Include prerelease notifications
-        Returns:
-            response (dict): dict of project info from libraries.io
-        """
-        return sub_api("subscribe", *args, **kwargs)
+        Not working yet, but hope to include - possible bug at libraries.io:
+        include_prerelease: default = True. Include prerelease notifications.
 
-    def check_subscribed(self, *args, **kwargs):
+        Args:
+            manager: package manager name (e.g. PyPI).
+            package: package name.
+        Returns:
+            Subscription confirmation message.
+        """
+        return sub_api("subscribe", manager, package)
+
+    def check_subscribed(self, manager: str, package: str) -> bool:
         """
         Check if a user is subscribed to notifications for new project releases.
 
         Args:
-            manager (str): package manager name (e.g. PyPI)
-            package (str): package name
+            manager: package manager name (e.g. PyPI).
+            package: package name.
         Returns:
-            (bool): True if subscribed to given package, else False
+            True if subscribed to the package indicated, else False.
         """
-        return sub_api("check_subscribed", *args, **kwargs)
+        return sub_api("check_subscribed", manager, package)
 
-    def update_subscribe(self, *args, **kwargs):
+    def update_subscribe(
+        self, manager: str, package: str, include_prerelease: bool
+    ) -> str:
         """
+        NOT IMPLEMENTED due to possible bug in libraries.io
         Update the options for a subscription.
 
         Args:
-            manager (str): package manager name (e.g. PyPI)
-            package (str): package name
+            manager: package manager name (e.g. PyPI).
+            package: package name.
             include_prerelease (bool): default = True. Include prerelease notifications.
 
         Returns:
-            response (dict): dict of project info from libraries.io
-            # make so a 404 for not found returns a nice message
-            # maybe return a message if 304 is reponse (not updated)
+            Update confirmation message.
         """
-        return sub_api("update_subscribe", *args, **kwargs)
+        return sub_api("update_subscribe", manager, package, include_prerelease)
 
-    def unsubscribe(self, *args, **kwargs):
+    def unsubscribe(self, manager: str, package: str) -> str:
         """
         Stop receiving release notifications from a project.
 
         Args:
-            manager (str): package manager name (e.g. PyPI)
-            package (str): package name
+            manager: package manager name (e.g. PyPI).
+            package: package name.
 
         Returns:
-            response (str or int): response header status from libraries.io
+            Message confirming delete or deletion unnecessary.
         """
 
-        return sub_api("delete_subscribe", *args, **kwargs)
+        return sub_api("delete_subscribe", manager, package)
 
 
 # From the command line you can call any public function by name with arguments
