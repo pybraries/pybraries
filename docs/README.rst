@@ -20,7 +20,7 @@ Pybraries
 .. image:: https://badgen.net/github/release/pybraries/pybraries&kill_cache=1
     :alt: Latest Release
 
-.. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
+.. image:: https://img.shields.io/pypi/wheel/pybraries.svg&kill_cache=1
     :alt: PyPI - Wheel
 
 .. image:: https://img.shields.io/pypi/pyversions/pybraries.svg   
