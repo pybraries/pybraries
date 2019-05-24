@@ -1,0 +1,6 @@
+# ninja log v5
+1	2607	1558728074574561077	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi	df74618da992f469
+2608	5205	1558728077171227331	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi	c3e8e650147173ea
+2607	5209	1558728077173983146	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi	a9f8e9588e42493d
+5209	8506	1558728080426064028	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi	fca292be7aee3dbe
+8506	11328	1558728083271086393	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi	cdbead54f77238b6

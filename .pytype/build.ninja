@@ -1,0 +1,21 @@
+rule infer
+  command = pytype-single --imports_info $imports --module-name $module -V 3.7 -o $out --no-report-errors --nofail --quick $in
+  description = infer $module
+rule check
+  command = pytype-single --imports_info $imports --module-name $module -V 3.7 -o $out --analyze-annotated --nofail --quick $in
+  description = check $module
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi: infer /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/helpers.py
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.helpers.imports
+  module = pybraries.helpers
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi: infer /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/make_request.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.make_request.imports
+  module = pybraries.make_request
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi: infer /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/search_helpers.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.search_helpers.imports
+  module = pybraries.search_helpers
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi: infer /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/set_pages.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/helpers.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.set_pages.imports
+  module = pybraries.set_pages
+build /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi: check /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/pybraries/search.py | /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/set_pages.pyi
+  imports = /Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/imports/pybraries.search.imports
+  module = pybraries.search
