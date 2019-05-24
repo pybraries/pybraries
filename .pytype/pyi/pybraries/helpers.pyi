@@ -12,6 +12,7 @@ requests: module
 retries: Any
 sess: requests.sessions.Session
 
-class APIKeyMissingError(Exception): ...
+class APIKeyMissingError(Exception):
+    __doc__: str
 
 def clear_params() -> None: ...

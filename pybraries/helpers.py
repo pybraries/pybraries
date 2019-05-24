@@ -5,6 +5,8 @@ from requests.adapters import HTTPAdapter
 
 
 class APIKeyMissingError(Exception):
+    """Custom error for API Key missing"""
+
     pass
 
 
@@ -28,6 +30,6 @@ sess.params["api_key"] = LIBRARIES_API_KEY
 sess.mount("https://", HTTPAdapter(max_retries=retries))
 
 
-def clear_params():
+def clear_params() -> None:
     sess.params.clear()
     sess.params["api_key"] = LIBRARIES_API_KEY

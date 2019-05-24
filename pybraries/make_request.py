@@ -1,9 +1,10 @@
 # make_request.pyß
 from requests.exceptions import HTTPError
 from pybraries.helpers import sess, clear_params
+from typing import Dict, List, Optional, Any
 
 
-def make_request(url, kind):
+def make_request(url: str, kind: str) -> Any:
     """ call api server 
 
         Args:
