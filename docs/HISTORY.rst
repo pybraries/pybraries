@@ -19,3 +19,8 @@ History
 * Better argument docs
 * Type hinting
 * Type checking
+
+0.1.1 (2019-05-25)
+------------------
+
+* Remove subscribe extra print statements

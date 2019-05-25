@@ -6,24 +6,24 @@ Pybraries
     :target: https://travis-ci.org/pybraries/pybraries
     :alt: Travis Status
 
-.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master&kill_cache=1
     :alt: coveralls
     :target: https://coveralls.io/github/pybraries/pybraries?branch=master
 
-.. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest
+.. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest&kill_cache=1
     :target: https://pybraries.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. image:: https://badgen.net/github/license/pybraries/pybraries
+.. image:: https://badgen.net/github/license/pybraries/pybraries?kill_cache=1
     :alt: License
 
-.. image:: https://badgen.net/github/release/pybraries/pybraries&kill_cache=1
+.. image:: https://badgen.net/github/release/pybraries/pybraries?kill_cache=1
     :alt: Latest Release
 
-.. image:: https://img.shields.io/pypi/wheel/pybraries.svg   
+.. image:: https://img.shields.io/pypi/wheel/pybraries.svg?kill_cache=1
     :alt: PyPI - Wheel
 
-.. image:: https://img.shields.io/pypi/pyversions/pybraries.svg   
+.. image:: https://img.shields.io/pypi/pyversions/pybraries.svg?kill_cache=1   
     :alt: PyPI - Python Version
 
 Pybraries is a Python wrapper for the libraries.io API.
