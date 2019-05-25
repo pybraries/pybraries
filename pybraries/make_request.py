@@ -22,26 +22,13 @@ def make_request(url: str, kind: str) -> Any:
             r_val = r.json()
         if kind == "post":
             r = sess.post(url, params={"include_prerelease": "False"})
-
-            print(r.request.url)
-            print("")
-            print(r.headers)
             r.raise_for_status()
             r_val = "successfully subscribed"
             x = r.json()
-            print(x["include_prerelease"])
         if kind == "put":
-
             r = sess.put(url)
-            print(r)
-            print("body:")
-            print(r.request.body)
-            print(r.request.url)
-            x = r.json()
-            print(x["include_prerelease"])
-
             r.raise_for_status()
-            r_val = "successfully updated"
+            r_val = "include_prerelease is always set to true"
         if kind == "delete":
             r = sess.delete(url)
             r.raise_for_status()
