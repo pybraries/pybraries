@@ -2,7 +2,9 @@
 
 from typing import Any
 
+api: Search
 fire: module
+t: Any
 
 class Search(object):
     __doc__: str

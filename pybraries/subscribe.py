@@ -72,7 +72,7 @@ class Subscribe(object):
             package: package name.
 
         Returns:
-            Message confirming delete or deletion unnecessary.
+            Message confirming deleted or deletion unnecessary.
         """
 
         return sub_api("delete_subscribe", manager, package)

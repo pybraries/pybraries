@@ -257,10 +257,9 @@ if __name__ == "__main__":
     fire.Fire(Search)
 
     # manually testing actions
-    # api = Search()
+    api = Search()
 
-    # t = api.user("github", "discdiver")
-    # print(t)
+    t = api.user("github", "discdiver")
 
     # x = set_pages(1, 3)
     # print(x)
