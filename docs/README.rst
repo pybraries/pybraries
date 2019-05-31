@@ -146,7 +146,7 @@ _______
 * `BSD-3-clause: <https://github.com/pybraries/pybraries/blob/master/LICENSE>`_
 
 
-.. _Contributing: https://pybraries.readthedocs.io/contributing
+.. _Contributing: https://pybraries.readthedocs.io/en/latest/CONTRIBUTING.html
 .. _documentation: https://pybraries.readthedocs.io
 .. _libraries.io: https://libraries.io
 .. _GitHub: https://github.com/pybraries/pybraries/issues
