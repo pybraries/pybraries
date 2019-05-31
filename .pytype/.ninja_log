@@ -12,3 +12,7 @@
 7752	10382	1558731558249441798	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscribe.pyi	16a13bd5f9d219ad
 8405	11206	1558731559064281564	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search.pyi	44f4bb63c711c929
 11206	13678	1558731561562369764	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/__init__.pyi	704e64e65b33fdd6
+1	2472	1558785117292709175	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/make_request.pyi	ffafc987854b6a18
+2473	4946	1558785119761882732	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscription_helpers.pyi	42a6b379bf30a35b
+2473	5587	1558785120361032355	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/search_helpers.pyi	6f5bcbf8b5c41e68
+4946	7538	1558785122352873002	/Users/jeffhale/Dropbox/ds/repos/pybraries_repo/.pytype/pyi/pybraries/subscribe.pyi	16a13bd5f9d219ad
