@@ -12,7 +12,6 @@ def make_request(url: str, kind: str) -> Any:
             kind (str): get, post, put, or delete
         Returns:
             response from libraries.io
-    
     """
 
     try:
@@ -23,7 +22,7 @@ def make_request(url: str, kind: str) -> Any:
         if kind == "post":
             r = sess.post(url, params={"include_prerelease": "False"})
             r.raise_for_status()
-            r_val = "successfully subscribed"
+            r_val = "Successfully Subscribed"
             x = r.json()
         if kind == "put":
             r = sess.put(url)
@@ -32,7 +31,7 @@ def make_request(url: str, kind: str) -> Any:
         if kind == "delete":
             r = sess.delete(url)
             r.raise_for_status()
-            r_val = "successfully unsubscribed"
+            r_val = "Successfully Unsubscribed"
 
         clear_params()
         return r_val

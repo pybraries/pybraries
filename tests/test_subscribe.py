@@ -53,7 +53,7 @@ def test_update_subscribe_updates():
 def test_unsubscribe_kwargs(pre_sub):
     """for api key sent- doesn't error for kwargs"""
     del_sub = subs.unsubscribe(manager=mgr, package=repo2)
-    assert del_sub == "successfully unsubscribed"
+    assert del_sub == "Successfully Unsubscribed"
 
 
 def test_unsubscribe_intercept(pre_unsub):
@@ -66,7 +66,7 @@ def test_unsubscribe_intercept(pre_unsub):
 def test_unsubscribe_args(pre_sub):
     """for api key sent- doesn't error if not already subscribed"""
     del_sub = subs.unsubscribe(mgr, repo2)
-    assert del_sub == "successfully unsubscribed"
+    assert del_sub == "Successfully Unsubscribed"
 
 
 def test_unsubscribe_works():
