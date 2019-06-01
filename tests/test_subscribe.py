@@ -51,7 +51,7 @@ def test_update_subscribe_updates():
 
 
 def test_unsubscribe_kwargs(pre_sub):
-    """for api key sent- doesn't error for kwargs"""
+    """subscribed person gets unsubscribed message"""
     del_sub = subs.unsubscribe(manager=mgr, package=repo2)
     assert del_sub == "Successfully Unsubscribed"
 

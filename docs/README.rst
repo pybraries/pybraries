@@ -7,23 +7,27 @@ Pybraries
     :alt: Travis Status
 
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master&kill_cache=1
-    :alt: coveralls
     :target: https://coveralls.io/github/pybraries/pybraries?branch=master
+    :alt: coveralls
 
 .. image:: https://readthedocs.org/projects/pybraries/badge/?version=latest&kill_cache=1
     :target: https://pybraries.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
 .. image:: https://badgen.net/github/license/pybraries/pybraries?kill_cache=1
+    :target: https://pybraries.readthedocs.io/en/latest/README.html
     :alt: License
 
 .. image:: https://badgen.net/github/release/pybraries/pybraries?kill_cache=1
+    :target: https://pybraries.readthedocs.io/en/latest/README.html
     :alt: Latest Release
 
 .. image:: https://img.shields.io/pypi/wheel/pybraries.svg?kill_cache=1
+    :target: https://pybraries.readthedocs.io/en/latest/README.html
     :alt: PyPI - Wheel
 
 .. image:: https://img.shields.io/pypi/pyversions/pybraries.svg?kill_cache=1   
+    :target: https://pybraries.readthedocs.io/en/latest/README.html
     :alt: PyPI - Python Version
 
 Pybraries is a Python wrapper for the libraries.io API.
@@ -33,6 +37,8 @@ to open source packages.
 
 You can also use it to find information about
 many aspects of open source packages and repositories.
+
+The full documentation is hosted at `Read the Docs`_.
 
 Quick Start
 -----------
@@ -143,11 +149,13 @@ ____________
 License
 _______
 
-* `BSD-3-clause: <https://github.com/pybraries/pybraries/blob/master/LICENSE>`_
+* `BSD-3-clause`_
 
 
-.. _Contributing: CONTRIBUTING.html
-.. _documentation: README.html
+.. _BSD-3-clause: https://github.com/pybraries/pybraries/blob/master/LICENSE
+.. _Contributing: https://pybraries.readthedocs.io/en/latest/CONTRIBUTING.html
+.. _Read the Docs: https://pybraries.readthedocs.io/en/latest/README.html
+.. _documentation: https://pybraries.readthedocs.io/en/latest/README.html
 .. _libraries.io: https://libraries.io
 .. _GitHub: https://github.com/pybraries/pybraries/issues
 .. _Stack Overflow: https://stackoverflow.com/questions/ask
