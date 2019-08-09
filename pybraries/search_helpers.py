@@ -67,10 +67,10 @@ def search_api(action, *args, **kwargs):
             url_end_list.append("dependencies")
 
         if action == "pproject_dependents":
-            url_end_list.append("dependendents")
+            url_end_list.append("dependents")
 
         if action == "pproject_dependent_repositories":
-            url_end_list.append("dependendent_repositories")
+            url_end_list.append("dependent_repositories")
 
         if action == "pproject_contributors":
             url_end_list.append("contributors")
