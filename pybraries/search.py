@@ -62,7 +62,7 @@ class Search(object):
             List of dicts package dependents from libraries.io.
         """
 
-        return search_api("pproject_dependendents", manager, package)
+        return search_api("pproject_dependents", manager, package)
 
     def project_dependent_repositories(self, manager: str, package: str) -> Any:
         """
@@ -75,7 +75,7 @@ class Search(object):
             List of dicts of dependent repositories from libraries.io.
         """
 
-        return search_api("pproject_dependendent_repositories", manager, package)
+        return search_api("pproject_dependent_repositories", manager, package)
 
     def project_contributors(self, manager: str, package: str) -> Any:
         """
