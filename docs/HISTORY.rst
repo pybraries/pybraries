@@ -25,7 +25,7 @@ History
 
 * Remove subscribe extra print statements
 
-0.1.2 (2019-07-09)
+0.2.0 (2019-07-10)
 ------------------
 
 * Fix typo in two search functions
