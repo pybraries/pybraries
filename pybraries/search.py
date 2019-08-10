@@ -37,7 +37,7 @@ class Search(object):
 
     def project_dependencies(self, manager: str, package: str) -> Any:
         """
-        Get a list of dependencies for a version of a project.
+        Get dependencies for a version of a project.
 
         Returns latest version info.
 
@@ -62,7 +62,7 @@ class Search(object):
             List of dicts package dependents from libraries.io.
         """
 
-        return search_api("pproject_dependendents", manager, package)
+        return search_api("pproject_dependents", manager, package)
 
     def project_dependent_repositories(self, manager: str, package: str) -> Any:
         """
@@ -75,7 +75,7 @@ class Search(object):
             List of dicts of dependent repositories from libraries.io.
         """
 
-        return search_api("pproject_dependendent_repositories", manager, package)
+        return search_api("pproject_dependent_repositories", manager, package)
 
     def project_contributors(self, manager: str, package: str) -> Any:
         """
@@ -259,7 +259,14 @@ if __name__ == "__main__":
     # manually testing actions
     api = Search()
 
-    t = api.user("github", "discdiver")
+    # t = api.user("github", "discdiver")
+
+    x = api.project_dependents("pypi", "plotly")
+    print(x[0]["name"])
+
+    y = api.project_dependent_repositories("pypi", "yellowbrick")
+    print(y[0])
+    print(type(y))
 
     # x = set_pages(1, 3)
     # print(x)

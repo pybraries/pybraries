@@ -32,8 +32,8 @@ Pybraries
 
 Pybraries is a Python wrapper for the libraries.io API.
 
-You can use it to subscribe to and unsubscribe from updates
-to open source packages.
+You can use it to subscribe to email alerts for
+new versions of open source packages.
 
 You can also use it to find information about
 many aspects of open source packages and repositories.
@@ -69,7 +69,7 @@ Import the pybraries package and use it to subscribe to a package.
 
     s.subscribe("pypi", "pandas")
 
-Now you're subscribed to updates to the *pandas* package.
+Now you'll get an email update every time a new version of *pandas* is released.
 
 Here's another example. 
 Search for projects with *visualization* as a keyword and *python* as a language.

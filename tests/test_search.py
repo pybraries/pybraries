@@ -47,15 +47,15 @@ def test_project_dependencies():
 
 
 def test_project_dependents():
-    """returns a dict with correct package name """
+    """returns a list of dicts with correct package name """
     packer = search.project_dependents(mgr, pkg)
-    assert packer["name"] == "plotly"
+    assert packer[0]["name"] is not None
 
 
 def test_project_dependent_repositories():
-    """returns a dict with correct package name"""
-    pack = search.project_dependent_repositories(mgr, pkg)
-    assert pack["name"] == "plotly"
+    """returns a list of dicts with a description"""
+    pack = search.project_dependent_repositories(mgr, pkg2)
+    assert pack[0]["description"] is not None
 
 
 def test_project_contributors():
