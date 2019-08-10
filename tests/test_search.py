@@ -54,8 +54,8 @@ def test_project_dependents():
 
 def test_project_dependent_repositories():
     """returns a dict with correct package name"""
-    pack = search.project_dependent_repositories(mgr, pkg)
-    assert pack["name"] == "plotly"
+    pack = search.project_dependent_repositories(mgr, pkg2)
+    assert pack["name"] == "yellowbrick"
 
 
 def test_project_contributors():
