@@ -257,15 +257,16 @@ if __name__ == "__main__":
     fire.Fire(Search)
 
     # manually testing actions
-    # api = Search()
+    api = Search()
 
     # t = api.user("github", "discdiver")
 
-    # x = api.project_dependendents("pypi", "plotly")
-    # print(x["name"])
+    x = api.project_dependents("pypi", "plotly")
+    print(x[0]["name"])
 
-    # print(type(x))
-    # print(type(x["name"]))
+    y = api.project_dependent_repositories("pypi", "yellowbrick")
+    print(y[0])
+    print(type(y))
 
     # x = set_pages(1, 3)
     # print(x)
