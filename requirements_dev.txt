@@ -9,7 +9,7 @@ pytest-mock==1.10.4
 coveralls==1.8.2
 sphinx==2.1.2
 sphinx_rtd_theme==0.4.3
-bump2version==0.5.10
+bump2version==0.5.11
 black==19.3b0
 flake8==3.7.8
 fire==0.2.1
