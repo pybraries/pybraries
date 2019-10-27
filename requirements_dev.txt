@@ -4,7 +4,7 @@ twine==1.13.0
 pytest==5.0.1
 pytest-cov==2.7.1
 pytest-flake8==1.0.4
-pytest-runner==5.1
+pytest-runner==5.2
 pytest-mock==1.10.4
 coveralls==1.8.2
 sphinx==2.1.2
