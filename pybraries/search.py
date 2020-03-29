@@ -33,9 +33,9 @@ class Search(object):
             Dict of information about the project from libraries.io.
         """
 
-        return search_api("pproject", manager, package)
+        return search_api("project", manager, package)
 
-    def project_dependencies(self, manager: str, package: str) -> Any:
+    def project_dependencies(self, manager: str, package: str, version: str = None) -> Any:
         """
         Get dependencies for a version of a project.
 
@@ -44,13 +44,14 @@ class Search(object):
         Args:
             manager: package manager (e.g. "pypi").
             package: package name.
+            version: (optional) package version
         Returns:
             Dict of dependencies for a version of a project from libraries.io.
         """
 
-        return search_api("pproject_dependencies", manager, package)
+        return search_api("project_dependencies", manager, package)
 
-    def project_dependents(self, manager: str, package: str) -> Any:
+    def project_dependents(self, manager: str, package: str, version: str = None) -> Any:
         """
         Get packages that have at least one version that depends on a given project.
 
@@ -62,7 +63,7 @@ class Search(object):
             List of dicts package dependents from libraries.io.
         """
 
-        return search_api("pproject_dependents", manager, package)
+        return search_api("project_dependents", manager, package, version=version)
 
     def project_dependent_repositories(self, manager: str, package: str) -> Any:
         """
@@ -75,7 +76,7 @@ class Search(object):
             List of dicts of dependent repositories from libraries.io.
         """
 
-        return search_api("pproject_dependent_repositories", manager, package)
+        return search_api("project_dependent_repositories", manager, package)
 
     def project_contributors(self, manager: str, package: str) -> Any:
         """
@@ -88,7 +89,7 @@ class Search(object):
             List of dicts of project contributor info from libraries.io.
         """
 
-        return search_api("pproject_contributors", manager, package)
+        return search_api("project_contributors", manager, package)
 
     def project_sourcerank(self, manager: str, package: str) -> Any:
         """
@@ -101,7 +102,7 @@ class Search(object):
             Dict of sourcerank info response from libraries.io.
         """
 
-        return search_api("pproject_sourcerank", manager, package)
+        return search_api("project_sourcerank", manager, package)
 
     def project_usage(selfself, manager: str, package: str) -> Any:
         """
@@ -114,7 +115,7 @@ class Search(object):
             Dict with info about usage from libraries.io.
         """
 
-        return search_api("pproject_usage", manager, package)
+        return search_api("project_usage", manager, package)
 
     def project_search(self, **kwargs):
         """
@@ -140,7 +141,7 @@ class Search(object):
         Return information about a repository and its versions.
 
         Args:
-            host: host host name (e.g. GitHub)
+            host: host provider name (e.g. GitHub)
             owner: owner
             repo: repo
         Returns:
@@ -182,7 +183,7 @@ class Search(object):
         Return information about a user.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
         Dict of info about user from libraries.io.
@@ -194,7 +195,7 @@ class Search(object):
         Return information about a user's repos.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
             List of dicts with info about user repos from libraries.io.
@@ -206,7 +207,7 @@ class Search(object):
         Return information about packages using a user's repos.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
             List of dicts of package info from libraries.io.
@@ -218,7 +219,7 @@ class Search(object):
         Return information about packages a user has contributed to.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
             List of dicts with user package contribution info from libraries.io.
@@ -230,7 +231,7 @@ class Search(object):
         Return information about repositories a user has contributed to.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
             (list): list of dicts response from libraries.io
@@ -244,10 +245,10 @@ class Search(object):
         Ordered by frequency of use in those repositories.
 
         Args:
-            host: host (e.g. github)
+            host: host provider name (e.g. GitHub)
             user: username
         Returns:
-            Liist of dicts with user package dependency info.
+            List of dicts with user package dependency info.
         """
         return search_api("user_dependencies", host, user)
 

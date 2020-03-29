@@ -2,15 +2,18 @@ from setuptools import setup, find_packages
 
 
 def readme():
-    with open("docs/README.rst") as f:
-        return f.read()
+    try:
+        with open("docs/README.rst") as f:
+            return f.read()
+    except:
+        return ""
 
 
 setup_requirements = ["pytest-runner"]
 
 test_requirements = ["pytest"]
 
-requirements = ["requests>=2", "fire>0.1.1"]
+requirements = ["requests>=2", "fire>0.1.1", 'urllib3']
 
 setup(
     name="pybraries",
