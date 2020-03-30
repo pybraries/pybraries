@@ -1,7 +1,7 @@
 # subscribe_api.py
-import fire
+from typing import Any
+
 from pybraries.subscription_helpers import sub_api
-from typing import Dict, List, Optional, Any
 
 
 class Subscribe(object):
@@ -74,27 +74,3 @@ class Subscribe(object):
         """
 
         return str(sub_api("delete_subscribe", manager, package))
-
-
-# From the command line you can call any public function by name with arguments
-if __name__ == "__main__":
-    fire.Fire(Subscribe)
-
-    # subs = Subscribe()
-
-    # sub = subs.list_subscribed()
-    # print(sub)
-
-    # x = subs.subscribe(manager="pypi", package="pandas")
-    # print(x)
-
-    # a = subs.unsubscribe(manager="pypi", package="pandas")
-    # print(a)
-
-    # y = subs.check_subscribed("pypi", "numpy")
-    # print(y)
-
-    # z = subs.update_subscribe(
-    #    manager="pypi", package="plotly", include_prerelease="False"
-    # )
-    # print(z)

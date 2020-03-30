@@ -1,7 +1,8 @@
 # search_helpers.py
-from pybraries.helpers import sess, clear_params
-from pybraries.make_request import make_request
 from typing import List
+
+from pybraries.helpers import sess
+from pybraries.make_request import make_request
 
 
 def search_api(action, *args, filters=None, sort=None, **kwargs):
@@ -22,46 +23,27 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
     url_end_list: List[str] = ["https://libraries.io/api"]  # start of list to build url
     url_combined: str  # final string url
-    kind = "get"  # type of request
+    kind = "get"  # type of request, defaults to "get"
 
+    # Handle path params
     if action == "special_project_search":
         url_end_list.append("search?")
-
-        # package seems to be ignored by the libraries.io API
-        # - bug in docs or their api
-        # if "package" in kwargs:
-        #    url_end_list.append(kwargs["package"])
-        if filters is not None:
-            try:
-                filters["platforms"] = filters.pop("manager")
-            except KeyError:
-                pass
-            sess.params = {**sess.params, **filters}
-        if sort is not None:
-            sess.params["sort"] = sort
-
-        url_combined = "/".join(url_end_list)
-        response = make_request(url_combined, kind)
-
-        clear_params()
-        return response
-
-    if action == "platforms":
+    elif action == "platforms":
         url_end_list.append("platforms")
 
-    if action.startswith("project"):
+    elif action.startswith("project"):
         action = action[7:]  # remove action prefix
         if kwargs:
-            if "manager" in kwargs:
-                url_end_list.append(kwargs["manager"])
-            if "package" in kwargs:
-                url_end_list.append(kwargs["package"])
+            if "platforms" in kwargs:
+                url_end_list.append(kwargs.pop("platforms"))
+            if "project" in kwargs:
+                url_end_list.append(kwargs.pop("project"))
         if args:
             url_end_list += args
         if action.startswith("_"):
             action = action[1:]  # remove remaining underscore from operation name
             if action == "dependencies":
-                version = kwargs["version"] if "version" in kwargs else "latest"  # defaults to latest
+                version = kwargs.pop("version") or "latest"  # defaults to latest
                 url_end_list.append(version)
             url_end_list.append(action)
 
@@ -69,11 +51,11 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
         action = action[10:]
         if kwargs:
             if "host" in kwargs:
-                url_end_list.append(kwargs["host"])
+                url_end_list.append(kwargs.pop("host"))
             if "owner" in kwargs:
-                url_end_list.append(kwargs["owner"])
+                url_end_list.append(kwargs.pop("owner"))
             if "repo" in kwargs:
-                url_end_list.append(kwargs["repo"])
+                url_end_list.append(kwargs.pop("repo"))
         if args:
             url_end_list += args
 
@@ -83,9 +65,9 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
     elif "user" in action:
         if kwargs:
             if "host" in kwargs:
-                url_end_list.append(kwargs["host"])
+                url_end_list.append(kwargs.pop("host"))
             if "user" in kwargs:
-                url_end_list.append(kwargs["user"])
+                url_end_list.append(kwargs.pop("user"))
         if args:
             url_end_list += args
             print(url_end_list)
@@ -93,10 +75,10 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
         if action == "user_repositories":
             url_end_list.append("repositories")
 
-        if action == "user_packages":
+        if action == "user_projects":
             url_end_list.append("projects")
 
-        if action == "user_packages_contributions":
+        if action == "user_projects_contributions":
             url_end_list.append("project-contributions")
 
         if action == "user_repositories_contributions":
@@ -104,7 +86,14 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
         if action == "user_dependencies":
             url_end_list.append("dependencies")
-
+    # Handle query params
+    if "project" in kwargs:
+        sess.params['q'] = kwargs["project"]
+    if filters is not None:
+        sess.params = {**sess.params, **filters}
+    if sort is not None:
+        sess.params["sort"] = sort
+    sess.params = {**sess.params, **kwargs}
     url_combined = "/".join(url_end_list)
     response = make_request(url_combined, kind)
     return response

@@ -115,3 +115,7 @@ venpy/
 
 # PyCharm project files
 .idea/
+
+# Astah diagrams
+**/*.asta
+**/*.asta.lock

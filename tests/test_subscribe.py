@@ -1,6 +1,17 @@
 """Tests for `pybraries Subscribe` package."""
+from time import sleep
+
 import pytest
+
 import pybraries
+
+
+# fixture to avoid hitting rate limit
+@pytest.fixture(autouse=True, scope="function")
+def wait_a_sec():
+    yield
+    sleep(1)
+
 
 # variables for testing
 subs = pybraries.Subscribe()  # instantiate subscribe api object

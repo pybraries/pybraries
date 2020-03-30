@@ -1,9 +1,18 @@
 """ test_misc.py miscellaneous tests '"""
+from time import sleep
+
 import pytest
+
 from pybraries import Search
 from pybraries import set_pages
-from pybraries.helpers import APIKeyMissingError, sess
-import pybraries
+
+
+# fixture to avoid hitting rate limit
+@pytest.fixture(autouse=True, scope="function")
+def wait_a_sec():
+    yield
+    sleep(1)
+
 
 # variables for testing
 # put in fixture
