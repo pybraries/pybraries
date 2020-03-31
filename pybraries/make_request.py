@@ -1,4 +1,6 @@
 from requests.exceptions import HTTPError
+
+from pybraries import fix_pages
 from pybraries.helpers import sess, clear_params
 
 
@@ -14,6 +16,7 @@ def make_request(url: str, kind: str) -> str:
 
     try:
         params = {"include_prerelease": "False"} if kind == "post" else {}
+        fix_pages()  # Must be called before any request for page validation
         r = getattr(sess, kind)(url, params=params)
         r.raise_for_status()
         return r.json()
