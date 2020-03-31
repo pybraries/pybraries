@@ -1,5 +1,7 @@
-from pybraries.make_request import make_request
 from typing import Union
+
+from pybraries.helpers import extract
+from pybraries.make_request import make_request
 
 
 def sub_api(action, manager="", package="", *args, **kwargs) -> Union[bool, str]:
@@ -15,18 +17,16 @@ def sub_api(action, manager="", package="", *args, **kwargs) -> Union[bool, str]
         resp = make_request(url_combined, kind)
         return resp
 
-    assert manager != "", "this operation requires manager definition"
-    assert package != "", "this operation requires package definition"
+    assert manager and package, "this operation requires manager and package definition"
 
-    url_end_list.append(manager)
-    url_end_list.append(package)
+    url_end_list += [manager, package]
     url_combined = "/".join(url_end_list)
 
     if action == "check_subscribed":
         resp = make_request(url_combined, kind)
         return resp is not None
-
     if action == "subscribe":
+        extract("include_prerelease").of(kwargs).then(url_end_list.append)
         kind = "post"
         make_request(url_combined, kind)
         return "Successfully Subscribed"

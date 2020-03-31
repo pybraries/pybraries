@@ -1,7 +1,7 @@
 # search_helpers.py
 from typing import List
 
-from pybraries.helpers import sess
+from pybraries.helpers import sess, extract
 from pybraries.make_request import make_request
 
 
@@ -21,11 +21,28 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
         Many are dicts or list of dicts.
     """
 
-    url_end_list: List[str] = ["https://libraries.io/api"]  # start of list to build url
-    url_combined: str  # final string url
-    kind = "get"  # type of request, defaults to "get"
+    kind = "get"
+    url_end_list = handle_path_params(action, *args, **kwargs)
+    handle_query_params(filters, kwargs, sort)
+    url_combined = "/".join(url_end_list)
+    return make_request(url_combined, kind)
 
-    # Handle path params
+
+def handle_query_params(filters, kwargs, sort):
+    if "project" in kwargs:
+        sess.params['q'] = kwargs["project"]
+    if filters:
+        extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
+    if sort:
+        sess.params["sort"] = sort
+    sess.params = {**sess.params, **kwargs}
+
+
+def handle_path_params(action, *args, **kwargs):
+    def from_kwargs(*keys):
+        return extract(*keys).of(kwargs).then([].append)
+
+    url_end_list: List[str] = ["https://libraries.io/api"]  # start of list to build url
     if action == "special_project_search":
         url_end_list.append("search?")
     elif action == "platforms":
@@ -33,45 +50,20 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
     elif action.startswith("project"):
         action = action[7:]  # remove action prefix
-        if kwargs:
-            if "platforms" in kwargs:
-                url_end_list.append(kwargs.pop("platforms"))
-            if "project" in kwargs:
-                url_end_list.append(kwargs.pop("project"))
-        if args:
-            url_end_list += args
+        url_end_list += [*from_kwargs("platforms", "project"), *args]
         if action.startswith("_"):
             action = action[1:]  # remove remaining underscore from operation name
             if action == "dependencies":
                 version = kwargs.pop("version") or "latest"  # defaults to latest
                 url_end_list.append(version)
             url_end_list.append(action)
-
     elif action.startswith("repository"):
-        action = action[10:]
-        if kwargs:
-            if "host" in kwargs:
-                url_end_list.append(kwargs.pop("host"))
-            if "owner" in kwargs:
-                url_end_list.append(kwargs.pop("owner"))
-            if "repo" in kwargs:
-                url_end_list.append(kwargs.pop("repo"))
-        if args:
-            url_end_list += args
-
+        action = action[len("repository"):]
+        url_end_list += [*from_kwargs("host", "owner", "repo"), *args]
         if action.startswith("_"):
             url_end_list.append(action[1:])
-
     elif "user" in action:
-        if kwargs:
-            if "host" in kwargs:
-                url_end_list.append(kwargs.pop("host"))
-            if "user" in kwargs:
-                url_end_list.append(kwargs.pop("user"))
-        if args:
-            url_end_list += args
-            print(url_end_list)
-
+        url_end_list += [*from_kwargs("host", "user"), *args]
         if action == "user_repositories":
             url_end_list.append("repositories")
 
@@ -86,14 +78,4 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
         if action == "user_dependencies":
             url_end_list.append("dependencies")
-    # Handle query params
-    if "project" in kwargs:
-        sess.params['q'] = kwargs["project"]
-    if filters is not None:
-        sess.params = {**sess.params, **filters}
-    if sort is not None:
-        sess.params["sort"] = sort
-    sess.params = {**sess.params, **kwargs}
-    url_combined = "/".join(url_end_list)
-    response = make_request(url_combined, kind)
-    return response
+    return url_end_list

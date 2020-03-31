@@ -99,6 +99,13 @@ def test_project_search_with_kwargs():
     assert "visualization" in projects[0]["keywords"]
 
 
+def test_project_search_with_filters():
+    """Project search with kwargs for vizualization
+    and sort stars returns project with visualization as keyword"""
+    projects = search.project_search(sort="stars", filters=dict(keywords="visualization", platforms="pypi"))
+    assert "visualization" in projects[0]["keywords"]
+
+
 # Repository functionality
 
 

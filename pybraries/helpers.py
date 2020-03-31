@@ -1,7 +1,9 @@
 import os
+from typing import Union, List, Dict, Tuple
+
 import requests
-from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 class APIKeyMissingError(Exception):
@@ -33,3 +35,23 @@ sess.mount("https://", HTTPAdapter(max_retries=retries))
 def clear_params() -> None:
     sess.params.clear()
     sess.params["api_key"] = LIBRARIES_API_KEY
+
+
+def extract(*keys):
+    class From:
+        def of(self, container: Union[Dict, List, Tuple]):
+            class Promise(list):  # workaround to allow monkeypatch to builtin list type
+                def then(self, f) -> List: pass
+
+            def then(f):
+                try:
+                    return [f(value) for value in values]
+                except (ValueError, TypeError):
+                    return [f(key, value) for key, value in zip(keys, values)]
+
+            values = Promise()
+            values.extend([container.pop(k) for k in keys if k in container])
+            values.then = then
+            return values
+
+    return From()
