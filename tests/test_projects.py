@@ -15,8 +15,12 @@ def search():
 
 
 def expect_correct_project(name, platform, project):
-    expect(project).to_include("deprecation_reason", "description", "forks", "homepage", "language", "repository_url",
-                               "licenses", "name", "rank", "stars", "dependents_count", "platform")
+    expect(project).to_include(
+        "deprecation_reason", "description", "forks", 
+        "homepage", "language", "repository_url",
+        "licenses", "name", "rank", "stars", 
+        "dependents_count", "platform"
+        )
     expect(project["stars"]).is_greater_or_equal_than(1)
     expect(project["forks"]).is_greater_or_equal_than(1)
     expect(project["dependents_count"]).is_greater_or_equal_than(0)
@@ -60,9 +64,17 @@ def dictfilt(x, y):
 
 
 def test_projects(search):
-    projects = search.project_search(sort="dependents_count", platforms="pypi", licenses="MIT")
+    projects = search.project_search(
+        sort="dependents_count", 
+        platforms="pypi", 
+        licenses="MIT"
+        )
 
-    resorted_projects = sorted(projects, key=lambda project: project["dependents_count"], reverse=True)
+    resorted_projects = sorted(
+        projects, 
+        key=lambda project: project["dependents_count"], 
+        reverse=True
+        )
     wanted_keys = ("name", "dependents_count")
     print(dictfilt(projects[0], wanted_keys))
     print(dictfilt(resorted_projects[0], wanted_keys))
@@ -76,5 +88,10 @@ def test_projects(search):
 
 
 def test_projects_100_per_page(search):
-    projects = search.project_search(sort="dependents_count", platforms="pypi", licenses="MIT", per_page=MAX_PER_PAGE)
+    projects = search.project_search(
+        sort="dependents_count", 
+        platforms="pypi", 
+        licenses="MIT", 
+        per_page=MAX_PER_PAGE
+        )
     expect(projects).of_size(MAX_PER_PAGE)
