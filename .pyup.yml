@@ -1,0 +1,6 @@
+# .pyup.yml for configuring pypu package updating bot https://pyup.io/docs/bot/config/
+
+# update schedule
+# default: empty
+# allowed: "every day", "every week", ..
+schedule: "every month"
