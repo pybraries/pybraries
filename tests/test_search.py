@@ -1,7 +1,17 @@
 """Tests for `pybraries` Search class."""
-import pytest
-import pybraries
 from time import sleep
+
+import pytest
+
+import pybraries
+
+
+# fixture to avoid hitting rate limit
+@pytest.fixture(autouse=True, scope="function")
+def wait_a_sec():
+    yield
+    sleep(1)
+
 
 # variables for testing
 # put in fixture
@@ -36,7 +46,7 @@ def test_project_args():
 
 def test_project_kwargs():
     """using kwargs - returns a dict with correct package name"""
-    packs = search.project(manager="pypi", package="plotly")
+    packs = search.project(platforms="pypi", name="plotly")
     assert packs["name"] == "plotly"
 
 
@@ -85,9 +95,14 @@ def test_project_search():
 def test_project_search_with_kwargs():
     """Project search with kwargs for vizualization 
     and sort stars returns project with visualization as keyword"""
-    projects = search.project_search(
-        sort="stars", filters=dict(keywords="visualization", manager="pypi")
-    )
+    projects = search.project_search(sort="stars", keywords="visualization", platforms="pypi")
+    assert "visualization" in projects[0]["keywords"]
+
+
+def test_project_search_with_filters():
+    """Project search with kwargs for vizualization
+    and sort stars returns project with visualization as keyword"""
+    projects = search.project_search(sort="stars", filters=dict(keywords="visualization", platforms="pypi"))
     assert "visualization" in projects[0]["keywords"]
 
 
@@ -127,16 +142,16 @@ def test_user_repositories():
     assert user_repos[0]["size"] > 0
 
 
-def test_user_packages():
+def test_user_projects():
     """returns a package with rank >= 0"""
-    user_pkgs2 = search.user_packages(host, "wesm")
+    user_pkgs2 = search.user_projects(host, "wesm")
     assert user_pkgs2[0]["rank"] >= 0
 
 
-def test_user_packages_contributions():
+def test_user_projects_contributions():
     """returns a project in a list item with stars >=0"""
-    user_package_contribs = search.user_packages_contributions(host, username)
-    assert user_package_contribs[0]["stars"] >= 0
+    user_project_contribs = search.user_projects_contributions(host, username)
+    assert user_project_contribs[0]["stars"] >= 0
 
 
 def test_user_repository_contributions():

@@ -1,7 +1,7 @@
 # subscribe_api.py
-import fire
+from typing import Any
+
 from pybraries.subscription_helpers import sub_api
-from typing import Dict, List, Optional, Any
 
 
 class Subscribe(object):
@@ -32,7 +32,7 @@ class Subscribe(object):
         Returns:
             Subscription confirmation message.
         """
-        return sub_api("subscribe", manager, package)
+        return str(sub_api("subscribe", manager, package))
 
     def check_subscribed(self, manager: str, package: str) -> bool:
         """
@@ -44,11 +44,9 @@ class Subscribe(object):
         Returns:
             True if subscribed to the package indicated, else False.
         """
-        return sub_api("check_subscribed", manager, package)
+        return bool(sub_api("check_subscribed", manager, package))
 
-    def update_subscribe(
-        self, manager: str, package: str, include_prerelease: bool
-    ) -> str:
+    def update_subscribe(self, manager: str, package: str, include_prerelease: bool = True) -> str:
         """
         NOT IMPLEMENTED due to possible bug in libraries.io
         Update the options for a subscription.
@@ -61,7 +59,7 @@ class Subscribe(object):
         Returns:
             Update confirmation message.
         """
-        return sub_api("update_subscribe", manager, package, include_prerelease)
+        return str(sub_api("update_subscribe", manager, package, include_prerelease))
 
     def unsubscribe(self, manager: str, package: str) -> str:
         """
@@ -75,28 +73,4 @@ class Subscribe(object):
             Message confirming deleted or deletion unnecessary.
         """
 
-        return sub_api("delete_subscribe", manager, package)
-
-
-# From the command line you can call any public function by name with arguments
-if __name__ == "__main__":
-    fire.Fire(Subscribe)
-
-    # subs = Subscribe()
-
-    # sub = subs.list_subscribed()
-    # print(sub)
-
-    # x = subs.subscribe(manager="pypi", package="pandas")
-    # print(x)
-
-    # a = subs.unsubscribe(manager="pypi", package="pandas")
-    # print(a)
-
-    # y = subs.check_subscribed("pypi", "numpy")
-    # print(y)
-
-    # z = subs.update_subscribe(
-    #    manager="pypi", package="plotly", include_prerelease="False"
-    # )
-    # print(z)
+        return str(sub_api("delete_subscribe", manager, package))

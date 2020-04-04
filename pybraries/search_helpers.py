@@ -1,15 +1,17 @@
 # search_helpers.py
-from pybraries.helpers import sess, clear_params
+from typing import List
+
+from pybraries.helpers import sess, extract
 from pybraries.make_request import make_request
 
 
-def search_api(action, *args, **kwargs):
+def search_api(action, *args, filters=None, sort=None, **kwargs):
     """
     build and call for search 
 
     Args:
         action (str): function action name
-        filters (list): list of strings 
+        filters (dict): filters passed to requests Session
         sort (str): to sort by. Options
         *args (str): positional arguments
         **kwargs (str): keyword arguments
@@ -19,104 +21,56 @@ def search_api(action, *args, **kwargs):
         Many are dicts or list of dicts.
     """
 
-    url_end_list = ["https://libraries.io/api"]  # start of list to build url
-    more_args = []  # for unpacking args
-    url_combined = ""  # final string url
-    kind = "get"  # type of request
+    kind = "get"
+    url_end_list = handle_path_params(action, *args, **kwargs)
+    handle_query_params(filters, kwargs, sort)
+    url_combined = "/".join(url_end_list)
+    return make_request(url_combined, kind)
 
+
+def handle_query_params(filters, kwargs, sort):
+    if "project" in kwargs:
+        sess.params['q'] = kwargs["project"]
+    if filters:
+        extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
+    if sort:
+        sess.params["sort"] = sort
+    sess.params = {**sess.params, **kwargs}
+
+
+def handle_path_params(action, *args, **kwargs):
+    def from_kwargs(*keys):
+        return extract(*keys).of(kwargs).then([].append)
+
+    url_end_list: List[str] = ["https://libraries.io/api"]  # start of list to build url
     if action == "special_project_search":
         url_end_list.append("search?")
-
-        # package seems to be ignored by the libraries.io API
-        # - bug in docs or their api
-        # if "package" in kwargs:
-        #    url_end_list.append(kwargs["package"])
-
-        if kwargs:
-            if "filters" in kwargs:
-                filts = dict(kwargs["filters"])
-                if "manager" in filts:
-                    filts["platforms"] = filts.pop("manager")
-                sess.params = {**sess.params, **filts}
-            if "sort" in kwargs:
-                sess.params["sort"] = kwargs["sort"]
-
-        url_combined = "/".join(url_end_list)
-        response = make_request(url_combined, kind)
-
-        clear_params()
-        return response
-
-    if action == "platforms":
+    elif action == "platforms":
         url_end_list.append("platforms")
 
-    if "pproject" in action:
-        if kwargs:
-            if "manager" in kwargs:
-                url_end_list.append(kwargs["manager"])
-            if "package" in kwargs:
-                url_end_list.append(kwargs["package"])
-        if args:
-            more_args = [arg for arg in args]
-            url_end_list = url_end_list + more_args
-
-        if action == "pproject_dependencies":
-            url_end_list.append(
-                "latest"
-            )  # could make option to subscribe to other versions
-            url_end_list.append("dependencies")
-
-        if action == "pproject_dependents":
-            url_end_list.append("dependents")
-
-        if action == "pproject_dependent_repositories":
-            url_end_list.append("dependent_repositories")
-
-        if action == "pproject_contributors":
-            url_end_list.append("contributors")
-
-        if action == "pproject_sourcerank":
-            url_end_list.append("sourcerank")
-
-        if action == "pproject_usage":
-            url_end_list.append("usage")
-
-    if "repository" in action:
-        if kwargs:
-            if "host" in kwargs:
-                url_end_list.append(kwargs["host"])
-            if "owner" in kwargs:
-                url_end_list.append(kwargs["owner"])
-            if "repo" in kwargs:
-                url_end_list.append(kwargs["repo"])
-        if args:
-            more_args = [arg for arg in args]
-            url_end_list = url_end_list + more_args
-
-        if action == "repository_dependencies":
-            url_end_list.append("dependencies")
-
-        if action == "repository_projects":
-            url_end_list.append("projects")
-
-    if "user" in action:
-        if kwargs:
-            if "host" in kwargs:
-                url_end_list.append(kwargs["host"])
-            if "user" in kwargs:
-                url_end_list.append(kwargs["user"])
-        if args:
-            more_args = [arg for arg in args]
-            url_end_list = url_end_list + more_args
-            print(url_end_list)
-
+    elif action.startswith("project"):
+        action = action[7:]  # remove action prefix
+        url_end_list += [*from_kwargs("platforms", "project"), *args]
+        if action.startswith("_"):
+            action = action[1:]  # remove remaining underscore from operation name
+            if action == "dependencies":
+                version = kwargs.pop("version") or "latest"  # defaults to latest
+                url_end_list.append(version)
+            url_end_list.append(action)
+    elif action.startswith("repository"):
+        action = action[len("repository"):]
+        url_end_list += [*from_kwargs("host", "owner", "repo"), *args]
+        if action.startswith("_"):
+            url_end_list.append(action[1:])
+    elif "user" in action:
+        url_end_list += [*from_kwargs("host", "user"), *args]
         if action == "user_repositories":
             url_end_list.append("repositories")
 
-        if action == "user_packages":
+        if action == "user_projects":
             url_end_list.append("projects")
 
-        if action == "user_packages_contributions":
+        if action == "user_projects_contributions":
             url_end_list.append("project-contributions")
 
         if action == "user_repositories_contributions":
@@ -124,8 +78,4 @@ def search_api(action, *args, **kwargs):
 
         if action == "user_dependencies":
             url_end_list.append("dependencies")
-
-    url_combined = "/".join(url_end_list)
-    url_end_list = []
-    response = make_request(url_combined, kind)
-    return response
+    return url_end_list

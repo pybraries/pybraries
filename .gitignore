@@ -111,4 +111,11 @@ venpy/
 .DS_Store
 
 # pytype for type checking
-.pytype
+.pytype/
+
+# PyCharm project files
+.idea/
+
+# Astah diagrams
+**/*.asta
+**/*.asta.lock
