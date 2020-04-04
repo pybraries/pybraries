@@ -26,4 +26,6 @@ def test_platforms_typing(platforms):
 
 
 def test_platform_attributes(any_platform):
-    expect(any_platform).to_include("name", "project_count", "homepage", "color", "default_language")
+    expect(any_platform).to_include(
+        "name", "project_count", "homepage", "color", "default_language"
+    )

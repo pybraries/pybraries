@@ -15,15 +15,22 @@ expect.to_be_a_list_of = expect.list_of = to_be_a_list_of
 
 def has_substring(self, substring, *other_substrings):
     all_substrings = [substring, *other_substrings]
-    self._assert(any([self._actual.find(s) != -1 for s in all_substrings]),
-                 f"to have any of {all_substrings} as substring")
+    self._assert(
+        any([self._actual.find(s) != -1 for s in all_substrings]),
+        f"to have any of {all_substrings} as substring",
+    )
 
 
-expect.has_substring = expect.to_have_substring = expect.to_have_any_of_substrings = has_substring
+expect.has_substring = (
+    expect.to_have_substring
+) = expect.to_have_any_of_substrings = has_substring
 
 
 def of_size(self, size):
-    self._assert(len(self._actual) == size, f"to have a size equal to {size}, but it's {len(self._actual)}")
+    self._assert(
+        len(self._actual) == size,
+        f"to have a size equal to {size}, but it's {len(self._actual)}",
+    )
 
 
 expect.of_size = expect.to_have_size = of_size
