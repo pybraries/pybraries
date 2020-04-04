@@ -30,3 +30,9 @@ History
 
 * Fix typo in two search functions
 * Update dependencies
+
+0.2.0 (2020-04-04)
+------------------
+
+* Refactored functions - thanks (victorgveloso)
+*fixed naming divergences between libraries.io API and pybraries (manager->platform and package->project) 

@@ -113,16 +113,17 @@ _________
     *user* 
         A repository user  e.g. a GitHub username. e.g. discdiver
 
-    *manager* 
-        A package manager. e.g. PyPI
+    *platform* 
+        A package manager platform. e.g. PyPI
 
-    *package* 
-        A package distributed by a package manager. e.g. pandas
+    *project* 
+        A package or library distributed by a package manager platform. e.g. pandas
 
 
-Note that many repos and packages share the same name. 
+Note that many repos and projects share the same name. 
 Many owners and repos also share the same name.
-Further, many owners are also users.
+Further, many owners are also users. 
+Fun! 😁
 
 
 Pybraries methods that return one item generally return a dict with information.

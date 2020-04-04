@@ -1,6 +1,6 @@
 from requests.exceptions import HTTPError
 
-from pybraries import fix_pages
+from pybraries.pagination import fix_pages
 from pybraries.helpers import sess, clear_params
 
 
