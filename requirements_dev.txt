@@ -1,4 +1,4 @@
-pip==20.0.2
+pip==20.1
 wheel==0.34.2
 twine==3.1.1
 pytest==5.4.1
