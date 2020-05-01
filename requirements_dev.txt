@@ -6,7 +6,7 @@ pytest-cov==2.8.1
 pytest-flake8==1.0.5
 pytest-runner==5.2
 pytest-mock==3.1.0
-coveralls==1.11.1
+coveralls==2.0.0
 coverage==5.0.4
 sphinx==2.4.4
 sphinx_rtd_theme==0.4.3
