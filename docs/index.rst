@@ -9,8 +9,9 @@ Welcome to Pybraries's documentation!
 
     README
     CONTRIBUTING
+    CODE_OF_CONDUCT
     HISTORY
-
+    
 
 .. autosummary::
     :toctree: stubs
