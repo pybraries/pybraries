@@ -23,14 +23,14 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
     kind = "get"
     url_end_list = handle_path_params(action, *args, **kwargs)
-    handle_query_params(filters, kwargs, sort)
+    handle_query_params(action, filters, kwargs, sort)
     url_combined = "/".join(url_end_list)
     return make_request(url_combined, kind)
 
 
-def handle_query_params(filters, kwargs, sort):
-    if "project" in kwargs:
-        sess.params['q'] = kwargs["project"]
+def handle_query_params(action, filters, kwargs, sort):
+    if action == "special_project_search":
+        sess.params['q'] = kwargs["keywords"]
     if filters:
         extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
     if sort:

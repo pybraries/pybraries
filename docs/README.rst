@@ -95,7 +95,7 @@ This option can be toggled at the `libraries.io`_ website.
 
 
 Search() and Subscribe() are the two classes in this package. 
-See all their available methods by clicking on the methods in the `documentation`_.
+See all their available methods by clicking on the method names in the left sidebar in the `documentation`_.
 
 
 Key Terms
@@ -139,8 +139,8 @@ Getting Help
 ____________
 
 1. Check out the pybraries docs.
-2. Check out the libraries.io docs.
-3. Open an issue on `GitHub`_ or tag a question on `Stack Overflow`_ with "pybraries".
+1. Check out the libraries.io docs.
+1. Open an issue on `GitHub`_ or tag a question on `Stack Overflow`_ with "pybraries".
 
 Contributing
 ____________

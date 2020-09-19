@@ -116,13 +116,14 @@ class Search(object):
 
         return search_api("project_usage", platforms, project)
 
-    def project_search(self, **kwargs):
+    def project_search(self, keywords, **kwargs):
         """
         Search for projects. Accepts keyword arguments only.
 
         Args:
+            keywords (list of strings):  required keywords to search
             filters (dict): optional dict of form
-                dict(languages="python", keywords="data", 
+                dict(languages="python", 
                 licenses="my_license", platforms="pypi")
 
             sort str: (optional) one of rank, stars, 
