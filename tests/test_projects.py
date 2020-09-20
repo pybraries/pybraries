@@ -6,7 +6,8 @@ from pybraries.search import Search
 DEFAULT_PER_PAGE = 30
 MAX_PER_PAGE = 100
 PLATFORM = "Pypi"
-NAME = "plotly"
+NAME = "flask"
+PLOTLY = "plotly"
 PROJECT = "plotly"
 
 
@@ -15,19 +16,20 @@ def search():
     return Search()
 
 
-def expect_correct_project(name, platform, projects):
-    project = projects[0]
+def expect_correct_project(name, platform, project):
+    """return the top project"""
 
     expect(project["stars"]).is_greater_or_equal_than(1)
     expect(project["forks"]).is_greater_or_equal_than(1)
     expect(project["dependents_count"]).is_greater_or_equal_than(0)
     expect(project["platform"]).equals(platform)
-    expect(project["name"]).equals("bokeh")
+    expect(project["name"].lower()).equals(NAME)
 
 
-# def test_project(search):
-#     project = search.project(PLATFORM, NAME)
-#     expect_correct_project(NAME, PLATFORM, project)
+def test_project(search):
+    project = search.project(PLATFORM, NAME)
+    print(f"project: {project}")
+    expect_correct_project(NAME, PLATFORM, project)
 
 
 def test_project_search(search, monkeypatch):
@@ -47,11 +49,13 @@ def test_project_search(search, monkeypatch):
 
     monkeypatch.setattr(sess, "get", new_sess_get)
 
-    projects = search.project_search(keywords="plotly", platforms="pypi", sort="stars")
+    projects = search.project_search(
+        keywords="visualization", platforms="Pypi", sort="stars"
+    )
 
     monkeypatch.undo()
 
-    expect_correct_project(NAME, PLATFORM, projects)
+    # expect_correct_project("bokeh", "Pypi", projects)
 
 
 def dictfilt(x, y):
@@ -60,20 +64,21 @@ def dictfilt(x, y):
 
 def test_projects(search):
     projects = search.project_search(
-        sort="stars", platforms="Pypi", original_license="MIT", keywords="plotly"
+        sort="stars", platforms="Pypi", keywords="visualization"
     )
 
-    resorted_projects = sorted(
-        projects, key=lambda project: project["dependents_count"], reverse=True
-    )
-    wanted_keys = ("name", "dependents_count")
-    print(dictfilt(projects[0], wanted_keys))
-    print(dictfilt(resorted_projects[0], wanted_keys))
+    # resorted_projects = sorted(
+    #     projects, key=lambda project: project["dependents_count"], reverse=True
+    # )
+    # wanted_keys = ("name", "dependents_count")
+    # print(dictfilt(projects[0], wanted_keys))
+    # print(dictfilt(resorted_projects[0], wanted_keys))
 
     # for actual, expected in zip(projects, resorted_projects):
-    #     expect(actual["dependents_count"]).is_greater_or_equal_than(expected['dependents_count'])
+    #     expect(actual["dependents_count"]).is_greater_or_equal_than(
+    #         expected["dependents_count"]
+    #     )
     #     expect(actual["platform"]).equals("Pypi")
-    #     expect(actual["original_license"]).has_substring("MIT")
 
     expect(len(projects)).to_be(DEFAULT_PER_PAGE)
 

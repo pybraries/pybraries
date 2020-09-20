@@ -81,7 +81,7 @@ Sort by the number of stars.
 
     search = Search()
 
-    info = search.project_search(keywords='visualization', dict(sort='stars'))
+    info = search.project_search(keywords='visualization', sort='stars', platform='pypi')
     print(info)
 
 A list of dictionaries with project names and other project information is returned.
