@@ -116,12 +116,11 @@ class Search(object):
 
         return search_api("project_usage", platforms, project)
 
-    def project_search(self, keywords, **kwargs):
+    def project_search(self, **kwargs):
         """
-        Search for projects. Accepts keyword arguments only.
-
+        Search for projects. 
         Args:
-            keywords (list of strings):  required keywords to search
+            keywords (string):  REQUIRED keywords to search
             filters (dict): optional dict of form
                 dict(languages="python", 
                 licenses="my_license", platforms="pypi")
@@ -134,7 +133,7 @@ class Search(object):
             List of dicts of project info from libraries.io.
         """
 
-        return search_api("special_project_search", **kwargs)
+        return search_api("special_project_search", kwargs['keywords'], **kwargs)
 
     def repository(self, host: str, owner: str, repo: str) -> Any:
         """

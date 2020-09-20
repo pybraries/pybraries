@@ -5,12 +5,13 @@ from pybraries.helpers import sess, extract
 from pybraries.make_request import make_request
 
 
-def search_api(action, *args, filters=None, sort=None, **kwargs):
+def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
     """
     build and call for search 
 
     Args:
         action (str): function action name
+        keywords (str): keywords for project_search only
         filters (dict): filters passed to requests Session
         sort (str): to sort by. Options
         *args (str): positional arguments
@@ -23,14 +24,18 @@ def search_api(action, *args, filters=None, sort=None, **kwargs):
 
     kind = "get"
     url_end_list = handle_path_params(action, *args, **kwargs)
-    handle_query_params(action, filters, kwargs, sort)
+    handle_query_params(action, keywords, filters, sort, **kwargs)
     url_combined = "/".join(url_end_list)
     return make_request(url_combined, kind)
 
 
-def handle_query_params(action, filters, kwargs, sort):
+def handle_query_params(action, keywords, filters, sort, **kwargs):
+
     if action == "special_project_search":
-        sess.params['q'] = kwargs["keywords"]
+        sess.params['q'] = keywords
+        
+    elif "project" in kwargs:
+        sess.params['q'] = kwargs["project"]
     if filters:
         extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
     if sort:
