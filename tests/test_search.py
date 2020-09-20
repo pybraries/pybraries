@@ -89,18 +89,15 @@ def test_project_usage():
 def test_project_search():
     """Project search returns a project list item with a name key"""
     projects = search.project_search(keywords="pybraries")
-    
+
     assert projects
-    
 
 
 def test_project_search_with_kwargs():
-    """Project search with kwargs for analytics 
+    """Project search with kwargs for analytics
     and sort stars returns project with analytics as keyword"""
     projects = search.project_search(
-        sort="stars", 
-        keywords="analytics", 
-        platforms="Pypi"
+        sort="stars", keywords="analytics", platforms="Pypi"
     )
     assert "analytics" in projects[0]["keywords"]
 
@@ -108,7 +105,7 @@ def test_project_search_with_kwargs():
 def test_project_search_with_filters():
     """Project search with kwargs for visualization
     and sort stars returns project with visualization as keyword"""
-    projects = search.project_search(keywords="visualization", sort="stars" )
+    projects = search.project_search(keywords="visualization", sort="stars")
     assert "visualization" in projects[0]["keywords"]
 
 

@@ -7,7 +7,7 @@ from pybraries.make_request import make_request
 
 def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
     """
-    build and call for search 
+    build and call for search
 
     Args:
         action (str): function action name
@@ -18,7 +18,7 @@ def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
         **kwargs (str): keyword arguments
     Returns:
         (list): list of dicts response from libraries.io.
-            according to page and per page 
+            according to page and per page
         Many are dicts or list of dicts.
     """
 
@@ -32,10 +32,10 @@ def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
 def handle_query_params(action, keywords, filters, sort, **kwargs):
 
     if action == "special_project_search":
-        sess.params['q'] = keywords
-        
+        sess.params["q"] = keywords
+
     elif "project" in kwargs:
-        sess.params['q'] = kwargs["project"]
+        sess.params["q"] = kwargs["project"]
     if filters:
         extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
     if sort:
@@ -63,7 +63,7 @@ def handle_path_params(action, *args, **kwargs):
                 url_end_list.append(version)
             url_end_list.append(action)
     elif action.startswith("repository"):
-        action = action[len("repository"):]
+        action = action[len("repository") :]
         url_end_list += [*from_kwargs("host", "owner", "repo"), *args]
         if action.startswith("_"):
             url_end_list.append(action[1:])

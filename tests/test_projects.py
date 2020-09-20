@@ -17,12 +17,12 @@ def search():
 
 def expect_correct_project(name, platform, projects):
     project = projects[0]
-    
+
     expect(project["stars"]).is_greater_or_equal_than(1)
     expect(project["forks"]).is_greater_or_equal_than(1)
     expect(project["dependents_count"]).is_greater_or_equal_than(0)
     expect(project["platform"]).equals(platform)
-    expect(project["name"]).equals('bokeh')
+    expect(project["name"]).equals("bokeh")
 
 
 # def test_project(search):
@@ -37,6 +37,7 @@ def test_project_search(search, monkeypatch):
 
     def new_sess_get(*args, **kwargs):
         from urllib.parse import parse_qs, urlparse
+
         r = old_get(*args, **kwargs)
         params = parse_qs(urlparse(r.request.url).query)
         expect(params).includes("q", "api_key", "platforms")
@@ -59,17 +60,12 @@ def dictfilt(x, y):
 
 def test_projects(search):
     projects = search.project_search(
-        sort="stars", 
-        platforms="Pypi", 
-        original_license="MIT",
-        keywords="plotly"
-        )
+        sort="stars", platforms="Pypi", original_license="MIT", keywords="plotly"
+    )
 
     resorted_projects = sorted(
-        projects, 
-        key=lambda project: project["dependents_count"], 
-        reverse=True
-        )
+        projects, key=lambda project: project["dependents_count"], reverse=True
+    )
     wanted_keys = ("name", "dependents_count")
     print(dictfilt(projects[0], wanted_keys))
     print(dictfilt(resorted_projects[0], wanted_keys))
@@ -84,10 +80,10 @@ def test_projects(search):
 
 def test_projects_100_per_page(search):
     projects = search.project_search(
-        sort="dependents_count", 
-        platforms="pypi", 
-        licenses="MIT", 
+        sort="dependents_count",
+        platforms="pypi",
+        licenses="MIT",
         per_page=MAX_PER_PAGE,
-        keywords=NAME
-        )
+        keywords=NAME,
+    )
     expect(projects).of_size(MAX_PER_PAGE)

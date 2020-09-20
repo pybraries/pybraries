@@ -5,7 +5,7 @@ from pybraries.search_helpers import search_api
 
 
 class Search(object):
-    """Class for wrapping the libraries.io API for 
+    """Class for wrapping the libraries.io API for
     platform, project, repo, and user GET actions"""
 
     def __init__(self):
@@ -34,7 +34,9 @@ class Search(object):
 
         return search_api("project", platforms, name)
 
-    def project_dependencies(self, platforms: str, project: str, version: str = None) -> Any:
+    def project_dependencies(
+        self, platforms: str, project: str, version: str = None
+    ) -> Any:
         """
         Get dependencies for a version of a project.
 
@@ -50,7 +52,9 @@ class Search(object):
 
         return search_api("project_dependencies", platforms, project, version=version)
 
-    def project_dependents(self, platforms: str, project: str, version: str = None) -> Any:
+    def project_dependents(
+        self, platforms: str, project: str, version: str = None
+    ) -> Any:
         """
         Get projects that have at least one version that depends on a given project.
 
@@ -118,22 +122,22 @@ class Search(object):
 
     def project_search(self, **kwargs):
         """
-        Search for projects. 
+        Search for projects.
         Args:
             keywords (string):  REQUIRED keywords to search
             filters (dict): optional dict of form
-                dict(languages="python", 
+                dict(languages="python",
                 licenses="my_license", platforms="pypi")
 
-            sort str: (optional) one of rank, stars, 
-                dependents_count, dependent_repos_count, 
+            sort str: (optional) one of rank, stars,
+                dependents_count, dependent_repos_count,
                 latest_release_published_at, contributions_count, created_at
-        
+
         Returns:
             List of dicts of project info from libraries.io.
         """
 
-        return search_api("special_project_search", kwargs['keywords'], **kwargs)
+        return search_api("special_project_search", kwargs["keywords"], **kwargs)
 
     def repository(self, host: str, owner: str, repo: str) -> Any:
         """
