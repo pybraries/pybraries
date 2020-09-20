@@ -37,7 +37,7 @@ History
 * Refactored code - (thanks victorgveloso!)
 * Fixed naming divergences between libraries.io API and pybraries (manager->platform and package->project) 
 
-0.2.3 (2020-09-19)
+0.3.0 (2020-09-19)
 ------------------
 
 * Fixed bug in project_search. Now pass keywords="my keywords to search" as an argument. Must be passed as a keyword argument.
