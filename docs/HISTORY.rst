@@ -41,3 +41,8 @@ History
 ------------------
 
 * Fixed bug in project_search. Now pass keywords="my keywords to search" as an argument. Must be passed as a keyword argument.
+
+0.3.1 (2020-09-20)
+------------------
+
+* project_search. Other project_search functionality with platforms regression fixed. 

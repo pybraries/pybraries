@@ -5,15 +5,12 @@ from pybraries.helpers import sess, extract
 from pybraries.make_request import make_request
 
 
-def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
+def search_api(action, *args, **kwargs):
     """
     build and call for search
 
     Args:
         action (str): function action name
-        keywords (str): keywords for project_search only
-        filters (dict): filters passed to requests Session
-        sort (str): to sort by. Options
         *args (str): positional arguments
         **kwargs (str): keyword arguments
     Returns:
@@ -23,23 +20,37 @@ def search_api(action, *args, keywords=None, filters=None, sort=None, **kwargs):
     """
 
     kind = "get"
+
     url_end_list = handle_path_params(action, *args, **kwargs)
-    handle_query_params(action, keywords, filters, sort, **kwargs)
+
+    handle_query_params(action, **kwargs)
     url_combined = "/".join(url_end_list)
     return make_request(url_combined, kind)
 
 
-def handle_query_params(action, keywords, filters, sort, **kwargs):
+def handle_query_params(action, **kwargs):
 
     if action == "special_project_search":
-        sess.params["q"] = keywords
+        try:
+            sess.params["q"] = kwargs["keywords"]
+        except:
+            print("A string of keywords must be passed as a keyword argument")
+
+        if "platforms" in kwargs:
+            sess.params["platforms"] = kwargs["platforms"]
+        if "licenses" in kwargs:
+            sess.params["licenses"] = kwargs["licenses"]
+        if "languages" in kwargs:
+            sess.params["languages"] = kwargs["languages"]
 
     elif "project" in kwargs:
         sess.params["q"] = kwargs["project"]
-    if filters:
+
+    if "filters" in kwargs:
         extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
-    if sort:
-        sess.params["sort"] = sort
+
+    if "sort" in kwargs:
+        sess.params["sort"] = kwargs["sort"]
     sess.params = {**sess.params, **kwargs}
 
 

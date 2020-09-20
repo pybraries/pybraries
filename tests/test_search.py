@@ -88,7 +88,7 @@ def test_project_usage():
 
 def test_project_search():
     """Project search returns a project list item with a name key"""
-    projects = search.project_search(keywords="pybraries")
+    projects = search.project_search(keywords="visualization")
 
     assert projects
 
