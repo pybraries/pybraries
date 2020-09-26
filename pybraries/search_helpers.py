@@ -33,7 +33,6 @@ def handle_query_params(action, **kwargs):
     if action == "special_project_search":
         try:
             sess.params["q"] = kwargs["keywords"]
-            print(sess.params["q"])
         except:
             print("A string of keywords must be passed as a keyword argument")
 
