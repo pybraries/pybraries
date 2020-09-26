@@ -46,3 +46,8 @@ History
 ------------------
 
 * project_search. Other project_search functionality with platforms regression fixed. 
+
+0.3.2 (2020-09-26)
+------------------
+
+* Fix regression bug in kwargs
