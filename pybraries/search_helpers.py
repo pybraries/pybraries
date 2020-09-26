@@ -33,6 +33,7 @@ def handle_query_params(action, **kwargs):
     if action == "special_project_search":
         try:
             sess.params["q"] = kwargs["keywords"]
+            print(sess.params["q"])
         except:
             print("A string of keywords must be passed as a keyword argument")
 
@@ -51,7 +52,10 @@ def handle_query_params(action, **kwargs):
 
     if "sort" in kwargs:
         sess.params["sort"] = kwargs["sort"]
-    sess.params = {**sess.params, **kwargs}
+    if "page" in kwargs:
+        sess.params["page"] = kwargs["page"]
+    if "per_page" in kwargs:
+        sess.params["per_page"] = kwargs["per_page"]
 
 
 def handle_path_params(action, *args, **kwargs):
