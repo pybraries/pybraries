@@ -17,7 +17,7 @@ requirements = ["requests>=2", "fire>0.1.1", "urllib3"]
 
 setup(
     name="pybraries",
-    version="0.3.2",
+    version="0.3.3",
     author="Jeff Hale",
     author_email="jeffmshale@gmail.com",
     description="A Python wrapper for the libraries.io API",

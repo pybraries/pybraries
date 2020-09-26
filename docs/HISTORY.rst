@@ -51,3 +51,8 @@ History
 ------------------
 
 * Fix regression bug in kwargs
+
+0.3.3 (2020-09-26)
+------------------
+
+* remove stdout from project_search
