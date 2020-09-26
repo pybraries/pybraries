@@ -47,7 +47,9 @@ def handle_query_params(action, **kwargs):
         sess.params["q"] = kwargs["project"]
 
     if "filters" in kwargs:
-        extract(*list(filters.keys())).of(filters).then(sess.params.__setitem__)
+        extract(*list(kwargs["filters"].keys())).of(kwargs["filters"]).then(
+            sess.params.__setitem__
+        )
 
     if "sort" in kwargs:
         sess.params["sort"] = kwargs["sort"]
