@@ -56,3 +56,8 @@ History
 ------------------
 
 * remove stdout from project_search
+
+0.3.4 (2020-09-26)
+------------------
+
+* fix filter kwargs
