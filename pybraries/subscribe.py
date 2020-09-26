@@ -46,7 +46,9 @@ class Subscribe(object):
         """
         return bool(sub_api("check_subscribed", manager, package))
 
-    def update_subscribe(self, manager: str, package: str, include_prerelease: bool = True) -> str:
+    def update_subscribe(
+        self, manager: str, package: str, include_prerelease: bool = True
+    ) -> str:
         """
         NOT IMPLEMENTED due to possible bug in libraries.io
         Update the options for a subscription.
