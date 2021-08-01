@@ -2,7 +2,7 @@ pip==21.2.2
 wheel==0.36.2
 twine==3.4.2
 pytest==6.2.4
-pytest-cov==2.10.1
+pytest-cov==2.12.1
 pytest-flake8==1.0.6
 pytest-runner==5.2
 pytest-mock==3.3.1
