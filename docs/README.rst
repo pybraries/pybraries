@@ -30,6 +30,10 @@ Pybraries
     :target: https://pybraries.readthedocs.io/en/latest/README.html
     :alt: PyPI - Python Version
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+    :alt: Black code formatter
+
 Pybraries is a Python wrapper for the libraries.io API.
 
 You can use it to subscribe to email alerts for
