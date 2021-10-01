@@ -13,5 +13,5 @@ sphinx_rtd_theme==1.0.0
 bump2version==1.0.1
 black==21.9b0
 flake8==3.9.2
-fire==0.3.1
+fire==0.4.0
 pyexpect==1.0.20
