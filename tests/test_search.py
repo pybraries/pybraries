@@ -32,9 +32,15 @@ repo3 = "scikit-learn"  # repo name
 # Integration tests
 # Platforms functionality
 def test_platforms():
-    """returns a list of platforms whose name includes 'Go'"""
+    """'Go' is in a returend dictionary with a key "name" when platforms are queried"""
     all_platforms = search.platforms()
-    assert "Go" in all_platforms
+    assert any("Conda" == platform['name'] for platform in all_platforms)
+
+
+def test_platforms_doesnt_have_fake_platform():
+    """'Go' is in a returend dictionary with a key "name" when platforms are queried"""
+    all_platforms = search.platforms()
+    assert not any("Cona" == platform['name'] for platform in all_platforms)
 
 
 # Project functionality

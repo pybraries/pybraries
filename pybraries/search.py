@@ -29,9 +29,10 @@ class Search(object):
             platforms: package manager (e.g. "pypi").
             name: project name.
         Returns:
-            Dict of information about the project from libraries.io.
+            List of dictionaries with information about the project from libraries.io.
         """
 
+        null = None  # null comes in looking like a variable for some platforms
         return search_api("project", platforms, name)
 
     def project_dependencies(
