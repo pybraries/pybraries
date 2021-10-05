@@ -91,7 +91,7 @@ Ready to contribute? Here's how to set up `pybraries` for local development.
 5. We use `black <https://black.readthedocs.io/en/stable/the_black_code_style.html>`_
 and `Flake8 <http://flake8.pycqa.org/en/latest/>`_ for style guide sanity. 
 
-Max line length is set to 88 characters and the following errors are ignored:
+Max line length is set to 100 characters and the following errors are ignored:
 
 * F401 - module imported but unused
 * F841 - local variable name is assigned to but never used
@@ -122,7 +122,7 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The code should work for Python 3.7 and 3.8. 
+3. The code should work for Python 3.8 and higher. 
 
 Deploying
 ---------
