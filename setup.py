@@ -5,7 +5,7 @@ def readme():
     try:
         with open("docs/README.rst") as f:
             return f.read()
-    except:
+    except Exception:
         return ""
 
 
