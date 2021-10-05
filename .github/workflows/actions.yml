@@ -33,7 +33,7 @@ jobs:
           # exit-zero treats all errors as warnings. 
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
       - name: Test with pytest
-        env:
-          LIBRARIES_API_KEY: ${{ secrets.LIBRARIES_API_KEY }}
         run: |
           pytest
+        env:
+          LIBRARIES_API_KEY: ${{ secrets.API_KEY }}
