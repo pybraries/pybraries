@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
@@ -19,10 +19,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Get API Key secret 
-        env:
-          LIBRARIES_API_KEY: ${{ secrets.LIBRARIES_API_KEY }}
+     
       
       - name: Install dependencies
         run: |
@@ -40,6 +37,8 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
       
       - name: Test with pytest
+        env:
+          LIBRARIES_API_KEY: ${{ secrets.LIBRARIES_API_KEY }}
         run: |
           pytest 
 
