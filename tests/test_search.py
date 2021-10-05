@@ -34,7 +34,7 @@ repo3 = "scikit-learn"  # repo name
 def test_platforms():
     """returns a list of platforms whose name includes 'Go'"""
     all_platforms = search.platforms()
-    assert all_platforms[0]["name"] == "Go"
+    assert "Go" in all_platforms
 
 
 # Project functionality
