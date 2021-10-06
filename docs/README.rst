@@ -2,9 +2,6 @@
 Pybraries
 =============
 
-.. image:: https://travis-ci.org/pybraries/pybraries.svg?branch=master&kill_cache=1
-    :target: https://travis-ci.org/pybraries/pybraries
-    :alt: Travis Status
 
 .. image:: https://coveralls.io/repos/github/pybraries/pybraries/badge.svg?branch=master&kill_cache=1
     :target: https://coveralls.io/github/pybraries/pybraries?branch=master
@@ -35,7 +32,7 @@ Pybraries
     :alt: Black code formatter
 
 Pybraries is a Python wrapper for the libraries.io API.
-
+g
 You can use it to subscribe to email alerts for
 new versions of open source packages.
 
