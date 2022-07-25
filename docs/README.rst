@@ -32,7 +32,7 @@ Pybraries
     :alt: Black code formatter
 
 Pybraries is a Python wrapper for the libraries.io API.
-g
+
 You can use it to subscribe to email alerts for
 new versions of open source packages.
 
