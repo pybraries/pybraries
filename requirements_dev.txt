@@ -3,7 +3,7 @@ wheel==0.38.4
 twine==4.0.2
 pytest==7.2.1
 pytest-cov==4.0.0
-pytest-flake8==1.0.6
+pytest-flake8==1.1.1
 pytest-runner==5.2
 pytest-mock==3.3.1
 coveralls==2.1.2
