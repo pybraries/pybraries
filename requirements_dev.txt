@@ -1,7 +1,7 @@
 pip==24.1.1
 wheel==0.43.0
 twine==5.1.1
-pytest==6.0.1
+pytest==8.2.2
 pytest-cov==2.10.1
 pytest-flake8==1.0.6
 pytest-runner==5.2
